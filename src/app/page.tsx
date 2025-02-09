@@ -1,9 +1,19 @@
 export default function Home() {
   return (
-    <div>
-      <h1 className="font-BenguiatITCbyBT">Hello World</h1>
-      <h1 className="font-Prompt">Hello Prompt</h1>
-      <h1 className="font-Prompt">Hello แปลว่าสวัสดี</h1>
-    </div>
+    <main className="bg-black-300">
+      {/* Hero Section By Nae*/}
+
+      {/* Podium Section  */}
+
+      {/* Sport Scoreboard Slider By Gun*/}
+
+      {/* Podium Scoreboard */}
+
+      {/* Live Schedule By C */}
+
+      {/* Full detail sport schedule slider By Gun*/}
+
+      {/* Sponsers */}
+    </main>
   );
 }

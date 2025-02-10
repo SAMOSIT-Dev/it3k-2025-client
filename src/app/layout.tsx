@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "IT3K",
@@ -14,9 +13,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/brackets-viewer@latest/dist/brackets-viewer.min.css" />
-      </Head>
       <body>
         {/* NavBar */}
         {children}

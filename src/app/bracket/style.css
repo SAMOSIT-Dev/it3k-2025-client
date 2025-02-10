@@ -1,0 +1,23 @@
+.bracket{
+    width: 100% 100vw;
+    padding-left: 10%;
+    height: 100vh;
+    
+}
+
+.bracket-sorted{
+    
+}
+.btn-choice{
+    background-color: transparent;
+    width: 200px;
+    margin-left: 10px;
+    padding: 0.5%;
+    color: white;
+    font-weight: bolder;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+.btn-choice:hover{
+    background-color: red;
+}

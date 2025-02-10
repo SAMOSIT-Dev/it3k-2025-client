@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "axios": "^1.7.9",
+    "brackets-json-db": "^1.0.2",
+    "brackets-manager": "^1.6.4",
+    "brackets-viewer": "^1.6.2",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "next": "15.1.6",

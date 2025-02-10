@@ -1,4 +1,3 @@
-import PodiumSection from "./(components)/PodiumSection";
 
 export default function Home() {
   return (

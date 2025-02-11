@@ -1,0 +1,41 @@
+:root {
+    --category-accent-color: #E90000;
+
+    /*query screen size*/
+    --screen-xs: 767px;
+    --screen-sm: 1023px;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+.category_button {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    border-radius: 0.5rem;
+    border-color: var(--category-accent-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category_button:hover {
+    background-color: var(--category-accent-color);
+    box-shadow: 0 0 15px var(--category-accent-color), 0 0 10px var(--category-accent-color);
+}
+
+.category_button:focus,
+.category_button:hover {
+    outline: none;
+    background-color: var(--category-accent-color);
+    box-shadow: 0 0 15px var(--category-accent-color), 0 0 10px var(--category-accent-color);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 0.25rem;
+}

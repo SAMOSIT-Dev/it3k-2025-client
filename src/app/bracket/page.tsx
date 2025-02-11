@@ -5,7 +5,6 @@ import './style.css'
 
 
 const URL = 'https://raw.githubusercontent.com/Drarig29/brackets-viewer.js/master/demo/db.json'
-
 function importCdn() {
   const script = document.createElement('script')
   script.type = 'text/javascript'
@@ -38,15 +37,24 @@ function injectCustomStyles() {
       border: solid 2px red !important;
     }
     .brackets-viewer .btn-choice {
-      
+     
       color: white !important;
       padding: 10px 20px !important;
       border-radius: 5px;
       margin: 5px;
     }
+      //เเก้ไม่หาย
+    .brackets-viewer .btn-choice:hover {
+      background-color: black 
+      color: white; 
+    }
+    .brackets-viewer .match:hover {
+      background-color: #333 ;
+    }
   `
   document.head.appendChild(style)
 }
+
 
 async function render() {
   const data = await fetch(URL).then((res) => res.json())

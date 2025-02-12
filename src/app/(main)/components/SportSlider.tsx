@@ -1,13 +1,14 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
-import Image from 'next/image'
 import { Icon } from '@iconify/react'
+import Image from 'next/image'
+import Link from 'next/link'
+import styles from '@/app/styles/swiper/swiper.module.css'
 
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
-import Link from 'next/link'
 
 interface SportSliderProps {
   title: string
@@ -27,9 +28,12 @@ const SportSlider = ({ title, sportLists }: SportSliderProps) => {
           prevEl: '.custom-prev',
           nextEl: '.custom-next'
         }}
-        modules={[Navigation]}>
+        modules={[Navigation]}
+        className={styles.swiper}>
         {sportLists.map((sport, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide
+            key={index}
+            className={`${styles['swiper-slide']} ${styles['swiper-wrapper']}`}>
             <Link
               href={sport.route}
               className="flex items-center justify-center flex-col">
@@ -39,7 +43,7 @@ const SportSlider = ({ title, sportLists }: SportSliderProps) => {
                 height={200}
                 width={200}
               />
-              <p className="text-white text-[14px] sm:text-xl text-center md:text-2xl font-bold font-Prompt ">
+              <p className="text-white text-[14px] sm:text-xl md:text-2xl font-bold font-Prompt ">
                 {sport.name}
               </p>
             </Link>

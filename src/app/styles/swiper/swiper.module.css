@@ -1,0 +1,14 @@
+.swiper {
+   max-width: 1200px !important;
+}
+
+.swiper-wrapper {
+	align-items: center !important;
+}
+
+.swiper-slide {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+	align-items: center !important;
+}

@@ -1,12 +1,9 @@
-:root {
-    --category-accent-color: #E90000;
-}
-
 body {
     font-family: 'Prompt', sans-serif;
 }
 
 .category-button {
+    --category-accent-color: #E90000;
     padding: 0.2rem 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;

@@ -1,91 +1,71 @@
-"use client"
-import Script from 'next/script'
-import React, { useEffect } from 'react'
-import './style.css' 
+import React from 'react';
+import "./style.css"
 
+const Bracket = () => {
+  const matches = [
+    { team1: 'Team A', team2: 'Team B', score1: 3, score2: 1 },
+    { team1: 'Team C', team2: 'Team D', score1: 2, score2: 2 },
+    { team1: 'Team E', team2: 'Team F', score1: 1, score2: 0 },
+    { team1: 'Team G', team2: 'Team H', score1: 4, score2: 3 },
+    { team1: 'Winner 1', team2: 'Winner 2', score1: 2, score2: 1 },
+    { team1: 'Winner 3', team2: 'Winner 4', score1: 3, score2: 2 },
+    { team1: 'Winner 5', team2: 'Winner 6', score1: 1, score2: 0 },
+  ];
 
-const URL = 'https://raw.githubusercontent.com/Drarig29/brackets-viewer.js/master/demo/db.json'
-function importCdn() {
-  const script = document.createElement('script')
-  script.type = 'text/javascript'
-  script.src = 'https://cdn.jsdelivr.net/npm/brackets-viewer@latest/dist/brackets-viewer.min.js'
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.href = 'https://cdn.jsdelivr.net/npm/brackets-viewer@latest/dist/brackets-viewer.min.css'
-  document.head.appendChild(link)
-  document.body.appendChild(script)
-}
-
-function injectCustomStyles() {
-  const style = document.createElement('style')
-  style.innerHTML = `
-    .brackets-viewer {
-      background-color: black !important;
-      color: white !important;
-      border: solid 2px red !important;
-      padding: 20px 40px !important;
-    }
-    .brackets-viewer .match {
-      background-color: black !important;
-      
-      padding: 15px !important;
-    }
-    .brackets-viewer .participant {
-      background-color: black !important;
-      color: white !important;
-      padding: 10px 20px !important;
-      border: solid 2px red !important;
-    }
-    .brackets-viewer .btn-choice {
-     
-      color: white !important;
-      padding: 10px 20px !important;
-      border-radius: 5px;
-      margin: 5px;
-    }
-      //เเก้ไม่หาย
-    .brackets-viewer .btn-choice:hover {
-      background-color: black 
-      color: white; 
-    }
-    .brackets-viewer .match:hover {
-      background-color: #333 ;
-    }
-  `
-  document.head.appendChild(style)
-}
-
-
-async function render() {
-  const data = await fetch(URL).then((res) => res.json())
-
-  window.bracketsViewer.render({
-    stages: data.stage,
-    matches: data.match,
-    matchGames: data.match_game,
-    participants: data.participant
-  })
-}
-
-const sortingChoice = ["คู่ผสม", "ชายคู่", "ชายเดี่ยว", "หญิงเดี่ยว", "หญิงคู่"]
-
-const BracketPage = () => {
-  useEffect(() => {
-    importCdn()
-    injectCustomStyles()  
-    render()
-  }, [])
-
-  return (
-    <div className="brackets-viewer">
-      <h1>ปิงปอง</h1>
-      <div className='bracket-sorted'>
-        {sortingChoice.map((index, key) => (
-          <button key={key} className='btn-choice'>{index}</button> 
-        ))}
+  const Match = ({ team1, team2, score1, score2 }) => (
+    <div className="flex flex-col bg-black-800 border-2 border-red-500 w-48">
+      <div className="flex justify-between items-center p-2 border-b border-red-500">
+        <span className="text-white">{team1}</span>
+        <span className="text-white ml-2">{score1}</span>
+      </div>
+      <div className="flex justify-between items-center p-2">
+        <span className="text-white">{team2}</span>
+        <span className="text-white ml-2">{score2}</span>
       </div>
     </div>
-  )
-}
+  );
 
-export default BracketPage
+  return (
+    <div className="p-8 bg-black min-h-screen bracket-container">
+      <h1 className="text-white text-2xl mb-8">Tournament Bracket</h1>
+      <div className="relative flex">
+        {/* Round 1 */}
+        <div className="flex flex-col justify-around mr-24">
+          {matches.slice(0, 4).map((match, index) => (
+            <div key={index} className="mb-16 relative">
+              <Match {...match} />
+              <div className="connector-container">
+                {/* <div className="h-px w-6 bg-red-500 absolute right-0 top-1/4 transform translate-x-full"></div>
+                <div className="h-px w-6 bg-red-500 absolute right-0 top-3/4 transform translate-x-full"></div>
+                <div className="h-1/2 w-px bg-red-500 absolute right-0 top-1/4 transform translate-x-6"></div> */}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Round 2 */}
+        <div className="flex flex-col justify-around mr-24">
+          {matches.slice(4, 6).map((match, index) => (
+            <div key={index} className={`${index === 0 ? 'mt-24 mb-32' : 'mb-16'} relative`}>
+              <Match {...match} />
+              <div className="connector-container">
+                {/* <div className="h-px w-6 bg-red-500 absolute right-0 top-1/4 transform translate-x-full"></div>
+                <div className="h-px w-6 bg-red-500 absolute right-0 top-3/4 transform translate-x-full"></div>
+                <div className="h-1/2 w-px bg-red-500 absolute right-0 top-1/4 transform translate-x-6"></div> */}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Final Round */}
+        <div className="flex flex-col justify-around">
+          <div className="mt-34">
+            <Match {...matches[6]} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Bracket;

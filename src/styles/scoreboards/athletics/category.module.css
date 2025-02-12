@@ -1,16 +1,12 @@
 :root {
     --category-accent-color: #E90000;
-
-    /*query screen size*/
-    --screen-xs: 767px;
-    --screen-sm: 1023px;
 }
 
 body {
     font-family: 'Prompt', sans-serif;
 }
 
-.category_button {
+.category-button {
     padding: 0.2rem 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -21,13 +17,13 @@ body {
     transition: all 0.3s ease;
 }
 
-.category_button:hover {
+.category-button:hover {
     background-color: var(--category-accent-color);
     box-shadow: 0 0 15px var(--category-accent-color), 0 0 10px var(--category-accent-color);
 }
 
-.category_button:focus,
-.category_button:hover {
+.category-button:focus,
+.category-button:hover {
     outline: none;
     background-color: var(--category-accent-color);
     box-shadow: 0 0 15px var(--category-accent-color), 0 0 10px var(--category-accent-color);
@@ -35,7 +31,52 @@ body {
 
 .container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: start;
     gap: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        gap: 0.5rem;
+    }
+
+    .category-button {
+        padding: 0.25rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        overflow-x: scroll;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 50%;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .category-button {
+        padding: 0.2rem 0.5rem;
+        scroll-snap-align: center;
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        margin: 0.45rem 0.25rem;
+    }
+
+    .category-button:hover {
+        background-color: var(--category-accent-color);
+        box-shadow: 0 0 10px var(--category-accent-color), 0 0 7px var(--category-accent-color);
+    }
+
+    .category-button:focus,
+    .category-button:hover {
+        outline: none;
+        background-color: var(--category-accent-color);
+        box-shadow: 0 0 10px var(--category-accent-color), 0 0 7px var(--category-accent-color);
+    }
+
 }

@@ -26,7 +26,7 @@ const Category: React.FC = () => {
         <ul className={styles.container}>
           {category.map((item, id) => (
             <li
-              className={`text-white mr-2 border ${styles.category_button}`}
+              className={`text-white mr-1 lg:mr-2 border ${styles['category-button']}`}
               key={id}>
               <button>{item.name}</button>
             </li>

@@ -25,7 +25,7 @@ export default function ScheduleCard({
       <div className="flex m-auto flex-col space-y-1 w-full">
         <span className="flex justify-center items-center">
           {scheduleData.icon}
-          <h2 className="font-bold text-4xl ml-4">แบดมินตัน</h2>
+          <h2 className="font-bold text-4xl ml-4">{scheduleData.sportName}</h2>
         </span>
         <p className="font-bold text-lg">
           {scheduleData.homeTeam.name} VS {scheduleData.awayTeam.name}

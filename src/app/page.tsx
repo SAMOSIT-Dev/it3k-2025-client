@@ -1,3 +1,6 @@
+import { scheduleData } from './schedule/scheduleData'
+import LiveSchedule from './schedule/components/LiveSchedule'
+
 export default function Home() {
   return (
     <main className="bg-black-300">
@@ -10,10 +13,10 @@ export default function Home() {
       {/* Podium Scoreboard */}
 
       {/* Live Schedule By C */}
-
+      <LiveSchedule scheduleData={scheduleData} />
       {/* Full detail sport schedule slider By Gun*/}
 
       {/* Sponsers */}
     </main>
-  );
+  )
 }

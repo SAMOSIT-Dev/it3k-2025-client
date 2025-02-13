@@ -2,8 +2,8 @@ import React from 'react';
 import "./style.css"
 const Bracket = () => {
   return (
-    <div className="p-8 bg-black min-h-screen bracket-container">
-      <h1 className="text-white text-2xl mb-8">SportName</h1>
+    <div className="p-8 bg-black min-h-screen bracket-container ">
+      <h1 className="text-white text-2xl mb-8 ">SportName</h1>
       <div className="sport-section mb-8">
         <button className="btn-bracket"> คู่ผสม</button>
         <button className="btn-bracket"> ชายคู่</button>
@@ -12,7 +12,7 @@ const Bracket = () => {
         <button className="btn-bracket"> หญิงเดี่ยว</button>
       </div>
       
-      <div className="relative flex gap-32">
+      <div className="relative flex gap-32 ml-48">
         {/* Round 1 */}
         <div className="flex flex-col gap-24">
           {[1, 2, 3, 4].map((match, index) => (

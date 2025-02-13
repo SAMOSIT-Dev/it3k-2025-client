@@ -1,153 +1,149 @@
 .bracket-container {
-    background-color: black;
-    min-height: 100vh;
-    width: 100%;
-    padding: 2rem;
-    overflow-x: auto;
-  }
-  
+  background-color: black;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+.tournament-rounds {
+  display: flex;
+  gap: 8rem;
+  padding: 2rem;
+  min-width: max-content;
+}
+
+.round-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.round-section::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgb(220, 38, 38);
+  opacity: 0.3;
+}
+
+.round-section:first-child::before {
+  display: none;
+}
+
+.round-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.connector-horizontal {
+  width: 32px;
+  height: 2px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.connector-vertical {
+  width: 2px;
+  height: 210px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 32px;
+  top: 50%;
+}
+
+.connector-vertical::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 2px;
+  background-color: rgb(255, 255, 255);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn-bracket {
+  @apply px-4 py-2 text-white border border-red-600 rounded mx-2;
+  transition: all 0.3s ease;
+}
+
+.btn-bracket:hover {
+  @apply bg-red-600;
+}
+
+.match-wrapper {
+  position: relative;
+}
+.match-wrapper.semifinal-bottom {
+  margin-top: 120px;
+}
+
+.connector-wrapper {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.connector-vertical1 {
+  width: 2px;
+  height: 427px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 32px;
+  top: 50%;
+}
+
+.connector-vertical1::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background-color: rgb(255, 255, 255);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.connector-top .connector-vertical,
+.connector-top .connector-vertical1 {
+  transform: translateY(0%);
+}
+
+.connector-bottom .connector-vertical,
+.connector-bottom .connector-vertical1 {
+  transform: translateY(-100%);
+}
+
+.sport-section {
+  display: flex;
+  padding: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
   .tournament-rounds {
-    display: flex;
-    gap: 8rem;
-    padding: 2rem;
-    min-width: max-content;
+    gap: 4rem;
   }
-  
-  .round-section {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .round-section::before {
-    content: '';
-    position: absolute;
-    left: -2rem;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: rgb(220, 38, 38);
-    opacity: 0.3;
-  }
-  
-  .round-section:first-child::before {
-    display: none;
-  }
-  
+
   .round-column {
-    display: flex;
-    flex-direction: column;
-    gap: 6rem;
+    gap: 4rem;
   }
-  
-  .btn-bracket {
-    @apply px-4 py-2 text-white border border-red-600 rounded mx-2;
-    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .bracket-container {
+    padding: 1rem;
   }
-  
-  .btn-bracket:hover {
-    @apply bg-red-600;
+
+  .tournament-rounds {
+    gap: 2rem;
   }
-  
-  .match-wrapper {
-    position: relative;
-  }
-  .match-wrapper.semifinal-bottom {
-    margin-top: 120px; /* mid */
-  }
-  
-  
-  .connector-wrapper {
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .connector-horizontal {
-    width: 32px;
-    height: 2px;
-    background-color: rgb(220, 38, 38);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .connector-vertical {
-    width: 2px;
-    height: 210px;
-    background-color: rgb(220, 38, 38);
-    position: absolute;
-    left: 32px;
-    top: 50%;
-  }
-  
-  .connector-vertical::after {
-    content: '';
-    position: absolute;
-    width: 90px;
-    height: 2px;
-    background-color: rgb(220, 38, 38);
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .connector-vertical1 {
-    width: 2px;
-    height: 427px;
-    background-color: rgb(220, 38, 38);
-    position: absolute;
-    left: 32px;
-    top: 50%;
-  }
-  
-  .connector-vertical1::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 2px;
-    background-color: rgb(220, 38, 38);
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .connector-top .connector-vertical,
-  .connector-top .connector-vertical1 {
-    transform: translateY(0%);
-  }
-  
-  .connector-bottom .connector-vertical,
-  .connector-bottom .connector-vertical1 {
-    transform: translateY(-100%);
-  }
-  
-  .sport-section {
-    display: flex;
-    padding: 2rem;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  @media (max-width: 1024px) {
-    .tournament-rounds {
-      gap: 4rem;
-    }
-    
-    .round-column {
-      gap: 4rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .bracket-container {
-      padding: 1rem;
-    }
-    
-    .tournament-rounds {
-      gap: 2rem;
-    }
-  }
+}

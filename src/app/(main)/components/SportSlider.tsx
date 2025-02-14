@@ -5,8 +5,6 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '@/app/styles/swiper/swiper.module.css'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
 

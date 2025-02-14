@@ -1,4 +1,3 @@
-import { useId } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { pingpongScheduleData } from '../../scheduleData'
 import ScheduleCard from '../../components/ScheduleCard'
@@ -20,7 +19,7 @@ export default function PingpongSchedulePage() {
               </h1>
               <div className="font-Prompt flex flex-col justify-center m-auto space-y-[42px]">
                 {type.scheduleData.map((data) => (
-                  <ScheduleCard key={useId()} scheduleData={data} />
+                  <ScheduleCard key={data.sportTitle} scheduleData={data} />
                 ))}
               </div>
             </div>

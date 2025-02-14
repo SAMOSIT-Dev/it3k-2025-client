@@ -2,7 +2,7 @@
 
 import { type ScheduleData } from '@/app/schedule/scheduleData'
 import ScheduleCard from './ScheduleCard'
-import { useId, useState } from 'react'
+import { useState } from 'react'
 
 type Location = 'Football Field' | 'Gym'
 
@@ -11,7 +11,7 @@ export default function LiveSchedule({
 }: {
   scheduleData: ScheduleData[]
 }) {
-  const [filters, setFilter] = useState<Location[]>([])
+  const [, setFilter] = useState<Location[]>([])
 
   const handleFilterButton = (location: Location) => {
     setFilter((prev) => {
@@ -22,7 +22,9 @@ export default function LiveSchedule({
     })
   }
 
-  const filteredData = scheduleData.filter((x) => x)
+  const filteredData = scheduleData.filter((x) => {
+    return x
+  })
 
   return (
     <div className="w-screen min-w-0 h-auto min-h-0 relative">
@@ -121,8 +123,8 @@ export default function LiveSchedule({
           </div>
         </div>
         <div className="flex flex-col mt-[25px] space-y-[42px]">
-          {filteredData.map((data) => (
-            <ScheduleCard key={useId()} scheduleData={data} />
+          {filteredData.map((data, i) => (
+            <ScheduleCard key={i} scheduleData={data} />
           ))}
         </div>
         <div className="before:w-full before:h-[1px] flex flex-col items-center before:mt-[51px] before:bg-white before:flex">

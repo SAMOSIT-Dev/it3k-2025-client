@@ -1,6 +1,4 @@
-import { useId } from 'react'
 import { ScheduleData } from '../scheduleData'
-// import BadmintonIcon from './icons/BadmintonIcon'
 
 export default function ScheduleCard({
   scheduleData
@@ -37,9 +35,13 @@ export default function ScheduleCard({
             ) : (
               <div className="flex size-[130px]"></div>
             )}
-            <div className='flex flex-col'>
+            <div className="flex flex-col">
               <h1 className="font-bold text-5xl">VS</h1>
-              {scheduleData.arena && (<span className='font-bold text-lg mt-2'>{scheduleData.arena}</span>)}
+              {scheduleData.arena && (
+                <span className="font-bold text-lg mt-2">
+                  {scheduleData.arena}
+                </span>
+              )}
             </div>
             {scheduleData.awayTeam.logo ? (
               <img
@@ -57,7 +59,7 @@ export default function ScheduleCard({
             {universityLogoList.map((uni) => (
               <img
                 className="bg-white rounded-full"
-                key={useId()}
+                key={uni.alt}
                 width={130}
                 src={uni.src}
                 alt={uni.alt}

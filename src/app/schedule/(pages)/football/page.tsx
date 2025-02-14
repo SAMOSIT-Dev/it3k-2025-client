@@ -1,4 +1,3 @@
-import { useId } from 'react'
 import PageTitle from '../../components/PageTitle'
 import ScheduleCard from '../../components/ScheduleCard'
 import { footballScheduleData } from '../../scheduleData'
@@ -14,7 +13,7 @@ export default function FootballSchedulePage() {
       <main className="my-[100px] h-auto min-h-0 mx-auto w-[1038.35px] relative z-20">
         <div className="font-Prompt flex flex-col justify-center m-auto space-y-[42px]">
           {footballScheduleData.map((data) => (
-            <ScheduleCard key={useId()} scheduleData={data} />
+            <ScheduleCard key={data.sportTitle} scheduleData={data} />
           ))}
         </div>
       </main>

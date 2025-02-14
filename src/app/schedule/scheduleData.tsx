@@ -1,7 +1,7 @@
-import { JSX, ReactElement, ReactNode } from 'react'
+import { JSX } from 'react'
 
-type UniversityTeamName = 'KMUTT' | 'KMITL' | 'KMUTNB' | 'KMUTNB PR'
-type Sport =
+export type UniversityTeamName = 'KMUTT' | 'KMITL' | 'KMUTNB' | 'KMUTNB PR'
+export type Sport =
   | 'แบดบินตัน'
   | 'ฟุตบอล'
   | 'กีฬาพื้นบ้าน'

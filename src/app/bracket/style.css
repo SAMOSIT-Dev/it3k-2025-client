@@ -5,6 +5,9 @@
   padding: 2rem;
   overflow-x: auto;
 }
+.bracket-container span{
+  scale: 1.1;
+}
 
 .tournament-rounds {
   display: flex;
@@ -72,11 +75,16 @@
 .btn-bracket {
   @apply px-10 py-2 text-white border border-red-600 rounded mx-2 ;
   transition: all 0.3s ease;
-  border-radius: 5px
+  border-radius: 5px;
+  scale: 1;
 }
 
+.btn-bracket p{
+  scale: 1.2;
+}
 .btn-bracket:hover {
-  @apply bg-red-600;
+  background-color: red;
+  box-shadow: 0 0 11px rgba(255, 120, 120, 0.953); 
 }
 
 .match-wrapper {

@@ -31,11 +31,11 @@ const Bracket: React.FC = () => {
       <div className="sport-section mb-8 d-flex flex-col">
       <h1 className="text-white text-4xl mb-8 font-extrabold">{sportname}</h1>
       <div>
-        <button className="btn-bracket">คู่ผสม</button>
-        <button className="btn-bracket">ชายคู่</button>
-        <button className="btn-bracket">ชายเดี่ยว</button>
-        <button className="btn-bracket">หญิงคู่</button>
-        <button className="btn-bracket">หญิงเดี่ยว</button>
+        <button className="btn-bracket"><p>คู่ผสม</p></button>
+        <button className="btn-bracket"><p>ชายคู่</p></button>
+        <button className="btn-bracket"><p>ชายเดี่ยว</p></button>
+        <button className="btn-bracket"><p>หญิงคู่</p></button>
+        <button className="btn-bracket"><p>หญิงเดี่ยว</p></button>
       </div>
         
       </div>
@@ -46,7 +46,7 @@ const Bracket: React.FC = () => {
           {round1Matches.map((match, index) => (
             <div key={match.id} className="relative match-wrapper">
               <div className="w-60 bg-black border border-red-600 rounded">
-                <div className="flex justify-between items-center p-3 border-b border-red-600">
+                <div className="flex justify-between items-center p-3 border-b border-red-700">
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />
                     <span className="text-white font-bold">{match.team1}</span>
@@ -76,7 +76,7 @@ const Bracket: React.FC = () => {
         <div className="flex flex-col gap-48 mt-24">
           {round2Matches.map((match, index) => (
             <div key={match.id} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
-              <div className="w-60 bg-black border border-red-600 rounded">
+              <div className="w-60 bg-black border border-red-600 rounded-lg">
                 <div className="flex justify-between items-center p-3 border-b border-red-600">
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />

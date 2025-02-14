@@ -10,11 +10,13 @@ interface Match {
 }
 
 const Bracket: React.FC = () => {
+  const sportname = "ปิงปอง"
   const round1Matches: Match[] = [
     { id: 1, team1: 'KMITL', team2: 'KMUTNB BKK', score1: 1, score2: 2 },
     { id: 2, team1: 'KMUTT', team2: 'KMUTNB', score1: 2, score2: 1 },
     { id: 3, team1: 'KMITL', team2: 'KMUTNB BKK', score1: 1, score2: 2 },
     { id: 4, team1: 'KMUTT', team2: 'KMUTNB', score1: 2, score2: 1 },
+    
   ];
 
   const round2Matches: Match[] = [
@@ -26,34 +28,40 @@ const Bracket: React.FC = () => {
 
   return (
     <div className="p-8 bg-black min-h-screen bracket-container">
-      <h1 className="text-white text-2xl mb-8">SportName</h1>
-      <div className="sport-section mb-8">
+      <div className="sport-section mb-8 d-flex flex-col">
+      <h1 className="text-white text-4xl mb-8 font-extrabold">{sportname}</h1>
+      <div>
         <button className="btn-bracket">คู่ผสม</button>
         <button className="btn-bracket">ชายคู่</button>
         <button className="btn-bracket">ชายเดี่ยว</button>
         <button className="btn-bracket">หญิงคู่</button>
         <button className="btn-bracket">หญิงเดี่ยว</button>
       </div>
+        
+      </div>
 
-      <div className="relative flex gap-32 ml-48">
+      <div className="relative flex gap-32 ml-48 font-bold">
         {/* Round 1 */}
         <div className="flex flex-col gap-24">
           {round1Matches.map((match, index) => (
             <div key={match.id} className="relative match-wrapper">
-              <div className="w-64 bg-black border border-red-600 rounded">
+              <div className="w-60 bg-black border border-red-600 rounded">
                 <div className="flex justify-between items-center p-3 border-b border-red-600">
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />
-                    <span className="text-white">{match.team1}</span>
+                    <span className="text-white font-bold">{match.team1}</span>
+                    <div className="score-separator" />
                   </div>
-                  <span className="text-white">{match.score1}</span>
+                  
+                  <span className="text-white font-bold">{match.score1}</span>
                 </div>
                 <div className="flex justify-between items-center p-3">
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />
-                    <span className="text-white">{match.team2}</span>
+                    <span className="text-white font-bold">{match.team2}</span>
+                    <div className="score-separator" />
                   </div>
-                  <span className="text-white">{match.score2}</span>
+                  <span className="text-white font-bold">{match.score2}</span>
                 </div>
               </div>
               <div className={`connector-wrapper ${index % 2 === 0 ? 'connector-top' : 'connector-bottom'}`}>
@@ -68,11 +76,12 @@ const Bracket: React.FC = () => {
         <div className="flex flex-col gap-48 mt-24">
           {round2Matches.map((match, index) => (
             <div key={match.id} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
-              <div className="w-64 bg-black border border-red-600 rounded">
+              <div className="w-60 bg-black border border-red-600 rounded">
                 <div className="flex justify-between items-center p-3 border-b border-red-600">
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />
                     <span className="text-white">{match.team1}</span>
+                    <div className="score-separator" />
                   </div>
                   <span className="text-white">{match.score1}</span>
                 </div>
@@ -80,8 +89,11 @@ const Bracket: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <img src="/team-logo.png" alt="" className="w-8 h-8" />
                     <span className="text-white">{match.team2}</span>
+                    <div className="score-separator" />
                   </div>
-                  <span className="text-white">{match.score2}</span>
+                  <span className="text-white">{match.score2}
+                    
+                  </span>
                 </div>
               </div>
               <div className={`connector-wrapper ${index === 0 ? 'connector-top' : 'connector-bottom'}`}>
@@ -94,20 +106,24 @@ const Bracket: React.FC = () => {
 
         {/* Final Round */}
         <div className="flex flex-col justify-center">
-          <div className="w-64 bg-black border border-red-600 rounded">
+          <div className="w-60 bg-black border border-red-600 rounded">
             <div className="flex justify-between items-center p-3 border-b border-red-600">
               <div className="flex items-center gap-3">
                 <img src="/team-logo.png" alt="" className="w-8 h-8" />
                 <span className="text-white">{finalMatch.team1}</span>
+                <div className="score-separator" />
               </div>
               <span className="text-white">{finalMatch.score1}</span>
             </div>
             <div className="flex justify-between items-center p-3">
               <div className="flex items-center gap-3">
                 <img src="/team-logo.png" alt="" className="w-8 h-8" />
+                
                 <span className="text-white">{finalMatch.team2}</span>
+                <div className="score-separator" />
               </div>
               <span className="text-white">{finalMatch.score2}</span>
+              
             </div>
           </div>
         </div>

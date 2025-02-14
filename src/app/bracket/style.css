@@ -43,7 +43,7 @@
 .connector-horizontal {
   width: 32px;
   height: 2px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(98, 98, 98);
   position: absolute;
   left: 0;
   top: 50%;
@@ -53,7 +53,7 @@
 .connector-vertical {
   width: 2px;
   height: 210px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
   top: 50%;
@@ -64,7 +64,7 @@
   position: absolute;
   width: 90px;
   height: 2px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(98, 98, 98);
   left: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -95,7 +95,7 @@
 .connector-vertical1 {
   width: 2px;
   height: 427px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
   top: 50%;
@@ -106,7 +106,7 @@
   position: absolute;
   width: 100px;
   height: 2px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(98, 98, 98);
   left: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -147,4 +147,25 @@
   .tournament-rounds {
     gap: 2rem;
   }
+}
+.team-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-top: 1px solid red;
+}
+
+.team-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-separator {
+  width: 1px;
+  position: absolute;
+  margin-left: 170px;
+  height: 58px;
+  background-color: red;
 }

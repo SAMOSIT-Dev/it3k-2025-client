@@ -41,7 +41,7 @@ const Bracket: React.FC = () => {
           <TransformComponent
             wrapperStyle={{
               width: "100%",
-              height: "100%",
+              height: "100vh",
               cursor: "grab" // เปลี่ยน cursor เป็นรูปมือจับเพื่อบอกว่าลากได้
             }}
           >

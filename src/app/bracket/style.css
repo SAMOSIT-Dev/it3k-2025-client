@@ -1,3 +1,7 @@
+.brackets-wrapper-container {
+  background-color: black;
+  
+}
 .bracket-container {
   background-color: black;
   min-height: 100vh;

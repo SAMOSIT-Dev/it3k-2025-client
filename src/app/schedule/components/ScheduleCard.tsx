@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ScheduleData } from '../scheduleData'
 
 export default function ScheduleCard({
@@ -26,9 +27,10 @@ export default function ScheduleCard({
         {scheduleData.homeTeam && scheduleData.awayTeam ? (
           <>
             {scheduleData.homeTeam.logo ? (
-              <img
+              <Image
                 className="bg-white rounded-full"
                 width={130}
+                height={130}
                 src={scheduleData.homeTeam.logo}
                 alt={scheduleData.homeTeam.name}
               />
@@ -44,9 +46,10 @@ export default function ScheduleCard({
               )}
             </div>
             {scheduleData.awayTeam.logo ? (
-              <img
+              <Image
                 className="bg-white rounded-full"
                 width={130}
+                height={130}
                 src={scheduleData.awayTeam.logo}
                 alt={scheduleData.awayTeam.name}
               />
@@ -57,10 +60,11 @@ export default function ScheduleCard({
         ) : (
           <div className="flex items-center space-x-[8px]">
             {universityLogoList.map((uni) => (
-              <img
+              <Image
                 className="bg-white rounded-full"
                 key={uni.alt}
                 width={130}
+                height={130}
                 src={uni.src}
                 alt={uni.alt}
               />

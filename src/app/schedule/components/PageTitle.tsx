@@ -1,30 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { Sport } from '../scheduleData'
 
-export default function PageTitle({
-  title
-}: {
-  title: 'badminton' | 'football' | 'tradition_game' | 'basketball' | 'pingpong'
-}) {
+export default function PageTitle({ title }: { title: Sport }) {
   const nevigate = useRouter()
-
-  const classNameMap = {
-    badminton:
-      'font-bold text-white text-6xl flex justify-center after:bg-[#FF0000] after:z-[1] z-[3] before:z-10 after:blur-[75px] relative after:absolute after:w-full after:h-full before:content-["แบดมินตัน"]',
-    football:
-      'font-bold text-white text-6xl flex justify-center after:bg-[#FF0000] after:z-[1] z-[3] before:z-10 after:blur-[75px] relative after:absolute after:w-full after:h-full before:content-["ฟุตบอล"]',
-    tradition_game:
-      'font-bold text-white text-6xl flex justify-center after:bg-[#FF0000] after:z-[1] z-[3] before:z-10 after:blur-[75px] relative after:absolute after:w-full after:h-full before:content-["กีฬาพื้นบ้าน"]',
-    basketball:
-      'font-bold text-white text-6xl flex justify-center after:bg-[#FF0000] after:z-[1] z-[3] before:z-10 after:blur-[75px] relative after:absolute after:w-full after:h-full before:content-["บาสเกตบอล"]',
-    pingpong:
-      'font-bold text-white text-6xl flex justify-center after:bg-[#FF0000] after:z-[1] z-[3] before:z-10 after:blur-[75px] relative after:absolute after:w-full after:h-full before:content-["ปิงปอง"]'
-  }
-
   return (
     <div className="w-full relative flex items-center font-Prompt my-[90px]">
-      <button className='absolute' onClick={() => nevigate.push('/')}>
+      <button className="absolute" onClick={() => nevigate.push('/')}>
         <svg
           width="67"
           height="67"
@@ -39,7 +22,12 @@ export default function PageTitle({
         </svg>
       </button>
       <div className="ml-auto mx-auto">
-        <span className={classNameMap[title]}></span>
+        <div className="relative justify-center">
+          <div className="after:bg-[#FF0000] after:z-[1] after:blur-[75px] after:absolute after:w-full after:h-full"></div>
+          <span className="font-bold text-white text-6xl flex relative z-10">
+            {title}
+          </span>
+        </div>
       </div>
     </div>
   )

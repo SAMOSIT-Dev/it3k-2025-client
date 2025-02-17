@@ -112,12 +112,12 @@ export default function LiveSchedule({
           <div className="flex items-center space-x-2">
             <button
               onClick={() => handleFilterButton('Football Field')}
-              className="h-[39] w-[175] text-xl font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
+              className="h-[39px] w-[175px] text-xl font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
               สนามบอล
             </button>
             <button
               onClick={() => handleFilterButton('Gym')}
-              className="h-[39] w-[175] text-xl font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
+              className="h-[39px] w-[175px] text-xl font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
               โรงยิม
             </button>
           </div>

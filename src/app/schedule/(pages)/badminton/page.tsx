@@ -7,7 +7,7 @@ export default function BadmintonSchedulePage() {
     <div className="w-screen font-Prompt h-screen overflow-scroll bg-black-300 fixed inset-0">
       <header className="">
         <div className="w-[1038.35px] mx-auto">
-          <PageTitle title="badminton" />
+          <PageTitle title="แบดบินตัน" />
         </div>
       </header>
       <main className="my-[100px] h-auto min-h-0 mx-auto w-[1038.35px] relative z-20">
@@ -17,8 +17,8 @@ export default function BadmintonSchedulePage() {
               {type.title}
             </h1>
             <div className="font-Prompt flex flex-col justify-center m-auto space-y-[42px]">
-              {type.scheduleData.map((data) => (
-                <ScheduleCard key={data.sportTitle} scheduleData={data} />
+              {type.scheduleData.map((data, i) => (
+                <ScheduleCard key={i} scheduleData={data} />
               ))}
             </div>
           </div>

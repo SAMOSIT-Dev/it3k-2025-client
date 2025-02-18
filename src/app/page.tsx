@@ -1,3 +1,4 @@
+import Sponsor from "./(main)/components/Sponsor";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       {/* Full detail sport schedule slider By Gun*/}
 
       {/* Sponsers */}
+      <Sponsor />
     </main>
   );
 }

@@ -131,7 +131,14 @@
   top: 50%;
   transform: translateY(-50%);
 }
-
+#third{
+  position: absolute;
+  top: 70%;
+}
+#third::after{
+  position: absolute;
+  top: 100%;
+}
 .connector-top .connector-vertical,
 .connector-top .connector-vertical1 {
   transform: translateY(0%);

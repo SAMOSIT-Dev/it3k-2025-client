@@ -2,15 +2,12 @@ version: '3'
 
 services:
   it3k-2025-client:
-    image: node:18
     container_name: it3k-2025-client
     build:
       context: . 
       dockerfile: Dockerfile
-    working_dir: /app
     volumes:
       - .:/app
-    command: ["npm", "run", "start"]
     networks:
       - it3k-2025-network
 

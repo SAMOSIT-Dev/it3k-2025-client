@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t my-app .
+        run: docker build -t it3k-2025-client .
 
       - name: Run Docker container
-        run: docker run -d --name my-container my-app
+        run: docker run -d --name it3k-2025-client it3k-2025-client
 
       - name: Check running containers
         run: docker ps

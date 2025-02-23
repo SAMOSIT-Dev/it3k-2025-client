@@ -6,8 +6,6 @@ services:
     build:
       context: . 
       dockerfile: Dockerfile
-    volumes:
-      - .:/app
     networks:
       - it3k-2025-network
 

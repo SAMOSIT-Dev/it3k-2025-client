@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  it3k-2025-client:
+    image: node:18
+    container_name: it3k-2025-client
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["npm", "run", "start"]
+    networks:
+      - it3k-2025-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - it3k-2025-client
+    networks:
+      - it3k-2025-network
+
+networks:
+  it3k-2025-network:
+    driver: bridge

@@ -1,9 +1,11 @@
 name: Run Docker on Self-Hosted Runner
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+      - feature/docker-deploy
 
 jobs:
   build-and-run:

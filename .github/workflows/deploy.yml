@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: it3k-2025
+    runs-on: it3k
     steps:
       - name: Check out repository
         uses: actions/checkout@v4

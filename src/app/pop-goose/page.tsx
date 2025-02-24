@@ -1,23 +1,55 @@
 'use client'
 
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import defaultGoose from '../../../public/images/pop_goose/default_goose.png'
 import popGoose from '../../../public/images/pop_goose/pop_goose.png'
 import gooseShadow from '../../../public/images/pop_goose/goose-shadow.png'
-import ScoreBar from './components/ScoreBar'
 import styles from '@/app/styles/game/game.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
+import Leaderboard from './components/LeaderBoard'
+import { initSocket } from './utils/socket'
+
+interface LeaderboardEntry {
+  rank: string
+  university: string
+  clicks: string
+}
 
 const PopGoosePage = () => {
-  const [score, setScore] = useState(0)
+  const [university, setUniversity] = useState('KMITL')
+  const [clickCount, setClickCount] = useState(0)
   const [isPopped, setIsPopped] = useState(false)
+  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([])
+
+  useEffect(() => {
+    const socket = initSocket()
+
+    socket.on('connect', () => {
+      console.log('Connected: ', socket.id)
+    })
+
+    socket.on('updateLeaderboard', (data) => {
+      console.log('Retrieve latest leaderboard data', data)
+      setLeaderboardData(data)
+    })
+
+    // Request initial leaderboard data
+    socket.emit('requestLeaderboard')
+
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
 
   const handlePress = useCallback(() => {
-    setScore((prev) => prev + 1)
+    setClickCount((prev) => prev + 1)
     setIsPopped(true)
-  }, [])
+
+    const socket = initSocket()
+    socket.emit('click', { university, clicks: 1 })
+  }, [university])
 
   const handleRelease = useCallback(() => {
     setIsPopped(false)
@@ -38,7 +70,7 @@ const PopGoosePage = () => {
             POP GOOSE
           </h1>
           <p className="text-3xl sm:text-4xl font-ReemKufiInk text-[#FFF] pt-2">
-            {score}
+            {clickCount}
           </p>
         </div>
 
@@ -49,7 +81,7 @@ const PopGoosePage = () => {
             width={300}
             height={80}
             priority
-            className="absolute right-[70px] sm:right-[250px] md:right-[280px] lg:right-[270px] bottom-[60px] sm:bottom-[100px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
+            className="absolute right-[70px] sm:right-[200px] md:right-[220px] lg:right-[270px] bottom-[60px] sm:bottom-[100px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
             draggable="false"
           />
 
@@ -68,7 +100,7 @@ const PopGoosePage = () => {
               className="transition-transform transform active:scale-105 object-contain w-[340px] h-[340px] sm:w-[500px] sm:h-[500px]"
             />
           </div>
-          <ScoreBar kmutt={19999} kmilt={888888} kmutnb_bkk={777777} />
+          <Leaderboard leaderboardData={leaderboardData} />
         </div>
       </div>
     </section>

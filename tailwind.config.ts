@@ -23,7 +23,9 @@ export default {
         // tailwind usage: bg-default-gradient
         'default-gradient':
           'linear-gradient(90deg, rgba(160,6,6,1) 0%, rgba(0,0,0,1) 100%)',
-        gameBg: "url('../../public/images/pop_goose/game_background.png')"
+        gameBg: "url('../../public/images/pop_goose/game_background.png')",
+        gameBgMd: "url('../../public/images/pop_goose/md_game_background.png')",
+        gameBgSm: "url('../../public/images/pop_goose/sm_game_background.png')"
       },
       fontFamily: {
         BenguiatITCbyBT: ['BenguiatITCbyBT', 'sans-serif'],

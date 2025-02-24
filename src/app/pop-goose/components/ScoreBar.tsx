@@ -28,15 +28,13 @@ const ScoreBar: FC<ScoreBarProps> = ({
   }, [kmutt, kmilt, kmutnb_bkk])
 
   return (
-    <div className="bg-[#ECECEC] min-w-[400px] w-[850px] p-6 rounded-full">
-      <ul className="flex flex-row items-center justify-evenly gap-6 font-PressStart2P">
+    <div className="bg-[#ECECEC] w-[365px] h-[30px] flex items-center justify-center sm:h-[60px] sm:w-[620px] md:w-[750px] lg:w-[850px] p-2 sm:p-4 rounded-full">
+      <ul className="flex flex-row items-center justify-evenly gap-3 sm:gap-6 font-PressStart2P">
         {sortedTeams.map((team, index) => (
           <li
             key={team.name}
-            className="flex items-center justify-center gap-2">
-            <span>
-              {index + 1}.{team.name}
-            </span>
+            className="flex items-center justify-center gap-2 text-[7px] sm:text-[12px] md:text-base">
+            {index + 1}.<span>{team.name}</span>
             <span className="text-[#3A5FE5]">{team.score}</span>
           </li>
         ))}

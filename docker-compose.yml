@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - it3k-2025-network
+    restart: unless-stopped
 
   nginx:
     image: nginx:alpine
@@ -20,7 +21,8 @@ services:
       - it3k-2025-client
     networks:
       - it3k-2025-network
+    restart: unless-stopped
 
 networks:
   it3k-2025-network:
-    driver: bridge
+    external: true

@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - feature/docker-deploy
+      # - feature/docker-deploy
 
 jobs:
   build-and-run:

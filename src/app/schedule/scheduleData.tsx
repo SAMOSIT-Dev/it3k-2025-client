@@ -37,8 +37,9 @@ export interface MixedScheduleData {
 const iconList: { [key: string]: JSX.Element } = {
   badminton: (
     <svg
-      width="34"
-      height="33"
+      className="md:lg:size-[34px] size-3"
+      // width="34"
+      // height="33"
       viewBox="0 0 34 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">

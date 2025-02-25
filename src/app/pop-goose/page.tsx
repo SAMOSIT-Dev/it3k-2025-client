@@ -10,6 +10,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
 import Leaderboard from './components/LeaderBoard'
 import { initSocket } from './utils/socket'
+import UniversitySelectModal from './components/UniversitySelectModal'
 
 interface LeaderboardEntry {
   rank: string
@@ -18,7 +19,8 @@ interface LeaderboardEntry {
 }
 
 const PopGoosePage = () => {
-  const [university, setUniversity] = useState('KMITL')
+  const [isModal, setIsModal] = useState(true)
+  const [university, setUniversity] = useState('')
   const [clickCount, setClickCount] = useState(0)
   const [isPopped, setIsPopped] = useState(false)
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([])
@@ -35,7 +37,6 @@ const PopGoosePage = () => {
       setLeaderboardData(data)
     })
 
-    // Request initial leaderboard data
     socket.emit('requestLeaderboard')
 
     return () => {
@@ -55,9 +56,16 @@ const PopGoosePage = () => {
     setIsPopped(false)
   }, [])
 
+  const handleUniSelect = useCallback((selectedUni: string) => {
+    setIsModal(false)
+    setUniversity(selectedUni)
+  }, [])
+
   return (
     <section
       className={`bg-[#9FC5E8] bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
+      {isModal && <UniversitySelectModal onSubmit={handleUniSelect} />}
+
       <Link href={'/'}>
         <Icon
           icon={'bxs:left-arrow'}
@@ -100,6 +108,7 @@ const PopGoosePage = () => {
               className="transition-transform transform active:scale-105 object-contain w-[340px] h-[340px] sm:w-[500px] sm:h-[500px]"
             />
           </div>
+
           <Leaderboard leaderboardData={leaderboardData} />
         </div>
       </div>

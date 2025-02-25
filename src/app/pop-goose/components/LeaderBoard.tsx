@@ -21,11 +21,11 @@ const Leaderboard = ({ leaderboardData }: LeaderboardProps) => {
 
   return (
     <div className="bg-[#ECECEC] w-[365px] h-[30px] flex items-center justify-center sm:h-[60px] sm:w-[620px] md:w-[750px] lg:w-[850px] p-2 sm:p-4 rounded-full">
-      <ul className="flex flex-row items-center justify-evenly gap-3 sm:gap-6 font-PressStart2P">
+      <ul className="flex flex-row items-center justify-evenly gap-2 sm:gap-6 font-PressStart2P">
         {sortedLeaderboard.map((team, index) => (
           <li
             key={team.rank}
-            className="flex items-center justify-center gap-2 text-[7px] sm:text-[12px] md:text-base">
+            className="flex items-center justify-center sm:gap-2 text-[6px] sm:text-[12px] xl:text-[14px]">
             {index + 1}.<span>{team.university}</span>
             <span className="text-[#3A5FE5]">{team.clicks}</span>
           </li>

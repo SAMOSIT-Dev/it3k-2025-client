@@ -1,15 +1,15 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 0.75rem;
     align-items: center;
 }
 
 .category-button {
     --category-accent-color: #E90000;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    padding: 0.4rem 0.8rem;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    line-height: 1.5;
     font-weight: 400;
     border: 1px solid var(--category-accent-color);
     background-color: transparent;
@@ -17,6 +17,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .category-button:hover,
@@ -28,6 +29,7 @@
 
 .swiper {
     max-width: 100% !important;
+    padding: 0.5rem 0;
 }
 
 .swiper-slide {
@@ -39,24 +41,25 @@
 
 @media (max-width: 1280px) {
     .container {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
     .category-button {
-        padding: 0.55rem 0.1rem;
-        font-size: 1.2rem;
+        padding: 0.5rem 0.2rem;
+        font-size: clamp(0.85rem, 1.8vw, 1rem);
     }
 }
+
 @media (max-width: 1023px) {
     .category-button {
-        padding: 0.35rem 0.1rem;
-        font-size: 0.95rem;
+        padding: 0.35rem 0.6rem;
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
     }
 }
 
 @media (max-width: 767px) {
     .category-button {
-        margin: 0.5rem 0.35rem;
-        font-size: 0.55rem;
-        padding: 0.085rem 0.3rem;
+        margin: 0.35rem;
+        padding: 0.25rem 0.5rem;
+        font-size: clamp(0.7rem, 3vw, 0.85rem);
     }
 }

@@ -9,8 +9,7 @@ export default function PageTitle({ title }: { title: Sport }) {
     <div className="w-full relative flex items-center font-Prompt my-[90px]">
       <button className="absolute" onClick={() => nevigate.push('/')}>
         <svg
-          width="67"
-          height="67"
+        className='size-7 md:size-11 lg:size-16'
           viewBox="0 0 67 67"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -23,8 +22,8 @@ export default function PageTitle({ title }: { title: Sport }) {
       </button>
       <div className="ml-auto mx-auto">
         <div className="relative justify-center">
-          <div className="after:bg-[#FF0000] after:z-[1] after:blur-[75px] after:absolute after:w-full after:h-full"></div>
-          <span className="font-bold text-white text-6xl flex relative z-10">
+          <div className="after:bg-[#FF0000] after:z-[1] after:blur-[50px] md:after:blur-[60px] lg:after:blur-[70px] after:absolute after:w-full after:h-full"></div>
+          <span className="font-bold text-white text-2xl md:text-5xl lg:text-6xl flex relative z-10">
             {title}
           </span>
         </div>

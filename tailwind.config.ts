@@ -18,7 +18,7 @@ export default {
           300: '#000000',
           500: '#111111'
         },
-        white: '#FFFFFF'
+        white: '#E3E3E3'
       },
       backgroundImage: {
         // tailwind usage: bg-default-gradient

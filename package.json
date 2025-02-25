@@ -10,11 +10,16 @@
   },
   "dependencies": {
     "axios": "^1.7.9",
+    "brackets-json-db": "^1.0.2",
+    "brackets-manager": "^1.6.4",
+    "brackets-viewer": "^1.6.2",
     "dayjs": "^1.11.13",
+    "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-zoom-pan-pinch": "^3.7.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

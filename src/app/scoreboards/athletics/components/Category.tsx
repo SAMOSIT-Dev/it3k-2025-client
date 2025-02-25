@@ -42,14 +42,14 @@ const Category: React.FC = () => {
         >
           {category.map((item) => (
             <SwiperSlide key={item.id} className={styles['swiper-slide']}>
-              <button className={styles['category-button']}>{item.name}</button>
+              <button className={`rounded-lg ${styles['category-button']}`}>{item.name}</button>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <ul className={styles.container}>
           {category.map((item) => (
-            <li className={styles['category-button']} key={item.id}>
+            <li className={`md:rounded-xl xl:rounded-lg ${styles['category-button']}`} key={item.id}>
               <button>{item.name}</button>
             </li>
           ))}

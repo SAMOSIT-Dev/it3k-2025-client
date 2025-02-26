@@ -26,17 +26,17 @@ const fetchMockData = async () => {
     setTimeout(() => {
       resolve({
         round1: [
-          { id: 1, team1: 'KMITL', team2: 'KMUTNB BKK', score1: 1, score2: 2 },
-          { id: 2, team1: 'KMUTT', team2: 'KMUTNB', score1: 2, score2: 1 },
-          { id: 3, team1: 'KMITL', team2: 'KMUTNB BKK', score1: 1, score2: 2 },
-          { id: 4, team1: 'KMUTT', team2: 'KMUTNB', score1: 2, score2: 1 },
+          { id: 1, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
+          { id: 2, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
+          { id: 3, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
+          { id: 4, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
         ],
         round2: [
-          { id: 5, team1: 'KMUTNB BKK', team2: 'KMUTT', score1: 2, score2: 3 },
-          { id: 6, team1: 'KMUTNB', team2: 'KMITL', score1: 1, score2: 2 },
+          { id: 5, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
+          { id: 6, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
         ],
-        final: { id: 7, team1: 'KMUTT', team2: 'KMUTNB', score1: 3, score2: 1 },
-        thirdPlace: { id: 8, team1: 'Loser Team 1', team2: 'Loser Team 2', score1: 1, score2: 1 },
+        final: { id: 7, team1: 'Null', team2: 'Null', score1: 0, score2: 0 },
+        thirdPlace: { id: 8, team1: 'Loser Team 1', team2: 'Loser Team 2', score1: 0, score2: 0 },
       })
     }, 500)
   })
@@ -239,7 +239,7 @@ const Bracket: React.FC = () => {
   <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
     <p>หญิงคู่</p>
   </button>
-  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs"  onClick={() => setIsAdmin(!isAdmin)}>
     <p>หญิงเดี่ยว</p>
   </button>
 </div>

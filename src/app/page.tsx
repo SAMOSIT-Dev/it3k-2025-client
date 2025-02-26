@@ -1,10 +1,10 @@
-import PodiumScoreBoard from './podium/components/PodiumScoreboard'
-import PodiumSection from './podium/components/PodiumSection'
+import PodiumScoreBoard from './(main)/components/PodiumScoreboard'
+import PodiumSection from './(main)/components/PodiumSection'
 
 const scoreboardData = [
   {
     name: 'KMUTT',
-    logo: '/images/KMUTT_Full.jpg',
+    logo: '/images/KMUTT_logo.png',
     scores: [999, 999, 999, 999, 999, 999, 999]
   },
   {
@@ -24,7 +24,6 @@ const scoreboardData = [
   }
 ]
 
-
 export default function Home() {
   return (
     <main className="bg-black-300">
@@ -38,6 +37,7 @@ export default function Home() {
       <PodiumSection scoreboardData={scoreboardData} />
 
       <PodiumScoreBoard scoreboardData={scoreboardData} />
+
       {/* Live Schedule By C */}
 
       {/* Full detail sport schedule slider By Gun*/}

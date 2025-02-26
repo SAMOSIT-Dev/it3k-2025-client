@@ -1,3 +1,5 @@
+import { scheduleData } from './schedule/scheduleData'
+import LiveSchedule from './schedule/components/LiveSchedule'
 import HeroMain from "./(main)/components/HeroMain";
 import Sponsor from "./(main)/components/Sponsor";
 import SportSlider from './(main)/components/SportSlider'
@@ -16,7 +18,7 @@ export default function Home() {
       {/* Podium Scoreboard By Ice */}
 
       {/* Live Schedule By C */}
-
+      <LiveSchedule scheduleData={scheduleData} />
       {/* Full detail sport schedule slider By Gun*/}
       <SportSlider title="กำหนดการแต่ละกีฬา" sportLists={scheduleSports} />
 

@@ -17,7 +17,7 @@ interface Match {
 
 type Round = 'round1' | 'round2' | 'final' | 'thirdPlace'
 type TeamKey = 'team1' | 'team2'
-const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK'] as const
+const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK',"BLANK"] as const
 type TeamName = typeof TEAM_OPTIONS[number]
 
 // Mock API functions
@@ -52,6 +52,7 @@ const Bracket: React.FC = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [round1Matches, setRound1Matches] = useState<Match[]>([])
   const [round2Matches, setRound2Matches] = useState<Match[]>([])
+  const [sportName, setSportName] = useState('ปิงปอง')
   const [finalMatch, setFinalMatch] = useState<Match | null>(null)
   const [thirdPlaceMatch, setThirdPlaceMatch] = useState<Match | null>(null)
   const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey; round: Round } | null>(null)
@@ -223,26 +224,53 @@ const Bracket: React.FC = () => {
 
   return (
     <div className="brackets-wrapper-container">
-      <div className="sport-section mb-8 d-flex flex-col">
-        <h1 className="text-white text-4xl mb-8 font-extrabold">{sportname}</h1>
-        <div>
-          <button className="btn-bracket"><p>คู่ผสม</p></button>
-          <button className="btn-bracket"><p>ชายคู่</p></button>
-          <button className="btn-bracket"><p>ชายเดี่ยว</p></button>
-          <button className="btn-bracket"><p>หญิงคู่</p></button>
-          <button className="btn-bracket"><p>หญิงเดี่ยว</p></button>
-          <button
-            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            onClick={() => setIsAdmin(!isAdmin)}
-          >
-            {isAdmin ? 'Switch to User' : 'Switch to Admin'}
-          </button>
-        </div>
-      </div>
-      <div>
-        <TransformWrapper initialScale={0.7} minScale={0.5} maxScale={2}>
-        <TransformComponent wrapperStyle={{ width: '90%', height: '100vh', cursor: 'grab' }}>
-          <div className="p-8 bg-black min-h-screen bracket-container border border-red-200">
+    <div className="sport-section mb-8 flex flex-col ">
+      <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold">{sportname}</h1>
+      <div className="flex gap-2 w-full ">
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+    <p>คู่ผสม</p>
+  </button>
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+    <p>ชายคู่</p>
+  </button>
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+    <p>ชายเดี่ยว</p>
+  </button>
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+    <p>หญิงคู่</p>
+  </button>
+  <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
+    <p>หญิงเดี่ยว</p>
+  </button>
+</div>
+
+
+    </div>
+
+    {/* Tournament Bracket Container */}
+    <div className="flex justify-center w-full">
+      <TransformWrapper
+        initialScale={1}
+        minScale={0.5}
+        maxScale={5} 
+      >
+        <TransformComponent
+          wrapperStyle={{
+            border: '2px solid #ff0000',
+            background: '#000',
+            padding: '10px',
+            overflow: 'hidden',
+            cursor: 'grab',
+            boxShadow: '0 4px 8px rgba(255, 0, 0, 0.5)',
+            width: '80%', // ให้ปรับขนาดตาม parent
+            maxWidth: '1200px', // จำกัด max-width ไม่ให้ใหญ่เกินไป
+          }}
+          contentStyle={{
+            transform: 'scale(0.8)', // ลดขนาดเริ่มต้น
+            
+          }}
+        >
+          <div className="p-8 bg-black min-h-screen bracket-container ">
             <div className="relative flex gap-32 ml-48 font-bold">
               {/* Round 1 */}
               <div className="flex flex-col gap-24">

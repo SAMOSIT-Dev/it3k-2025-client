@@ -90,12 +90,10 @@
   scale: 1;
   font-weight: 600;
   margin-top: 10px;
-  width: 10rem;
+
 }
 
-.btn-bracket p{
-  scale: 1.2;
-}
+
 .btn-bracket:hover {
   background-color: red;
   box-shadow: 0 0 11px rgba(255, 120, 120, 0.953); 

@@ -1,0 +1,18 @@
+name: Run Docker on Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      # - feature/docker-deploy
+
+jobs:
+  build-and-run:
+    runs-on: it3k-2025
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker compose up --build -d

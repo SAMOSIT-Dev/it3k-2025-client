@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "./(main)/components/Navbar";
+import FloatingPopGoose from "./(main)/components/FloatingPopGoose";
 
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
         {/* NavBar */}
         <Navbar />
         {children}
+        <FloatingPopGoose />
       </body>
     </html>
   );

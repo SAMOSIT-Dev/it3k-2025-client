@@ -1,8 +1,6 @@
 import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
-import MatchCard from '@/shared/components/MatchCard'
 import { Team } from '@/shared/utils/team'
-import '@/app/globals.css'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import MatchList from './components/MatchList'
 
@@ -15,7 +13,7 @@ const Page = () => {
     [4, <TeamCell team={Team.KMUTNBPR} />, '2-0', '55-36', 15]
   ]
   const getColumnstyle = (colIndex: number) => {
-    if (colIndex === 0) return 'text-xl'
+    if (colIndex === 0) return 'font-bold'
     if (colIndex === 1) return 'w-1/3'
     return ''
   }

@@ -49,7 +49,7 @@ const TableComponent = <T,>({
             {row.map((cell, cellIndex) => (
               <td
                 key={cellIndex}
-                className={`p-2 lg:h-[80px] text-xs sm:text-sm lg:text-xl border border-red-500 text-center relative overflow-hidden
+                className={`${columnStyles ? columnStyles(cellIndex) : ''} p-2 lg:h-[80px] text-xs sm:text-sm lg:text-xl border border-red-500 text-center relative overflow-hidden
                   ${
                     !edgeBorder
                       ? `${cellIndex === 0 ? 'border-l-0' : ''} 
@@ -57,8 +57,7 @@ const TableComponent = <T,>({
                        ${rowIndex === data.length - 1 ? 'border-b-0' : ''}
                     `
                       : ''
-                  }
-                  ${columnStyles ? columnStyles(cellIndex) : ''}`}
+                  }`}
               >
                 <div
                   className={`absolute inset-0 m-auto h-[60%] w-[80%] 

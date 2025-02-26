@@ -26,7 +26,7 @@ const TableComponent = <T,>({
           {header.map((title, index) => (
             <th
               key={index}
-              className={`p-2 relative ${
+              className={`text-xs md:text-xl p-2 relative ${
                 !edgeBorder &&
                 (index === 0
                   ? 'border-l-0'
@@ -49,7 +49,7 @@ const TableComponent = <T,>({
             {row.map((cell, cellIndex) => (
               <td
                 key={cellIndex}
-                className={`p-2 border border-red-500 text-center relative overflow-hidden
+                className={`p-2 lg:h-[80px] text-xs sm:text-sm lg:text-xl border border-red-500 text-center relative overflow-hidden
                   ${
                     !edgeBorder
                       ? `${cellIndex === 0 ? 'border-l-0' : ''} 
@@ -62,10 +62,10 @@ const TableComponent = <T,>({
               >
                 <div
                   className={`absolute inset-0 m-auto h-[60%] w-[80%] 
-                    blur-lg rounded-lg z-[1] ${
+                    blur-lg rounded-sm z-[1] ${
                       highlighted
                         ? rowIndex == 0
-                          ? 'bg-yellow-300 opacity-60'
+                          ? 'bg-yellow-300 opacity-40'
                           : 'bg-orange-100 opacity-20'
                         : ''
                     }`}

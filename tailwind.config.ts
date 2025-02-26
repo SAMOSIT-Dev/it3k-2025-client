@@ -5,7 +5,7 @@ export default {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/share/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/shared/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
@@ -24,7 +24,6 @@ export default {
         white: '#E3E3E3'
       },
       backgroundImage: {
-        // tailwind usage: bg-default-gradient
         'default-gradient':
           'linear-gradient(90deg, rgba(160,6,6,1) 0%, rgba(0,0,0,1) 100%)'
       },

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  it3k-2025-client:
+    container_name: it3k-2025-client
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    networks:
+      - it3k-2025-network
+    restart: unless-stopped
+
+networks:
+  it3k-2025-network:
+    external: true

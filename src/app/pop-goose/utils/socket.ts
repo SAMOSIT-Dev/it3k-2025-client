@@ -4,11 +4,13 @@ let socket: Socket
 
 export const initSocket = (): Socket => {
   if (!socket && typeof window !== 'undefined') {
-    const socketServerUrl = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL
+    const socketServerUrl = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || 'http://localhost/popcat/socket/'
     if (!socketServerUrl) {
       throw new Error('Socket server URL is not defined')
     }
-    socket = io(socketServerUrl)
+    socket = io(socketServerUrl, {
+      transports: ['websocket']
+    })
   }
   if (!socket) {
     throw new Error('Socket failed to initialize')

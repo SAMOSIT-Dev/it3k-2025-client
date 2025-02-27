@@ -26,7 +26,8 @@ export default {
       },
       fontFamily: {
         'BenguiatITCbyBT': ['BenguiatITCbyBT', 'sans-serif'],
-        'Prompt': ['Prompt', 'sans-serif']
+        'Prompt': ['Prompt', 'sans-serif'],
+        'Pixel': ["'Press Start 2P'", "cursive"],
       }
     },
   },

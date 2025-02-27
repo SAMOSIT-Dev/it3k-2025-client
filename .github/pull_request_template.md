@@ -1,3 +1,12 @@
+# Agreement
+1. commit ให้เล็ก คน review จะได้อ่านตอน review ได้ง่าย
+2. review code ตาม checklist กับคนในทีมก่อนค่อยส่งให้ทีมอื่น review
+3. developer ต้องเป็นคน test ให้ครอบคลุม ก่อนค่อย merge เข้า dev
+
+<!-- ถ้า pr นี้ จำเป็นต้อง merge pr อื่นขึ้นไปก่อน โปรดใส่ url pr นั้นด้วย ใน () -->
+
+- [ ] Pls merge [THIS PR BEFORE]()
+
 ## Description
 
 <!-- อธิบายใน pr นี้ ทำอะไรไปบ้าง อย่างละเอียด -->

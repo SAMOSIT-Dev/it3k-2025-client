@@ -1,3 +1,4 @@
+import style from '@/app/styles/scoreboards/athletics/table.module.css'
 const Table: React.FC = () => {
   interface universityDataProps {
     name: string
@@ -21,21 +22,21 @@ const Table: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedData.map((item) => (
-            <tr key={item.rank}>
-              <td className="bg-black-300 text-center text-md md:text-xl lg:text-2xl font-bold lg:py-4 py-2 border-2 md:border-4 border-x-[#E80100] border-y-[#E80100]">
-                {item.rank}
+          {sortedData.map((item, index) => (
+            <tr key={index}>
+              <td
+                className={`${index === 0 && style['glow-cell']} bg-black-300 text-center text-md md:text-xl lg:text-2xl font-bold lg:py-4 py-2 border-2 md:border-4 border-x-[#E80100] border-y-[#E80100]`}>
+                <span>{item.rank}</span>
               </td>
-              <td className="bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-x-[#F68D12] border-y-[#F68D12]">
+              <td
+                className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>
                 <div className="flex flex-row items-center justify-center">
                   <img
                     src={item.logo}
                     alt={item.name}
                     className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"
                   />
-                  <span className="text-center text-xs sm:text-lg lg:text-xl">
-                    {item.name}
-                  </span>
+                  <span>{item.name}</span>
                 </div>
               </td>
             </tr>

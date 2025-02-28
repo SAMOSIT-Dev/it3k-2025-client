@@ -23,7 +23,7 @@ const mockMatches = [
   },
   {
     time: 'เวลา : 18:30 - 20:00',
-    match: 'ชืงชนะเลิศ',
+    match: 'ชิงชนะเลิศ',
     teamA: Team.KMUTT,
     teamB: Team.KMUTNBPR,
     scoreA: 3,

@@ -1,8 +1,8 @@
 import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
 import { Team } from '@/shared/utils/team'
-import { Icon } from '@iconify/react/dist/iconify.js'
 import MatchList from './components/MatchList'
+import BackButton from '@/shared/components/BackButton'
 
 const Page = () => {
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
@@ -19,15 +19,10 @@ const Page = () => {
   }
 
   return (
-    <div className="flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8 bg-black-300">
+    <div className="font-Prompt flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8 bg-black-300">
       <div className="w-[90%]">
-        <div className="mt-2 mb-2 md:mb-8 md:mt-8 flex flex-row items-center lg:-ml-4 md:-ml-2 -ml-1">
-          <button>
-            <Icon
-              icon={'solar:alt-arrow-left-bold'}
-              className="text-3xl p-0 cursor-pointer"
-            />
-          </button>
+        <div className="mt-8 mb-4 md:mb-8 md:mt-8 flex flex-row items-center lg:-ml-4 md:-ml-2 -ml-1">
+          <BackButton />
           <h1 className="text-2xl font-bold">Football</h1>
         </div>
         <TableComponent

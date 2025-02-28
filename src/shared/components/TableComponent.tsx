@@ -18,24 +18,20 @@ const TableComponent = <T,>({
   rowStyles
 }: TableComponentProps<T>) => {
   return (
-    <table className={`w-full text-white text-center`}>
+    <table className={`font-Prompt w-full text-white text-center`}>
       <thead
-        className={`bg-gradient-to-r from-red-500 to-orange-100 ${edgeBorder ? 'border border-red-500' : 'border-b border-red-500'} uppercase`}
+        className={`bg-gradient-to-l from-orange-100 to-red-500 uppercase`}
       >
         <tr>
           {header.map((title, index) => (
             <th
               key={index}
-              className={`text-xs md:text-xl p-2 relative ${
-                !edgeBorder &&
-                (index === 0
-                  ? 'border-l-0'
-                  : index === header.length - 1
-                    ? 'border-r-0'
-                    : '')
-              }`}
+              style={{ textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)' }}
+              className={`text-xs md:text-xl p-2
+        ${index === 0 ? 'border-l-2 border-l-red-500' : ''} 
+        ${index === header.length - 1 ? 'border-r-2 border-r-orange-100' : ''}`}
             >
-              <span className="drop-shadow-2xl">{title}</span>
+              {title}
             </th>
           ))}
         </tr>

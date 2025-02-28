@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react'
 
 const FloatingPopGoose = () => {
   const router = useRouter()
-  const [isMediumDisplay, setIsMediumDisplay] = useState<boolean>(false)
+  const [isMediumDisplay, setIsMediumDisplay] = useState<boolean | null>(null)
+
   useEffect(() => {
     const checkScreenSize = () => {
       if (window.innerWidth <= 1024) {
@@ -18,6 +19,9 @@ const FloatingPopGoose = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  if (isMediumDisplay === null) {
+    return null
+  }
 
   return (
     <div
@@ -40,4 +44,5 @@ const FloatingPopGoose = () => {
     </div>
   )
 }
+
 export default FloatingPopGoose

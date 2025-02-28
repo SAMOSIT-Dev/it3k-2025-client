@@ -4,6 +4,7 @@ import { Team } from '@/shared/utils/team'
 import MatchList from './components/MatchList'
 import BackButton from '@/shared/components/BackButton'
 import Category from './components/Category'
+import Background from '@/shared/components/Background'
 
 const Page = () => {
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
@@ -20,7 +21,7 @@ const Page = () => {
   }
 
   return (
-    <div className="flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8 bg-black-300">
+    <div className="flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8">
       <div className="w-[90%]">
         <div className="flex flex-row items-center mt-8 mb-4 -ml-1 md:-ml-2 lg:-ml-4 md:mb-4">
           <BackButton />
@@ -41,6 +42,8 @@ const Page = () => {
           </div>
         </div>
       </div>
+
+      <Background />
     </div>
   )
 }

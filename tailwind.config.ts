@@ -25,11 +25,17 @@ export default {
       },
       backgroundImage: {
         'default-gradient':
-          'linear-gradient(90deg, rgba(160,6,6,1) 0%, rgba(0,0,0,1) 100%)'
+          'linear-gradient(90deg, rgba(160,6,6,1) 0%, rgba(0,0,0,1) 100%)',
+        gameBg: "url('/images/pop_goose/game_background.png')",
+        gameBgMd: "url('/images/pop_goose/md_game_background.png')",
+        gameBgSm: "url('/images/pop_goose/sm_game_background.png')"
       },
       fontFamily: {
         BenguiatITCbyBT: ['BenguiatITCbyBT', 'sans-serif'],
-        Prompt: ['Prompt', 'sans-serif']
+        Prompt: ['Prompt', 'sans-serif'],
+        RampartOne: ['Rampart One', 'sans-serif'],
+        ReemKufiInk: ['Reem Kufi Ink', 'sans-serif'],
+        PressStart2P: ['"Press Start 2P"', 'sans-serif']
       }
     }
   },

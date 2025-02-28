@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Category from './components/Category'
 import { Icon } from '@iconify/react'

@@ -4,15 +4,15 @@ const HeroMain = () => {
     const props = {
         title: 'โครงการกีฬาสานสัมพันธ์ไอทีสามพระจอมครั้งที่ 19',
         description: 'At King Mongkut\'s University of Technology Thonburi',
-        bg: '/images/HeroMainBg.png',
+        bg: '/images/HeroMainBg.svg',
         logo1: '/images/logoHero.svg',
         logo2: '/images/logoTextHero.svg'
     }
 
     return (
-        <div className="h-[900px] w-full bg-black font-Prompt">
+        <div className="h-[700px] sm:h-[900px] w-full bg-black font-Prompt">
             <div
-                className="h-[900px] w-full flex flex-col justify-center items-center relative bg-[#111]"
+                className="h-[700px] sm:h-[900px] w-full flex flex-col justify-center items-center relative bg-[#000000]"
             >
                 <div className="absolute inset-0 opacity-90 z-0 bg-cover bg-no-repeat"
                     style={{ backgroundImage: `url(${props.bg})`, backgroundPosition: "50% 0%" }}

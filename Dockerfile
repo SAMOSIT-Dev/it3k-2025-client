@@ -28,6 +28,8 @@ COPY --from=builder /app .
 
 # Set environment variables
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_SOCKET_SERVER_URL="http://localhost"
+ENV NEXT_PUBLIC_SOCKET_SERVER_URL_PATH="/popcat/socket/"
 
 # Install only production dependencies
 RUN npm ci --only=production

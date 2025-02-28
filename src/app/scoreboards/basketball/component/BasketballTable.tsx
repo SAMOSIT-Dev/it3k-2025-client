@@ -31,7 +31,7 @@ const BasketballTable = ({ scoreData }: { scoreData: IBasketballTable }) => {
           <td className="sm:py-1 lg:py-2 px-1  text-gray-400">
             {scoreData.scoreAQ2}
           </td>
-          <td className="sm:px-1 lg:py-2 font-bold">{scoreData.scoreAT}</td>
+          <td className="sm:px-1 lg:py-2 ">{scoreData.scoreAT}</td>
         </tr>
         <tr>
           <td className="sm:py-1 pr-6 text-left font-medium">
@@ -39,7 +39,8 @@ const BasketballTable = ({ scoreData }: { scoreData: IBasketballTable }) => {
           </td>
           <td className="sm:py-1 px-1  text-gray-400">{scoreData.scoreBQ1}</td>
           <td className="sm:py-1 px-1  text-gray-400">{scoreData.scoreBQ2}</td>
-          <td className="sm:py-1 px-1 font-bold">{scoreData.scoreBT}</td>
+
+          <td className="sm:py-1 px-1 ">{scoreData.scoreBT}</td>
         </tr>
       </tbody>
     </table>

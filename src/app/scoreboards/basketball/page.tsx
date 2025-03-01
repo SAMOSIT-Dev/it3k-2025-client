@@ -1,7 +1,7 @@
 'use client'
 
 import { Icon } from '@iconify/react/dist/iconify.js'
-import BasketBallCard from './component/BastketballCard'
+import BasketBallCard from './components/BastketballCard'
 import { useRouter } from 'next/navigation'
 const BasketBall = () => {
   const mock = [

@@ -9,6 +9,8 @@ type SponsorProps = {
 
 const sponsors: SponsorProps = [
   { logo: 'images/sponsors/kohkae.png',link: 'https://www.kohkae.com/'},
+  { logo: 'images/sponsors/raiseup.png',link: 'https://www.kohkae.com/'},
+  { logo: 'images/sponsors/jele.png',link: 'https://www.kohkae.com/'},
 ];
 
 const Sponsor = () => {

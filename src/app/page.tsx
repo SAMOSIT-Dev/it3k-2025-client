@@ -11,22 +11,22 @@ const scoreboardData = [
   {
     name: 'KMUTT',
     logo: '/images/KMUTT_logo.png',
-    scores: [999, 999, 999, 999, 999, 999, 999]
+    scores: [0, 0, 0, 0, 0, 0, 0]
   },
   {
     name: 'KMITL',
     logo: '/images/KMITL_logo.png',
-    scores: [999, 999, 999, 999, 999, 999, 999]
+    scores: [0, 0, 0, 0, 0, 0, 0]
   },
   {
     name: 'KMUTNB',
     logo: '/images/KMUTNB_logo.png',
-    scores: [999, 999, 999, 999, 999, 999, 999]
+    scores: [0, 0, 0, 0, 0, 0, 0]
   },
   {
     name: 'KMUTNB PR',
     logo: '/images/KMUTNB_logo.png',
-    scores: [999, 999, 999, 999, 999, 999, 999]
+    scores: [0, 0, 0, 0, 0, 0, 0]
   }
 ]
 

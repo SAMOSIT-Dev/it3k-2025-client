@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import CountUp from 'react-countup'
-import Leaderboard from './Leaderboard'
-
+import Leaderboard from './LeaderBoard'
 interface LeaderboardEntry {
   rank: string
   university: string

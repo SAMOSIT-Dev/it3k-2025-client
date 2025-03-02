@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
+import Image from 'next/image';
 
 
 const Navbar = () => {
@@ -22,7 +23,13 @@ const Navbar = () => {
             </button>
             <div>
               <Link href="/">
-                <img src="/images/logoNav.svg" alt="logoNav" className="h-[5rem]" />
+                <Image
+                  src="/images/logoNav.svg"
+                  alt="logoNav"
+                  width={200} 
+                  height={80}
+                  className="h-[5rem] w-auto"
+                />
               </Link>
             </div>
             <div className="hidden lg:flex space-x-6">
@@ -40,12 +47,12 @@ const Navbar = () => {
           {isOpen && (
             <div className="bg-[#111111] flex flex-col items-center pt-4 border-t-2 border-red-600">
               <Link href="/" className="flex items-center justify-center gap-1 py-4 hover:bg-opacity-50 hover:bg-white w-screen">
-                <img src="/images/rankIcon.png" alt="rankIcon" width={15} height={15} />
+                <Image src="/images/rankIcon.png" alt="rankIcon" width={15} height={15} />
                 <p className="text-sm">Rank</p>
               </Link>
               <hr className="w-[85%] border-white" />
               <Link href="/" className="flex items-center justify-center gap-2 py-4 hover:bg-opacity-50 hover:bg-white w-screen">
-                <img src="/images/matchIcon.png" alt="match" width={15} height={15} />
+                <Image src="/images/matchIcon.png" alt="match" width={15} height={15} />
                 <p className="text-sm">Match</p>
               </Link>
             </div>

@@ -8,9 +8,9 @@ import gooseShadow from '../../../public/images/pop_goose/goose-shadow.png'
 import styles from '@/app/styles/game/game.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
-import Leaderboard from './components/LeaderBoard'
 import { initSocket } from './utils/socket'
 import UniversitySelectModal from './components/UniversitySelectModal'
+import Scorebar from './components/Scorebar'
 
 interface LeaderboardEntry {
   rank: string
@@ -34,7 +34,9 @@ const PopGoosePage = () => {
   useEffect(() => {
     const socket = initSocket()
 
-    socket.on('connect', () => {})
+    socket.on('connect', () => {
+      console.log('connected')
+    })
 
     socket.on('updateLeaderboard', (data) => {
       setLeaderboardData(data)
@@ -129,17 +131,20 @@ const PopGoosePage = () => {
         </div>
 
         <div className="relative flex flex-col items-center justify-center">
-          <Image
-            src={gooseShadow}
-            alt="Shadow"
-            width={300}
-            height={80}
-            priority
-            className="absolute right-[70px] sm:right-[200px] md:right-[220px] lg:right-[270px] bottom-[60px] sm:bottom-[100px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
-            draggable="false"
-          />
+          <div
+            className="relative"
+            onPointerDown={handlePress}
+            onPointerUp={handleRelease}>
+            <Image
+              src={gooseShadow}
+              alt="Shadow"
+              width={300}
+              height={80}
+              priority
+              className="absolute right-[70px] sm:right-[100px]  bottom-[30px] sm:bottom-[40px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
+              draggable="false"
+            />
 
-          <div onPointerDown={handlePress} onPointerUp={handleRelease}>
             <Image
               src={isPopped ? popGoose : defaultGoose}
               alt="Pop Goose"
@@ -151,7 +156,7 @@ const PopGoosePage = () => {
             />
           </div>
 
-          <Leaderboard leaderboardData={leaderboardData} />
+          <Scorebar leaderboardData={leaderboardData} />
         </div>
       </div>
     </section>

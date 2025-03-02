@@ -1,0 +1,26 @@
+.glow-cell {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-cell::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160%;    /* กว้างขึ้นอีกหน่อย */
+    height: 200%;   /* เพิ่มความสูงขึ้นมา ไม่แบนเกิน */
+    background: radial-gradient(ellipse, rgba(255, 221, 0, 0.35), rgba(255, 221, 0, 0) 60%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-cell span {
+    position: relative;
+    z-index: 1;
+}
+.glow-cell div {
+    position: relative;
+    z-index: 1;
+}

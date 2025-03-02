@@ -39,6 +39,8 @@ const FloatingPopGoose = () => {
         <Image
           src="/images/pop.png"
           alt="Goose"
+          width={40}
+          height={40}
           className="w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 mt-2"
         />
       </div>

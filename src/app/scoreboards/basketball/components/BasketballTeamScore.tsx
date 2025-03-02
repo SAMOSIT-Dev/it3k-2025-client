@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BasketballTeam } from "../interfaces/basketball"
 
 const BasketballTeamScore = ({
@@ -8,8 +9,8 @@ const BasketballTeamScore = ({
   return (
     <div
       className={`flex justify-center items-center ${data.side == 'right' ? 'flex-row-reverse' : ''}`}>
-      <div className=" w-[50px] h-[50px] min-w-[30px] min-h-[30px]  sm:size-[90px] lg:size-[120px] rounded-full bg-white">
-        <img src={`/images/${data.team.image}`} alt={`${data.team.uniName} logo`}></img>
+      <div className="relative w-[50px] h-[50px] min-w-[30px] min-h-[30px]  sm:size-[90px] lg:size-[120px] rounded-full bg-white">
+        <Image src={`/images/${data.team.image}`} alt={`${data.team.uniName} logo`} fill/>
       </div>
       <div className="relative flex flex-col text-[#E9E9E9] font-semibold text-center mx-1 lg:mx-10 sm:mx-3 ">
         <h3 className="text-[9px] sm:text-[15px] lg:text-[24px] z-10">KMUTT</h3>

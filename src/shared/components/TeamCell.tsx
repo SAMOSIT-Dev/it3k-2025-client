@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Team, TeamLogos } from '../utils/team'
 
 interface TeamCellProps {
@@ -7,10 +8,13 @@ interface TeamCellProps {
 const TeamCell = ({ team }: TeamCellProps) => {
   return (
     <div className="flex items-center w-full h-full px-1 sm:px-2">
-      <div className="w-2/5">
-        <img
+      <div className="w-2/5 relative">
+        <Image
           src={TeamLogos[team]}
           alt="team"
+          width={0}
+          height={0}
+          sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
           className="w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
         />
       </div>

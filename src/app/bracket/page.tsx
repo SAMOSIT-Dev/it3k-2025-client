@@ -202,29 +202,18 @@ const Bracket: React.FC<{ sport: string }> = ({ sport }) => {
 
   return (
     <div className="brackets-wrapper-container">
-      <div className="sport-section mb-8 flex flex-col">
-        <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold">{sportName}</h1>
-        <div className="flex gap-2 w-full">
-          <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
-            <p>คู่ผสม</p>
-          </button>
-          <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
-            <p>ชายคู่</p>
-          </button>
-          <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
-            <p>ชายเดี่ยว</p>
-          </button>
-          <button className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs">
-            <p>หญิงคู่</p>
-          </button>
-          <button
-            className="btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs"
-            onClick={() => setIsAdmin(!isAdmin)}
-          >
-            <p>หญิงเดี่ยว</p>
-          </button>
-        </div>
-      </div>
+     <div className="sport-section mb-8 flex flex-col">
+  <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold">{sportName}</h1>
+  <div className="slider-container">
+    <div className="slider-content flex">
+      <button className="btn-bracket">คู่ผสม</button>
+      <button className="btn-bracket">ชายคู่</button>
+      <button className="btn-bracket">ชายเดี่ยว</button>
+      <button className="btn-bracket">หญิงคู่</button>
+      <button className="btn-bracket" onClick={() => setIsAdmin(!isAdmin)}>หญิงเดี่ยว</button>
+    </div>
+  </div>
+</div>
 
       <div className="flex justify-center w-full">
         <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>

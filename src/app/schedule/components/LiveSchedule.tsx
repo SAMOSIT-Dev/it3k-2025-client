@@ -34,7 +34,7 @@ export default function LiveSchedule({
       )
     }
     setData(filteredData)
-  }, [filter])
+  }, [scheduleData, filter])
 
   return (
     <div className="min-w-0 h-auto min-h-0 relative">

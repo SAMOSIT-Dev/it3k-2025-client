@@ -20,47 +20,50 @@ type TeamKey = 'team1' | 'team2'
 const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK', 'BLANK', 'Null'] as const
 type TeamName = typeof TEAM_OPTIONS[number]
 
-
-const fetchRealData = async () => {
+const fetchRealData = async (): Promise<{
+  round1: Match[];
+  round2: Match[];
+  final: Match | null;
+  thirdPlace: Match | null;
+}> => {
   try {
     const response = await fetch('https://678dadbfa64c82aeb11dab32.mockapi.io/api/pages/Learning', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json()
+    const data = await response.json();
 
-    // แปลงข้อมูลจาก API ให้เข้ากับ Match interface
-    const matches = data.map((item: any) => ({
+    // API 
+    const matches: Match[] = data.map((item: any) => ({
       id: item.id,
       team1: item.team_A_details?.image?.split('_')[0]?.toUpperCase() || 'Null',
       team2: item.team_B_details?.image?.split('_')[0]?.toUpperCase() || 'Null',
       score1: item.pingpong_sets?.[0]?.score_A || 0,
       score2: item.pingpong_sets?.[0]?.score_B || 0,
-    }))
+    }));
 
-    // จัดกลุ่มข้อมูลตาม ID
-    const round1 = matches.filter(match => [1, 2, 3, 4].includes(match.id))
-    const round2 = matches.filter(match => [5, 6].includes(match.id))
-    const final = matches.find(match => match.id === 7) || null
-    const thirdPlace = matches.find(match => match.id === 8) || null
+    // จัดกลุ่มข้อมูลตาม ID โดยระบุ Type ของ match เป็น Match
+    const round1 = matches.filter((match: Match) => [1, 2, 3, 4].includes(match.id));
+    const round2 = matches.filter((match: Match) => [5, 6].includes(match.id));
+    const final = matches.find((match: Match) => match.id === 7) || null;
+    const thirdPlace = matches.find((match: Match) => match.id === 8) || null;
 
-    return { round1, round2, final, thirdPlace }
+    return { round1, round2, final, thirdPlace };
   } catch (error) {
-    console.error('Error fetching real API data:', error)
+    console.error('Error fetching real API data:', error);
     return {
       round1: [],
       round2: [],
       final: null,
       thirdPlace: null,
-    }
+    };
   }
-}
-
+};
 const updateMockMatch = async (match: Match, round: Round) => {
   // ยังคงไว้สำหรับการอัปเดต mock data แต่สามารถปรับเป็นการเรียก API จริงได้
   return new Promise<Match>((resolve) => {

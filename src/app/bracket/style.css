@@ -92,7 +92,8 @@
   margin-top: 10px;
   white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
   min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
-  max-width: none; /* ลบ max-width เพื่อให้ยืดหยุ่น */
+  max-width: none; 
+ 
 }
 .btn-bracket:hover {
   background-color: red;
@@ -165,13 +166,13 @@
 
 .slider-content {
   display: flex;
-  gap: 1rem;
   min-width: max-content; /* ช่วยให้เนื้อหาไม่หดเกินไป */
-  padding: 0 1rem; /* ช่องว่างด้านข้าง */
+  padding: 0 0rem; /* ช่องว่างด้านข้าง */
+  
 }
 
 .btn-bracket {
-  @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
+  @apply px-8 py-2 text-white border border-red-600 rounded mx-1;
   transition: all 0.3s ease;
   border-radius: 5px;
   scale: 1;
@@ -194,12 +195,7 @@
   padding-bottom: 1rem; /* เพิ่มช่องว่างด้านล่างสำหรับการเลื่อน */
 }
 
-.slider-content {
-  display: flex;
-  gap: 1rem;
-  min-width: max-content; /* ช่วยให้เนื้อหาไม่หดเกินไป */
-  padding: 0 1rem; /* ช่องว่างด้านข้าง */
-}
+
 
 .btn-bracket {
   @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
@@ -215,21 +211,25 @@
 
 /* Media Query สำหรับมือถือ (768px ลงมา) */
 @media (max-width: 768px) {
-  .sport-section {
-    padding: 1rem;
+  .slider-content {
+    gap: 1px;
   }
 
   .btn-bracket {
-    padding: 0.5rem 1rem; /* ลด padding */
-    font-size: 10px; /* ลดขนาดตัวอักษร */
+    padding: 0.5rem 0.8rem; /* รักษาขนาดปุ่มให้เล็กลงตามเดิม */
+    font-size: 10px;
+    margin-left: 0.5rem; /* ลด margin ด้านซ้าย */
+    margin-right: 0.5rem; /* ลด margin ด้านขวา */
   }
 }
-
 /* Media Query สำหรับหน้าจอเล็กมาก (480px ลงมา) */
 @media (max-width: 480px) {
   .btn-bracket {
     padding: 0.4rem 0.8rem; /* ลด padding มากขึ้น */
     font-size: 8px; /* ลดขนาดตัวอักษรเพิ่ม */
+  }
+  .slider-content {
+    gap: 1px;
   }
 }
 
@@ -244,13 +244,14 @@
   }
 }
 
-/* เพิ่มสไตล์สำหรับการเลื่อนที่ราบรื่น */
+
 .slider-container::-webkit-scrollbar {
   height: 3px; /* ความสูงของ scrollbar */
 }
 
 .slider-container::-webkit-scrollbar-track {
   background: transparent; /* พื้นหลังโปร่งใส */
+  
 }
 
 .slider-container::-webkit-scrollbar-thumb {
@@ -268,6 +269,7 @@
   justify-content: space-between;
   padding: 5px;
   border-top: 1px solid red;
+  
 }
 
 .team-name {

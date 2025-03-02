@@ -1,21 +1,21 @@
 import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
 import { Team } from '@/shared/utils/team'
-import MatchList from './components/MatchList'
+// import MatchList from './components/MatchList'
 import BackButton from '@/shared/components/BackButton'
 import Background from '@/shared/components/Background'
 
 const Page = () => {
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
   const tableData = [
-    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '2-0', '55-36', 15],
-    [2, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-0', '55-36', 15],
-    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '2-0', '55-36', 15],
+    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '0-0', '0-0', 0],
+    [0, <TeamCell key="team-kmitl" team={Team.KMITL} />, '0-0', '0-0', 0],
+    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '0-0', '0-0', 0],
     [
       4,
       <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />,
-      '2-0',
-      '55-36',
+      '0-0',
+      '0-0',
       15
     ]
   ]
@@ -40,14 +40,14 @@ const Page = () => {
           columnStyles={getColumnstyle}
         />
 
-        <div className="flex flex-col w-full items-center lg:-ml-4 md:-ml-2 -ml-1">
+        {/* <div className="flex flex-col w-full items-center lg:-ml-4 md:-ml-2 -ml-1">
           <h1 className="mt-4 mb-4 md:mb-8 md:mt-8 text-2xl font-bold">
             Opening Match
           </h1>
           <div className="w-[100%] md:max-w-[550px] mb-8">
             <MatchList />
           </div>
-        </div>
+        </div> */}
       </div>
       <Background />
     </div>

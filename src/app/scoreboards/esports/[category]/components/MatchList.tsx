@@ -32,7 +32,7 @@ const mockMatches = [
 ]
 
 const MatchList = () => {
-  const [matches, setMatches] = useState<
+  const [matches] = useState<
     {
       time: string
       match: string
@@ -43,7 +43,7 @@ const MatchList = () => {
     }[]
   >(mockMatches)
 
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   return (
     <div className="flex flex-col gap-4 items-center">
       {loading ? (

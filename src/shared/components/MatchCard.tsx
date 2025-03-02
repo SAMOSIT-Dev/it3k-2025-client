@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Team, TeamLogos, TeamName } from '../utils/team'
 
 interface MatchCardProps {
@@ -52,10 +53,13 @@ const MatchCard = ({
 
           <div className="match-info w-[46%] h-full flex px-3 pt-1">
             <div className="w-1/4 flex justify-center items-center">
-              <img
+              <Image
                 src={TeamLogos[teamA]}
                 alt="team"
-                className="md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full aspect-square"
+                width={0}
+                height={0}
+                sizes="(max-width: 640px) 32px, (max-width: 1024px) 48px, 64px"
+                className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full aspect-square"
               />
             </div>
 
@@ -74,10 +78,13 @@ const MatchCard = ({
             </div>
 
             <div className="w-1/4 flex justify-center items-center">
-              <img
+              <Image
                 src={TeamLogos[teamB]}
                 alt="team"
-                className="md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full aspect-square"
+                width={0}
+                height={0}
+                sizes="(max-width: 640px) 32px, (max-width: 1024px) 48px, 64px"
+                className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full aspect-square"
               />
             </div>
           </div>

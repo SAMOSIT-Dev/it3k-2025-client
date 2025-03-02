@@ -1,14 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 
 
 type SponsorProps = {
-  name?: string;
+  name: string;
   logo: string;
   link?: string;
 }[];
 
 const sponsors: SponsorProps = [
-  { logo: 'images/sponsors/kohkae.png',link: 'https://www.kohkae.com/'},
+  { name:"kohkae", logo: '/images/sponsors/kohkae.png',link: 'https://www.kohkae.com/'},
+  { name:"jele",logo: '/images/sponsors/jele.png',link: 'https://jeledoubleice.com/'},
 ];
 
 const Sponsor = () => {
@@ -22,9 +24,8 @@ const Sponsor = () => {
         {sponsors.map((sponsor, index) => (
           <div key={index} className="flex flex-col items-center">
             <Link href={sponsor.link || "#"}>
-              <img src={sponsor.logo} alt={sponsor.name} className="mb-2 rounded-full w-[6rem] h-[6rem] object-center" />
+              <Image src={sponsor.logo} alt={sponsor.name} width={86} height={86} className="mb-2 rounded-full object-center"/>
             </Link>
-            <span>{sponsor.name || ""}</span>
           </div>
         ))}
       </div>

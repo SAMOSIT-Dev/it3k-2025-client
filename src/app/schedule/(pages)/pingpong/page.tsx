@@ -4,7 +4,7 @@ import ScheduleCard from '../../components/ScheduleCard'
 
 export default function PingpongSchedulePage() {
   return (
-    <div className="w-screen px-8 md:px-24 lg:px-0 h-screen overflow-scroll bg-black-300 fixed inset-0">
+    <div className="w-screen px-8 md:px-24 lg:px-0 h-auto overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">
         <div className="w-auto lg:w-[1038.35px] mx-auto">
           <PageTitle title="ปิงปอง" />

@@ -7,9 +7,9 @@ const Table: React.FC = () => {
     logo: string
   }
   const universityData: universityDataProps[] = [
-    { name: 'Dummy', rank: 0, logo: '/images/pop.png' },
     { name: 'Dummy', rank: 1, logo: '/images/pop.png' },
-    { name: 'Dummy', rank: 2, logo: '/images/pop.png' }
+    { name: 'Dummy', rank: 2, logo: '/images/pop.png' },
+    { name: 'Dummy', rank: 3, logo: '/images/pop.png' }
   ]
   const sortedData = universityData.sort((a, b) => a.rank - b.rank)
 

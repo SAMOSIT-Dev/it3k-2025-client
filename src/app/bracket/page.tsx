@@ -78,7 +78,7 @@ const Bracket: React.FC<{ sport: string }> = ({ sport }) => {
   const [sportName, setSportName] = useState('');
   const [finalMatch, setFinalMatch] = useState<Match | null>(null);
   const [thirdPlaceMatch, setThirdPlaceMatch] = useState<Match | null>(null);
-  const [editingTeam, setEditingTeam] = useState<{ matchId: number; TeamKey: TeamKey; round: Round } | null>(null);
+  const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey; round: Round } | null>(null);
   const sportNames: Record<string, string> = {
     badminton: "แบดมินตัน",
     pingpong: "ปิงปอง",

@@ -331,7 +331,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                   {round1Matches.map((match, index) => (
                     
                     <div key={match.matchId} className="relative match-wrapper">
-                       <h2 className="text-white text-center text-xl">Quarter-Final</h2>
+                       <h2 className="text-white text-center text-xl mb-4">Quarter-Final</h2>
                       <div className="w-60 bg-black border border-red-600 rounded">
                         <div className="flex justify-between items-center p-3 border-b border-red-700">
                           <div className="flex items-center gap-3 relative">
@@ -390,7 +390,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                
                   {round2Matches.map((match, index) => (
                     <div key={match.matchId} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
-                          <h2 className="text-white text-center text-xl">Semi Final</h2>
+                          <h2 className="text-white text-center text-xl mb-4">Semi Final</h2>
                       <div className="w-60 bg-black border border-red-600 rounded-lg">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
@@ -446,7 +446,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                 </div>
 
                 <div className="flex flex-col justify-center">
-                <h2 className="text-white text-center text-xl">Final</h2>
+                <h2 className="text-white text-center text-xl mb-4">Final</h2>
                   {finalMatch && (
                     
                     <div className="w-60 bg-black border border-red-600 rounded">
@@ -499,7 +499,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                   )}
 
                   <div className="w-60 rounded mt-6" id="third">
-                    <h2 className="text-white text-center text-xl">Third Place</h2>
+                    <h2 className="text-white text-center text-xl ">Third Place</h2>
                     {thirdPlaceMatch && (
                       <div className="w-60 bg-black border border-red-600 rounded mt-6" id="third">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">

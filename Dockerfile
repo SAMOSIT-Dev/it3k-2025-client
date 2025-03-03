@@ -16,6 +16,8 @@ RUN npm ci
 # Copy the rest of the application code
 COPY ./ ./
 
+COPY .env .env
+
 # Build the Next.js application
 RUN npm run build
 
@@ -26,8 +28,7 @@ WORKDIR /app
 # Copy the built application from the builder stage
 COPY --from=builder /app .
 
-# Set environment variables
-ENV NODE_ENV=production
+
 
 # Install only production dependencies
 RUN npm ci --only=production

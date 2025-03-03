@@ -1,0 +1,30 @@
+.no-select {
+   -webkit-user-select: none;
+   user-select: none;
+   -webkit-touch-callout: none;
+}
+
+.custom-radio {
+   appearance: none;
+   width: 25px;
+   height: 25px;
+   border: 2px solid #5A5A5A;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   position: relative;
+   transition: all .3s;
+
+   &:checked {
+      background-color: #1E0400;
+   }
+
+   @media (max-width: 768px) {
+      width: 20px;
+      height: 20px;
+   }
+
+
+}

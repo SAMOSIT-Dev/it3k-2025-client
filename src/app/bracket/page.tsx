@@ -8,6 +8,7 @@ import './style.css';
 import kmitlLogo from '../../../public/images/KMITL_logo.png';
 import kmuttLogo from '../../../public/images/KMUTT_logo.png';
 import kmutnbLogo from '../../../public/images/KMUTNB_logo.png';
+import gooseLogo from "../../../public/images/pop_goose/default_goose.png"
 
 interface Match {
   id: number;
@@ -136,8 +137,8 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     KMUTNB: kmutnbLogo.src,
     KMUTT: kmuttLogo.src,
     KMUTNBPR: kmutnbLogo.src,
-    Null: '/images/default.png',
-    BLANK: '/images/default.png',
+    Null: gooseLogo.src,
+    BLANK: gooseLogo.src,
   });
 
   useEffect(() => {
@@ -180,7 +181,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   }, [data, error, sport]);
 
   const getTeamLogo = (teamName: string | null): string => {
-    return teamName ? teamLogos[teamName] || '/images/default.png' : '/images/default.png';
+    return teamName && teamLogos[teamName] ? teamLogos[teamName] : gooseLogo.src;
   };
 
   const updateMatchScore = async (sport: string, match: Match, round: Round): Promise<void> => {

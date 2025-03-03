@@ -26,7 +26,7 @@ export const scoreboardSports = [
   },
   {
     name: 'E-sports',
-    route: '/scoreboards/esports',
+    route: '/scoreboards/esports/valorant',
     icon: '/images/sport_icon/esports.png'
   }
 ]

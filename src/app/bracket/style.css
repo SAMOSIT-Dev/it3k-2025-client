@@ -166,7 +166,8 @@
 
 .slider-content {
   display: flex;
-  min-width: max-content; /* ช่วยให้เนื้อหาไม่หดเกินไป */
+  
+  min-width: max-content; 
   padding: 0 0rem; /* ช่องว่างด้านข้าง */
   
 }
@@ -195,7 +196,9 @@
   padding-bottom: 1rem; /* เพิ่มช่องว่างด้านล่างสำหรับการเลื่อน */
 }
 
-
+.btn-back{
+  margin-right: 2rem
+}
 
 .btn-bracket {
   @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
@@ -246,7 +249,7 @@
 
 
 .slider-container::-webkit-scrollbar {
-  height: 3px; /* ความสูงของ scrollbar */
+  height: 3px; 
 }
 
 .slider-container::-webkit-scrollbar-track {

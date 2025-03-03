@@ -66,7 +66,7 @@
 
 .connector-vertical {
   width: 2px;
-  height: 210px;
+  height: 253px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
@@ -115,7 +115,7 @@
 }
 .connector-vertical1 {
   width: 2px;
-  height: 427px;
+  height: 470px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
@@ -125,11 +125,11 @@
 .connector-vertical1::after {
   content: '';
   position: absolute;
-  width: 100px;
+  width:  95px;
   height: 2px;
   background-color: rgb(98, 98, 98);
   left: 0;
-  top: 50%;
+  top: 65%;
   transform: translateY(-50%);
 }
 #third{

@@ -4,6 +4,7 @@ import { Team } from '@/shared/utils/team'
 // import MatchList from './components/MatchList'
 import BackButton from '@/shared/components/BackButton'
 import Background from '@/shared/components/Background'
+import MatchList from './components/MatchList'
 
 const Page = () => {
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
@@ -40,14 +41,14 @@ const Page = () => {
           columnStyles={getColumnstyle}
         />
 
-        {/* <div className="flex flex-col w-full items-center lg:-ml-4 md:-ml-2 -ml-1">
+        <div className="flex flex-col w-full items-center lg:-ml-4 md:-ml-2 -ml-1">
           <h1 className="mt-4 mb-4 md:mb-8 md:mt-8 text-2xl font-bold">
             Opening Match
           </h1>
           <div className="w-[100%] md:max-w-[550px] mb-8">
             <MatchList />
           </div>
-        </div> */}
+        </div>
       </div>
       <Background />
     </div>

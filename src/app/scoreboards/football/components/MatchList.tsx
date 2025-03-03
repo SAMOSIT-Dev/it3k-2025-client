@@ -10,24 +10,24 @@ const mockMatches = [
     match: 'MATCH 1',
     teamA: Team.KMUTT,
     teamB: Team.KMITL,
-    scoreA: 2,
-    scoreB: 3
+    scoreA: 0,
+    scoreB: 0
   },
   {
     time: 'เวลา : 18:30 - 20:00',
     match: 'MATCH 2',
     teamA: Team.KMUTT,
     teamB: Team.KMUTNBPR,
-    scoreA: 3,
-    scoreB: 3
+    scoreA: 0,
+    scoreB: 0
   },
   {
     time: 'เวลา : 18:30 - 20:00',
     match: 'ชิงชนะเลิศ',
     teamA: Team.KMUTT,
     teamB: Team.KMUTNBPR,
-    scoreA: 3,
-    scoreB: 2
+    scoreA: 0,
+    scoreB: 0
   }
 ]
 

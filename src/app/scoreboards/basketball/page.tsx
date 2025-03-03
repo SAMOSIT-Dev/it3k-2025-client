@@ -14,7 +14,7 @@ const BasketBall = () => {
   return (
     <div className=" flex flex-col w-full min-h-[calc(100vh-100px)] flex-1  items-center py-12  bg-black-300  space-y-2 sm:space-y-4 lg:space-y-8 font-Prompt bg-cover bg-bottom" style={{ backgroundImage: "url('/images/backgrounds/basketballBackground.png')" }} >
       <div className="flex items-center w-full  pl-[5%] md:pl-[10%] mb-5">
-        <button onClick={() => router.push('/scoreboards')}>
+        <button onClick={() => router.push('/')}>
           <Icon
             icon={'solar:alt-arrow-left-bold'}
             className="lg:text-6xl md:5xl text-4xl p-0 cursor-pointer text-white"

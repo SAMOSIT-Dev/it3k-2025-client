@@ -3,7 +3,6 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 import BasketBallCard from './components/BastketballCard'
 import { useRouter } from 'next/navigation'
-import useFetchBasketballMatch from './hooks/useFetchBasketballMatch'
 import { mockBasketBallMatches } from './interfaces/basketball'
 const BasketBall = () => {
 

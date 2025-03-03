@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 // Interfaces
 interface Match {
-  id: number;
+  matchId: number;
   team1: string | null;
   team2: string | null;
   score1: number;
@@ -29,30 +29,20 @@ const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK', 'BLANK', 'Null']
 interface ApiResponse {
   success: boolean;
   message: string;
-  data: (SportMatch | FootballMatch)[];
+  data: SportMatch[];
 }
 
 interface SportMatch {
-  id: number;
+  matchId: number;
   type: string;
   team_A_id: number;
   team_B_id: number;
   locationId: number;
   locationName?: string;
   time: string;
-  team_A_details?: { id: number; image: string; color_code: string };
-  team_B_details?: { id: number; image: string; color_code: string };
+  team_A_details?: { id: number; uniName: string; image: string; color_code: string };
+  team_B_details?: { id: number; uniName: string; image: string; color_code: string };
   pingpong_sets?: Array<{ id: number; pingpong_match_id: number; round: number; score_A: number; score_B: number }>;
-  badminton_sets?: Array<{ id: number; badminton_match_id: number; round: number; score_A: number; score_B: number }>;
-}
-
-interface FootballMatch {
-  id: number;
-  team_A: { image: string; score: number; name?: string };
-  team_B: { image: string; score: number; name?: string };
-  status: string;
-  timeStart: string;
-  timeEnd: string;
 }
 
 interface BracketProps {
@@ -111,7 +101,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const [round2Matches, setRound2Matches] = useState<Match[]>([]);
   const [finalMatch, setFinalMatch] = useState<Match | null>(null);
   const [thirdPlaceMatch, setThirdPlaceMatch] = useState<Match | null>(null);
-  const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey; } | null>(null); // ลบ Round ออกจาก type
+  const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
   const { data, error, isLoading, mutate } = useSWR<ApiResponse>(
@@ -120,7 +110,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      fallbackData: { success: false, message: 'No data available', data: [] as (SportMatch | FootballMatch)[] },
+      fallbackData: { success: false, message: 'No data available', data: [] as SportMatch[] },
     }
   );
 
@@ -137,45 +127,33 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
   useEffect(() => {
     if (data && data.success && data.data) {
-      const transformedMatches: Match[] = data.data.map((item) => {
-        if (sport === 'football' && 'team_A' in item) {
-          const footballMatch = item as FootballMatch;
-          return {
-            id: footballMatch.id,
-            team1: footballMatch.team_A.name || (footballMatch.team_A.image.split('_')[0]?.toUpperCase() || null),
-            team2: footballMatch.team_B.name || (footballMatch.team_B.image.split('_')[0]?.toUpperCase() || null),
-            score1: footballMatch.team_A.score || 0,
-            score2: footballMatch.team_B.score || 0,
-            type: 'football',
-          };
-        } else {
-          const sportMatch = item as SportMatch;
-          return {
-            id: sportMatch.id,
-            team1: sportMatch.team_A_details?.image.split('_')[0]?.toUpperCase() || `Team_${sportMatch.team_A_id}`,
-            team2: sportMatch.team_B_details?.image.split('_')[0]?.toUpperCase() || `Team_${sportMatch.team_B_id}`,
-            score1: (sportMatch.pingpong_sets || sportMatch.badminton_sets)?.[0]?.score_A || 0,
-            score2: (sportMatch.pingpong_sets || sportMatch.badminton_sets)?.[0]?.score_B || 0,
-            type: sportMatch.type || 'mix',
-          };
-        }
+      const transformedMatches: Match[] = data.data.map((item: SportMatch) => {
+        return {
+          matchId: item.matchId,
+          team1: item.team_A_details?.image.split('_')[0]?.toUpperCase() || `Team_${item.team_A_id}`,
+          team2: item.team_B_details?.image.split('_')[0]?.toUpperCase() || `Team_${item.team_B_id}`,
+          score1: item.pingpong_sets?.reduce((sum, set) => sum + set.score_A, 0) || 0, // Sum scores from pingpong_sets for team A
+          score2: item.pingpong_sets?.reduce((sum, set) => sum + set.score_B, 0) || 0, // Sum scores from pingpong_sets for team B
+          type: item.type || 'mix',
+        };
       });
 
-      const round1Ids = [1, 2, 3, 4] as const;
-      const round2Ids = [5, 6] as const;
-      const finalId = 7;
-      const thirdPlaceId = 8;
+      // Assign matches to rounds based on matchId
+      const round1Ids = [1, 2, 3, 4]; // Round 1 matches
+      const round2Ids = [5, 6]; // Round 2 matches
+      const finalId = 7; // Final match
+      const thirdPlaceId = 8; // Third place match
 
-      setRound1Matches(round1Ids.map(id => transformedMatches.find(m => m.id === id) || { id, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
-      setRound2Matches(round2Ids.map(id => transformedMatches.find(m => m.id === id) || { id, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
-      setFinalMatch(transformedMatches.find(m => m.id === finalId) || { id: finalId, team1: null, team2: null, score1: 0, score2: 0, type: sport });
-      setThirdPlaceMatch(transformedMatches.find(m => m.id === thirdPlaceId) || { id: thirdPlaceId, team1: null, team2: null, score1: 0, score2: 0, type: sport });
+      setRound1Matches(round1Ids.map(id => transformedMatches.find(m => m.matchId === id) || { matchId: id, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
+      setRound2Matches(round2Ids.map(id => transformedMatches.find(m => m.matchId === id) || { matchId: id, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
+      setFinalMatch(transformedMatches.find(m => m.matchId === finalId) || { matchId: finalId, team1: null, team2: null, score1: 0, score2: 0, type: sport });
+      setThirdPlaceMatch(transformedMatches.find(m => m.matchId === thirdPlaceId) || { matchId: thirdPlaceId, team1: null, team2: null, score1: 0, score2: 0, type: sport });
     } else if (error) {
       console.error('Error fetching data:', error);
-      setRound1Matches(Array(4).fill({ id: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
-      setRound2Matches(Array(2).fill({ id: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
-      setFinalMatch({ id: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport });
-      setThirdPlaceMatch({ id: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport });
+      setRound1Matches(Array(4).fill({ matchId: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
+      setRound2Matches(Array(2).fill({ matchId: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport }));
+      setFinalMatch({ matchId: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport });
+      setThirdPlaceMatch({ matchId: 0, team1: null, team2: null, score1: 0, score2: 0, type: sport });
     }
   }, [data, error, sport, isAdmin]);
 
@@ -187,52 +165,50 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (!token) throw new Error('No access token available');
 
     const [teamAId, teamBId] = [match.team1, match.team2].map(t => t ? TEAM_OPTIONS.findIndex(tn => tn === t) + 1 : 0);
-    const endpoint = `https://it3k.sit.kmutt.ac.th/api/admin/${sport}/matches${match.id ? `/${match.id}` : ''}` as const;
-    const method: 'POST' | 'PUT' = match.id ? 'PUT' : 'POST';
+    const endpoint = `https://it3k.sit.kmutt.ac.th/api/admin/${sport}/matches${match.matchId ? `/${match.matchId}` : ''}` as const;
+    const method: 'POST' | 'PUT' = match.matchId ? 'PUT' : 'POST';
     const body = { team_A_id: teamAId, team_B_id: teamBId, time: new Date().toISOString(), locationId: 1 };
 
-    if (sport === 'football') {
-      Object.assign(body, { timeStart: body.time, timeEnd: body.time, status: 'ongoing' });
-    } else {
+    if (sport === 'pingpong') {
       Object.assign(body, { type: match.type || 'mix' });
     }
 
     await fetch(endpoint, { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify(body) });
 
-    if (sport === 'pingpong' || sport === 'badminton') {
+    if (sport === 'pingpong') {
+      // Update pingpong sets with the total scores (you might need to adjust this based on your API requirements)
       await fetch(`https://it3k.sit.kmutt.ac.th/api/admin/${sport}/sets`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({ [sport === 'pingpong' ? 'pingpong_match_id' : 'badminton_match_id']: match.id, round: 1, score_A: match.score1, score_B: match.score2 }),
-      });
-    } else if (sport === 'football') {
-      await fetch(`https://it3k.sit.kmutt.ac.th/api/admin/football/score/${match.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({ score_A: match.score1, score_B: match.score2 }),
+        body: JSON.stringify({
+          pingpong_match_id: match.matchId,
+          round: 1, // Assuming we update the first set; adjust as needed
+          score_A: match.score1,
+          score_B: match.score2,
+        }),
       });
     }
 
-    mutate(); // Ensure mutate is used to prevent ESLint warnings
+    mutate();
   };
 
   const handleScoreChange = async (matchId: number, team: 'score1' | 'score2', delta: number): Promise<void> => {
     if (!isAdmin) return;
     const updateMatch = (match: Match) => ({ ...match, [team]: Math.max(0, match[team] + delta) });
 
-    if (round1Matches.some(m => m.id === matchId)) {
-      const updatedMatches = round1Matches.map((match) => match.id === matchId ? updateMatch(match) : match);
+    if (round1Matches.some(m => m.matchId === matchId)) {
+      const updatedMatches = round1Matches.map((match) => match.matchId === matchId ? updateMatch(match) : match);
       setRound1Matches(updatedMatches);
-      await updateMatchScore(sport, updatedMatches.find((m) => m.id === matchId)!);
-    } else if (round2Matches.some(m => m.id === matchId)) {
-      const updatedMatches = round2Matches.map((match) => match.id === matchId ? updateMatch(match) : match);
+      await updateMatchScore(sport, updatedMatches.find((m) => m.matchId === matchId)!);
+    } else if (round2Matches.some(m => m.matchId === matchId)) {
+      const updatedMatches = round2Matches.map((match) => match.matchId === matchId ? updateMatch(match) : match);
       setRound2Matches(updatedMatches);
-      await updateMatchScore(sport, updatedMatches.find((m) => m.id === matchId)!);
-    } else if (finalMatch?.id === matchId) {
+      await updateMatchScore(sport, updatedMatches.find((m) => m.matchId === matchId)!);
+    } else if (finalMatch?.matchId === matchId) {
       const updatedMatch = updateMatch(finalMatch);
       setFinalMatch(updatedMatch);
       await updateMatchScore(sport, updatedMatch);
-    } else if (thirdPlaceMatch?.id === matchId) {
+    } else if (thirdPlaceMatch?.matchId === matchId) {
       const updatedMatch = updateMatch(thirdPlaceMatch);
       setThirdPlaceMatch(updatedMatch);
       await updateMatchScore(sport, updatedMatch);
@@ -243,26 +219,26 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (!isAdmin || oldName === newName || !newName.trim()) return;
     const updateTeam = (matches: Match[] | Match | null) => {
       if (Array.isArray(matches)) {
-        return matches.map(m => m.id === matchId ? { ...m, [teamKey]: newName } : m);
+        return matches.map(m => m.matchId === matchId ? { ...m, [teamKey]: newName } : m);
       } else if (matches) {
         return { ...matches, [teamKey]: newName };
       }
       return matches;
     };
 
-    if (round1Matches.some(m => m.id === matchId)) {
+    if (round1Matches.some(m => m.matchId === matchId)) {
       const updatedMatches = updateTeam(round1Matches) as Match[];
       setRound1Matches(updatedMatches);
-      await updateMatchScore(sport, updatedMatches.find(m => m.id === matchId)!);
-    } else if (round2Matches.some(m => m.id === matchId)) {
+      await updateMatchScore(sport, updatedMatches.find(m => m.matchId === matchId)!);
+    } else if (round2Matches.some(m => m.matchId === matchId)) {
       const updatedMatches = updateTeam(round2Matches) as Match[];
       setRound2Matches(updatedMatches);
-      await updateMatchScore(sport, updatedMatches.find(m => m.id === matchId)!);
-    } else if (finalMatch?.id === matchId) {
+      await updateMatchScore(sport, updatedMatches.find(m => m.matchId === matchId)!);
+    } else if (finalMatch?.matchId === matchId) {
       const updatedMatch = updateTeam(finalMatch) as Match;
       setFinalMatch(updatedMatch);
       await updateMatchScore(sport, updatedMatch);
-    } else if (thirdPlaceMatch?.id === matchId) {
+    } else if (thirdPlaceMatch?.matchId === matchId) {
       const updatedMatch = updateTeam(thirdPlaceMatch) as Match;
       setThirdPlaceMatch(updatedMatch);
       await updateMatchScore(sport, updatedMatch);
@@ -277,14 +253,14 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
   const renderTeamSelector = (match: Match, teamKey: TeamKey): JSX.Element => {
     const teamName = match[teamKey];
-    if (isAdmin && editingTeam?.matchId === match.id && editingTeam?.teamKey === teamKey) {
+    if (isAdmin && editingTeam?.matchId === match.matchId && editingTeam?.teamKey === teamKey) {
       return (
         <div className="absolute bg-white text-black p-2 rounded shadow-lg" style={{ zIndex: 1000, left: '50px', top: '0' }}>
           {TEAM_OPTIONS.map((team) => (
             <button
               key={team}
               className="block w-full text-left px-2 py-1 hover:bg-gray-200"
-              onClick={() => handleTeamNameChange(teamName, team, match.id, teamKey)}
+              onClick={() => handleTeamNameChange(teamName, team, match.matchId, teamKey)}
             >
               {team}
             </button>
@@ -296,7 +272,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       );
     }
     return (
-      <span className="text-white font-bold" onClick={() => startEditing(match.id, teamKey)} style={{ cursor: isAdmin ? 'pointer' : 'default' }}>
+      <span className="text-white font-bold" onClick={() => startEditing(match.matchId, teamKey)} style={{ cursor: isAdmin ? 'pointer' : 'default' }}>
         {teamName || 'TBD'} {isAdmin && '(Edit)'}
       </span>
     );
@@ -331,15 +307,6 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
               {type === 'mix' ? 'คู่ผสม' : type === 'single_male' ? 'ชายเดี่ยว' : type === 'single_female' ? 'หญิงเดี่ยว' : type === 'pair_male' ? 'ชายคู่' : 'หญิงคู่'}
             </button>
           ))}
-          {/* <button
-            className={`btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs`}
-            onClick={() => {
-              setIsAdmin(!isAdmin);
-              localStorage.setItem('isAdmin', (!isAdmin).toString());
-            }}
-          >
-            Admin
-          </button> */}
         </div>
       </div>
 
@@ -362,25 +329,27 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
               <div className="relative flex gap-32 ml-48 font-bold">
                 <div className="flex flex-col gap-24">
                   {round1Matches.map((match, index) => (
-                    <div key={match.id} className="relative match-wrapper">
+                    
+                    <div key={match.matchId} className="relative match-wrapper">
+                       <h2 className="text-white text-center text-xl">Quarter-Final</h2>
                       <div className="w-60 bg-black border border-red-600 rounded">
                         <div className="flex justify-between items-center p-3 border-b border-red-700">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score1', -1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score1', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{match.score1}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score1', 1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score1', 1)}
                             >
                               +
                             </button>
@@ -388,21 +357,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score2', -1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score2', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{match.score2}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score2', 1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score2', 1)}
                             >
                               +
                             </button>
@@ -418,26 +387,28 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                 </div>
 
                 <div className="flex flex-col gap-48 mt-24">
+               
                   {round2Matches.map((match, index) => (
-                    <div key={match.id} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
+                    <div key={match.matchId} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
+                          <h2 className="text-white text-center text-xl">Semi Final</h2>
                       <div className="w-60 bg-black border border-red-600 rounded-lg">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score1', -1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score1', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{match.score1}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score1', 1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score1', 1)}
                             >
                               +
                             </button>
@@ -445,21 +416,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score2', -1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score2', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{match.score2}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.id, 'score2', 1)}
+                              onClick={() => handleScoreChange(match.matchId, 'score2', 1)}
                             >
                               +
                             </button>
@@ -475,25 +446,28 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                 </div>
 
                 <div className="flex flex-col justify-center">
+                <h2 className="text-white text-center text-xl">Final</h2>
                   {finalMatch && (
+                    
                     <div className="w-60 bg-black border border-red-600 rounded">
+                      
                       <div className="flex justify-between items-center p-3 border-b border-red-600">
                         <div className="flex items-center gap-3 relative">
-                          <Image src={getTeamLogo(finalMatch.team1)} alt={finalMatch.team1 || 'TBD'} className="w-8 h-8" />
+                          <Image width={32} height={32} src={getTeamLogo(finalMatch.team1)} alt={finalMatch.team1 || 'TBD'} className="w-8 h-8" />
                           {renderTeamSelector(finalMatch, 'team1')}
                         </div>
                         <div className={isAdmin ? 'hidden' : 'score-separator'} />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(finalMatch.id, 'score1', -1)}
+                            onClick={() => handleScoreChange(finalMatch.matchId, 'score1', -1)}
                           >
                             -
                           </button>
                           <span className="text-white mx-2">{finalMatch.score1}</span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(finalMatch.id, 'score1', 1)}
+                            onClick={() => handleScoreChange(finalMatch.matchId, 'score1', 1)}
                           >
                             +
                           </button>
@@ -501,21 +475,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       </div>
                       <div className="flex justify-between items-center p-3">
                         <div className="flex items-center gap-3 relative">
-                          <Image src={getTeamLogo(finalMatch.team2)} alt={finalMatch.team2 || 'TBD'} className="w-8 h-8" />
+                          <Image width={32} height={32} src={getTeamLogo(finalMatch.team2)} alt={finalMatch.team2 || 'TBD'} className="w-8 h-8" />
                           {renderTeamSelector(finalMatch, 'team2')}
                         </div>
                         <div className={isAdmin ? 'hidden' : 'score-separator'} />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(finalMatch.id, 'score2', -1)}
+                            onClick={() => handleScoreChange(finalMatch.matchId, 'score2', -1)}
                           >
                             -
                           </button>
                           <span className="text-white mx-2">{finalMatch.score2}</span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(finalMatch.id, 'score2', 1)}
+                            onClick={() => handleScoreChange(finalMatch.matchId, 'score2', 1)}
                           >
                             +
                           </button>
@@ -530,21 +504,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       <div className="w-60 bg-black border border-red-600 rounded mt-6" id="third">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(thirdPlaceMatch.team1)} alt={thirdPlaceMatch.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(thirdPlaceMatch.team1)} alt={thirdPlaceMatch.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(thirdPlaceMatch, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(thirdPlaceMatch.id, 'score1', -1)}
+                              onClick={() => handleScoreChange(thirdPlaceMatch.matchId, 'score1', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{thirdPlaceMatch.score1}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(thirdPlaceMatch.id, 'score1', 1)}
+                              onClick={() => handleScoreChange(thirdPlaceMatch.matchId, 'score1', 1)}
                             >
                               +
                             </button>
@@ -552,21 +526,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <Image src={getTeamLogo(thirdPlaceMatch.team2)} alt={thirdPlaceMatch.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image width={32} height={32} src={getTeamLogo(thirdPlaceMatch.team2)} alt={thirdPlaceMatch.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(thirdPlaceMatch, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(thirdPlaceMatch.id, 'score2', -1)}
+                              onClick={() => handleScoreChange(thirdPlaceMatch.matchId, 'score2', -1)}
                             >
                               -
                             </button>
                             <span className="text-white mx-2">{thirdPlaceMatch.score2}</span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(thirdPlaceMatch.id, 'score2', 1)}
+                              onClick={() => handleScoreChange(thirdPlaceMatch.matchId, 'score2', 1)}
                             >
                               +
                             </button>

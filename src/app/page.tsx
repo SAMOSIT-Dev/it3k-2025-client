@@ -6,6 +6,7 @@ import HeroMain from "./(main)/components/HeroMain";
 import Sponsor from "./(main)/components/Sponsor";
 import SportSlider from './(main)/components/SportSlider'
 import { scheduleSports, scoreboardSports } from './(main)/data/sportData'
+import FloatingPopGoose from './(main)/components/FloatingPopGoose';
 
 const scoreboardData = [
   {
@@ -52,6 +53,7 @@ export default function Home() {
 
       {/* Sponsers */}
       <Sponsor />
+      <FloatingPopGoose/>
     </main>
   )
 }

@@ -11,7 +11,7 @@ RUN npm install -g corepack@latest
 COPY ./package.json ./package-lock.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the application code
 COPY ./ ./
@@ -31,7 +31,7 @@ COPY --from=builder /app .
 
 
 # Install only production dependencies
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Expose the port Next.js runs on
 EXPOSE 3000

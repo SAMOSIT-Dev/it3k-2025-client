@@ -10,6 +10,7 @@ import kmitlLogo from '../../../public/images/KMITL_logo.png';
 import kmuttLogo from '../../../public/images/KMUTT_logo.png';
 import kmutnbLogo from '../../../public/images/KMUTNB_logo.png';
 import gooseLogo from '../../../public/images/pop_goose/default_goose.png';
+import Image from 'next/image';
 
 // Interfaces
 interface Match {
@@ -365,7 +366,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       <div className="w-60 bg-black border border-red-600 rounded">
                         <div className="flex justify-between items-center p-3 border-b border-red-700">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -387,7 +388,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -422,7 +423,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       <div className="w-60 bg-black border border-red-600 rounded-lg">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -444,7 +445,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(match, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -478,7 +479,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                     <div className="w-60 bg-black border border-red-600 rounded">
                       <div className="flex justify-between items-center p-3 border-b border-red-600">
                         <div className="flex items-center gap-3 relative">
-                          <img src={getTeamLogo(finalMatch.team1)} alt={finalMatch.team1 || 'TBD'} className="w-8 h-8" />
+                          <Image src={getTeamLogo(finalMatch.team1)} alt={finalMatch.team1 || 'TBD'} className="w-8 h-8" />
                           {renderTeamSelector(finalMatch, 'team1')}
                         </div>
                         <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -500,7 +501,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       </div>
                       <div className="flex justify-between items-center p-3">
                         <div className="flex items-center gap-3 relative">
-                          <img src={getTeamLogo(finalMatch.team2)} alt={finalMatch.team2 || 'TBD'} className="w-8 h-8" />
+                          <Image src={getTeamLogo(finalMatch.team2)} alt={finalMatch.team2 || 'TBD'} className="w-8 h-8" />
                           {renderTeamSelector(finalMatch, 'team2')}
                         </div>
                         <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -529,7 +530,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                       <div className="w-60 bg-black border border-red-600 rounded mt-6" id="third">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(thirdPlaceMatch.team1)} alt={thirdPlaceMatch.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(thirdPlaceMatch.team1)} alt={thirdPlaceMatch.team1 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(thirdPlaceMatch, 'team1')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />
@@ -551,7 +552,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <img src={getTeamLogo(thirdPlaceMatch.team2)} alt={thirdPlaceMatch.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image src={getTeamLogo(thirdPlaceMatch.team2)} alt={thirdPlaceMatch.team2 || 'TBD'} className="w-8 h-8" />
                             {renderTeamSelector(thirdPlaceMatch, 'team2')}
                           </div>
                           <div className={isAdmin ? 'hidden' : 'score-separator'} />

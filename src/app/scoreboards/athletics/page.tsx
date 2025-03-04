@@ -3,7 +3,7 @@
 import Category from './components/Category'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/navigation'
-import Table from '../components/Table'
+import Table from './components/Table'
 
 export default function Athletics() {
   const router = useRouter()

@@ -9,15 +9,15 @@ import Background from '@/shared/components/Background'
 const Page = () => {
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
   const tableData = [
-    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '2-0', '55-36', 15],
-    [2, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-0', '55-36', 15],
-    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '2-0', '55-36', 15],
+    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '0-0', '0-0', 0],
+    [2, <TeamCell key="team-kmitl" team={Team.KMITL} />, '0-0', '0-0', 0],
+    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '0-0', '0-0', 0],
     [
       4,
       <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />,
-      '2-0',
-      '55-36',
-      15
+      '0-0',
+      '0-0',
+      0
     ]
   ]
   const getColumnstyle = (colIndex: number) => {

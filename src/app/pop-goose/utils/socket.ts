@@ -10,7 +10,7 @@ export const initSocket = (): Socket => {
       throw new Error('Socket server URL is not defined')
     }
     socket = io(socketServerUrl, {
-      transports: ['websocket'], // Force WebSocket connection
+      transports: ['websocket'], // Force WebSocket connection 
       withCredentials: true,
       path: socketServerPath
     })

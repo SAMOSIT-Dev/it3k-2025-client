@@ -1,4 +1,5 @@
 import style from '@/app/styles/scoreboards/athletics/table.module.css'
+import Image from 'next/image'
 const Table: React.FC = () => {
   interface universityDataProps {
     name: string
@@ -6,9 +7,9 @@ const Table: React.FC = () => {
     logo: string
   }
   const universityData: universityDataProps[] = [
-    { name: 'Dummy', rank: 0, logo: '/images/pop.png' },
     { name: 'Dummy', rank: 1, logo: '/images/pop.png' },
-    { name: 'Dummy', rank: 2, logo: '/images/pop.png' }
+    { name: 'Dummy', rank: 2, logo: '/images/pop.png' },
+    { name: 'Dummy', rank: 3, logo: '/images/pop.png' }
   ]
   const sortedData = universityData.sort((a, b) => a.rank - b.rank)
 
@@ -31,7 +32,7 @@ const Table: React.FC = () => {
               <td
                 className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>
                 <div className="flex flex-row items-center justify-center">
-                  <img
+                  <Image
                     src={item.logo}
                     alt={item.name}
                     className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"

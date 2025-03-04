@@ -34,9 +34,9 @@ const PopGoosePage = () => {
   useEffect(() => {
     const socket = initSocket()
 
-    socket.on('connect', () => {
-      console.log('connected')
-    })
+    // socket.on('connect', () => {
+    //   console.log('connected')
+    // })
 
     socket.on('updateLeaderboard', (data) => {
       setLeaderboardData(data)

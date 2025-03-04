@@ -4,7 +4,6 @@ import { type ScheduleData } from '@/app/schedule/scheduleData'
 import ScheduleCard from './ScheduleCard'
 import { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
 
 type Location = 'field' | 'gym'
 
@@ -16,8 +15,34 @@ export default function LiveSchedule({
   const [filter, setFilter] = useState<Location | null>(null)
   const [data, setData] = useState<ScheduleData[]>([])
   const swiperRef = useRef<SwiperClass>(null)
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [containerHeight, setContainerHeight] = useState<number | null>(null)
+
+  const handleOnSlideChange = (swiper: SwiperClass) => {
+    setActiveIndex(swiper.activeIndex)
+  }
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (swiperRef.current) {
+        const index = swiperRef.current.activeIndex
+        const slides = swiperRef.current.slides
+        if (slides.length > 1) {
+          const firstTwoHeights =
+            slides[index].offsetHeight + slides[index + 1].offsetHeight + 19
+          setContainerHeight(firstTwoHeights)
+        }
+      }
+    }
+
+    updateHeight()
+
+    window.addEventListener('resize', updateHeight)
+    return () => window.removeEventListener('resize', updateHeight)
+  }, [data])
 
   const handleFilterButton = (location: Location) => {
+    swiperRef.current?.slideTo(0)
     setFilter((prev) => (prev == location ? null : location))
   }
 
@@ -34,13 +59,12 @@ export default function LiveSchedule({
       )
     }
     setData(filteredData)
-  }, [filter])
+  }, [filter, scheduleData])
 
   return (
     <div className="min-w-0 h-auto min-h-0 relative">
       <div className="flex flex-col relative font-Prompt m-auto px-8 md:px-24 lg:px-0 z-[12] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] text-center text-white">
         <div className="relative w-auto h-auto mx-auto px-10 py-10">
-          {/* <div className=""></div> */}
           <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:z-[1] before:content-['กำหนดการ'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
         </div>
         <div className="flex w-full flex-col space-y-4 sm:space-y-0 items-center  sm:flex-row lg:mt-[55px] justify-between mx-auto">
@@ -60,25 +84,27 @@ export default function LiveSchedule({
         </div>
         {data.length > 0 ? (
           <>
-            {/* <div className="flex flex-col mt-5 md:mt-[30px] relative h-[200px] sm:h-[270px] md:h-[320px] lg:h-auto"> */}
-            <div className="flex flex-col mt-5 md:mt-[30px] h-auto">
+            <div
+              className="flex flex-col mt-5 md:mt-[30px] h-auto"
+              style={{ height: containerHeight || 'max' }}>
               <Swiper
-                autoHeight
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                grid={{ rows: 3, fill: 'column' }}
-                // slidesPerView="auto"
-                freeMode
-                spaceBetween={19}
+                slidesPerView="auto"
                 direction="vertical"
-                className="w-full h-full">
-                {data.map((data, i) => (
-                  <SwiperSlide key={i} className="!h-auto">
-                    <ScheduleCard scheduleData={data} />
+                onSlideChange={handleOnSlideChange}
+                spaceBetween={19}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
+                className="!size-full">
+                {data.map((item, i) => (
+                  <SwiperSlide key={i} className="!h-max">
+                    <ScheduleCard
+                      isActive={i == activeIndex || i == activeIndex + 1}
+                      scheduleData={item}
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>
             </div>
-            {data.length >= 2 && (
+            {data.length > 2 && (
               <div className="before:w-full before:h-[1px] mt-4 md:mt-8 flex flex-col items-center before:bg-white before:flex">
                 <button
                   className="mt-[14px]"

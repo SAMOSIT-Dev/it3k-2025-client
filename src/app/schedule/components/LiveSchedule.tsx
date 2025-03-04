@@ -49,7 +49,7 @@ export default function LiveSchedule({
             <button
               onClick={() => handleFilterButton('field')}
               className="lg:h-[39px] lg:w-[175px] h-auto lg:text-xl text-sm py-1 w-[130px] font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
-              สนามบอล
+              สนามกีฬา
             </button>
             <button
               onClick={() => handleFilterButton('gym')}

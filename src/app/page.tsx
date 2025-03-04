@@ -49,7 +49,7 @@ export default function Home() {
       {/* Live Schedule By C */}
       <LiveSchedule scheduleData={scheduleData} />
       {/* Full detail sport schedule slider By Gun*/}
-      <SportSlider title="กำหนดการแต่ละกีฬา" sportLists={scheduleSports} />
+      <SportSlider title="กำหนดการแข่งขันกีฬา" sportLists={scheduleSports} />
 
       {/* Sponsers */}
       <Sponsor />

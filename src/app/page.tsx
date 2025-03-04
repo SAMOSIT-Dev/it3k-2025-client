@@ -38,12 +38,12 @@ export default function Home() {
       <HeroMain />
 
       {/* Podium Section By Ice */}
+      <PodiumSection scoreboardData={scoreboardData} />
 
       {/* Sport Scoreboard Slider By Gun*/}
       <SportSlider title="รายงานการแข่งขัน" sportLists={scoreboardSports} />
-      {/* Podium Scoreboard By Ice */}
-      <PodiumSection scoreboardData={scoreboardData} />
 
+      {/* Podium Scoreboard By Ice */}
       <PodiumScoreBoard scoreboardData={scoreboardData} />
 
       {/* Live Schedule By C */}

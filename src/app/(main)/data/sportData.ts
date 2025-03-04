@@ -11,12 +11,12 @@ export const scoreboardSports = [
   },
   {
     name: 'ปิงปอง',
-    route: '/scoreboards/pingpong',
+    route: '/bracket/pingpong',
     icon: '/images/sport_icon/table_tennis.png'
   },
   {
     name: 'แบดมินตัน',
-    route: '/scoreboards/badminton',
+    route: '/bracket/badminton',
     icon: '/images/sport_icon/badminton.png'
   },
   {
@@ -26,7 +26,7 @@ export const scoreboardSports = [
   },
   {
     name: 'E-sports',
-    route: '/scoreboards/esports',
+    route: '/scoreboards/esports/valorant',
     icon: '/images/sport_icon/esports.png'
   }
 ]

@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Outfit:wght@100..900&display=swap');
+
+.brackets-wrapper-container {
+  font-family: "IBM Plex Sans Thai", serif;
+  background-color: black;
+	font-weight: normal;
+	font-style: normal;
+  
+}
+
+
+.bracket-container {
+  background-color: black;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  overflow-x: auto;
+}
+.bracket-container span{
+  scale: 1.1;
+}
+
+.tournament-rounds {
+  display: flex;
+  gap: 8rem;
+  padding: 2rem;
+  min-width: max-content;
+}
+
+.round-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.round-section::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgb(220, 38, 38);
+  opacity: 0.3;
+}
+
+.round-section:first-child::before {
+  display: none;
+}
+
+.round-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.connector-horizontal {
+  width: 32px;
+  height: 2px;
+  background-color: rgb(98, 98, 98);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.connector-vertical {
+  width: 2px;
+  height: 253px;
+  background-color: rgb(98, 98, 98);
+  position: absolute;
+  left: 32px;
+  top: 50%;
+}
+
+.connector-vertical::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 2px;
+  background-color: rgb(98, 98, 98);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn-bracket {
+  @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  scale: 1;
+  font-weight: 600;
+  margin-top: 10px;
+  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
+  min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
+  max-width: none; 
+ 
+}
+.btn-bracket:hover {
+  background-color: red;
+  box-shadow: 0 0 11px rgba(255, 120, 120, 0.953); 
+}
+
+.match-wrapper {
+  position: relative;
+}
+.match-wrapper.semifinal-bottom {
+  margin-top: 120px;
+}
+
+.connector-wrapper {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.connector-vertical1 {
+  width: 2px;
+  height: 470px;
+  background-color: rgb(98, 98, 98);
+  position: absolute;
+  left: 32px;
+  top: 50%;
+}
+
+.connector-vertical1::after {
+  content: '';
+  position: absolute;
+  width:  95px;
+  height: 2px;
+  background-color: rgb(98, 98, 98);
+  left: 0;
+  top: 65%;
+  transform: translateY(-50%);
+}
+#third{
+  position: absolute;
+  top: 70%;
+}
+#third::after{
+  position: absolute;
+  top: 100%;
+}
+.connector-top .connector-vertical,
+.connector-top .connector-vertical1 {
+  transform: translateY(0%);
+}
+
+.connector-bottom .connector-vertical,
+.connector-bottom .connector-vertical1 {
+  transform: translateY(-100%);
+}
+
+.sport-section {
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.slider-container {
+  overflow-x: auto; /* อนุญาตให้เลื่อนแนวนอนเมื่อเนื้อหาล้น */
+  -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบนอุปกรณ์สัมผัส */
+  scroll-behavior: smooth; /* การเลื่อนที่นุ่มนวล */
+  padding-bottom: 1rem; /* เพิ่มช่องว่างด้านล่างสำหรับการเลื่อน */
+}
+
+.slider-content {
+  display: flex;
+  
+  min-width: max-content; 
+  padding: 0 0rem; /* ช่องว่างด้านข้าง */
+  
+}
+
+.btn-bracket {
+  @apply px-8 py-2 text-white border border-red-600 rounded mx-1;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  scale: 1;
+  font-weight: 600;
+  margin-top: 10px;
+  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
+}
+
+.sport-section {
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.slider-container {
+  overflow-x: auto; /* อนุญาตให้เลื่อนแนวนอนเมื่อเนื้อหาล้น */
+  -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบนอุปกรณ์สัมผัส */
+  scroll-behavior: smooth; /* การเลื่อนที่นุ่มนวล */
+  padding-bottom: 1rem; /* เพิ่มช่องว่างด้านล่างสำหรับการเลื่อน */
+}
+
+.btn-back{
+  margin-right: 2rem
+}
+
+.btn-bracket {
+  @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  scale: 1;
+  font-weight: 600;
+  margin-top: 10px;
+  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
+  min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
+  max-width: none; /* ลบ max-width เพื่อให้ยืดหยุ่น */
+}
+
+/* Media Query สำหรับมือถือ (768px ลงมา) */
+@media (max-width: 768px) {
+  .slider-content {
+    gap: 1px;
+  }
+
+  .btn-bracket {
+    padding: 0.5rem 0.8rem; /* รักษาขนาดปุ่มให้เล็กลงตามเดิม */
+    font-size: 10px;
+    margin-left: 0.5rem; /* ลด margin ด้านซ้าย */
+    margin-right: 0.5rem; /* ลด margin ด้านขวา */
+  }
+}
+/* Media Query สำหรับหน้าจอเล็กมาก (480px ลงมา) */
+@media (max-width: 480px) {
+  .btn-bracket {
+    padding: 0.4rem 0.8rem; /* ลด padding มากขึ้น */
+    font-size: 8px; /* ลดขนาดตัวอักษรเพิ่ม */
+  }
+  .slider-content {
+    gap: 1px;
+  }
+}
+
+/* ป้องกันการเลื่อนแนวนอนที่ไม่จำเป็นในหน้าจอใหญ่ */
+@media (min-width: 1024px) {
+  .slider-container {
+    overflow-x: hidden; /* ปิดการเลื่อนแนวนอนบนเดสก์ท็อป */
+  }
+
+  .slider-content {
+    justify-content: center; /* จัดปุ่มกึ่งกลางในเดสก์ท็อป */
+  }
+}
+
+
+.slider-container::-webkit-scrollbar {
+  height: 3px; 
+}
+
+.slider-container::-webkit-scrollbar-track {
+  background: transparent; /* พื้นหลังโปร่งใส */
+  
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+  background: #5C0000;
+
+  border-radius: 4px;
+}
+
+.slider-container::-webkit-scrollbar-thumb:hover {
+  background: #cc000017; /* สีเมื่อ hover */
+}
+.team-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-top: 1px solid red;
+  
+}
+
+.team-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-separator {
+  width: 1px;
+  position: absolute;
+  margin-left: 170px;
+  height: 58px;
+  background-color: red;
+}
+.score-button.hidden {
+  display: none;
+}
+.hidden {
+  display: none;
+}
+.toggle-admin {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.match-card {
+  background: black;
+  color: white;
+  border: 1px solid red;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.team {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-controls {
+  display: flex;
+  align-items: center;
+}
+
+.score-button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.score-button:active{
+  animation: bounce 0.5s ease-out;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}select {
+  position: absolute;
+  z-index: 1000;
+}

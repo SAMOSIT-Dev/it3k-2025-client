@@ -118,7 +118,7 @@ const PodiumSection: React.FC<PodiumSectionProps> = ({ scoreboardData }) => {
             </div>
           </div>
         )}
-        <div className="absolute bottom-14 sm:bottom-6 lg:bottom-[50px] right-6 sm:right-48 lg:right-[10%] flex flex-col items-center">
+        <div id='Podium' className="absolute bottom-14 sm:bottom-6 lg:bottom-[50px] right-6 sm:right-48 lg:right-[10%] flex flex-col items-center">
           <span className="text-white text-sm sm:text-xl lg:text-3xl font-bold">
             {rankedTeams[2].name}
           </span>

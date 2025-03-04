@@ -27,7 +27,7 @@ export default function LiveSchedule({
       if (swiperRef.current) {
         const index = swiperRef.current.activeIndex
         const slides = swiperRef.current.slides
-        if (slides.length > 1) {
+        if (slides?.length > 1) {
           const firstTwoHeights =
             slides[index].offsetHeight + slides[index + 1].offsetHeight + 19
           setContainerHeight(firstTwoHeights)

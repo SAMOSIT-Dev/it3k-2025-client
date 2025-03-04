@@ -28,7 +28,7 @@ const PodiumSection: React.FC<PodiumSectionProps> = ({ scoreboardData }) => {
     : []
 
   return (
-    <div className="relative my-8 w-full max-w-[300px] md:max-w-[780px] lg:max-w-[937px] h-[300px] lg:h-[630px] mx-auto flex justify-center font-BenguiatITCbyBT">
+    <div className="relative my-8 mt-0 w-full max-w-[300px] md:max-w-[780px] lg:max-w-[937px] h-[300px] lg:h-[630px] mx-auto flex justify-center font-BenguiatITCbyBT">
       {/* Podium Background */}
       <Image
         src="/images/podium.png"

@@ -18,7 +18,7 @@ const HeroMain = () => {
                     style={{ backgroundImage: `url(${props.bg})`, backgroundPosition: "50% 0%" }}
                 />
 
-                <div className="relative z-10 flex flex-col justify-center items-center mb-28">
+                <div className="relative z-10 flex flex-col justify-center items-center mb-14 md:28">
                     <div className="relative mb-[6rem] sm:mb-[7rem] flex justify-center items-center">
                         <Image
                             src={props.logo1}

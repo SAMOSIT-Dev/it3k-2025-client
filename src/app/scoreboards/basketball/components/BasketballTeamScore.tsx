@@ -13,6 +13,7 @@ const BasketballTeamScore = ({
         <Image
           src={`/images/${data.team.image}`}
           alt={`${data.team.uniName} logo`}
+          sizes="w-[50px] h-[50px] sm:w-[90px] sm:h-[90px] lg:w-[120px] lg:h-[120px]"
           fill
         />
       </div>

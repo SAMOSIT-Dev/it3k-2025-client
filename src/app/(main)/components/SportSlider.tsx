@@ -15,10 +15,15 @@ interface SportSliderProps {
 
 const SportSlider = ({ title, sportLists }: SportSliderProps) => {
   return (
-    <div className="px-8 md:px-36 py-4 sm:py-8">
-      <h1 className="text-white text-lg md:text-2xl font-bold font-Prompt text-center">
-        {title}
-      </h1>
+    <div className="px-8 md:px-36 py-4 sm:py-8 relative">
+      <div className='flex justify-center'>
+        <div className='relative w-fit flex flex-col items-center'>
+          <div className="font-bold font-Prompt text-2xl md:text-5xl flex justify-center text-white z-20">
+            {title}
+          </div>
+          <div className="bg-[#FF0000] w-full h-full absolute blur-[70px]"></div>
+        </div>
+      </div>
       <Swiper
         slidesPerView={4}
         loop={true}

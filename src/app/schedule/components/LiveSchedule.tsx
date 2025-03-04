@@ -68,12 +68,12 @@ export default function LiveSchedule({
           <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:z-[1] before:content-['กำหนดการ'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
         </div>
         <div className="flex w-full flex-col space-y-4 sm:space-y-0 items-center  sm:flex-row lg:mt-[55px] justify-between mx-auto">
-          <h2 className="font-bold text-xl lg:text-4xl">Next Match</h2>
+          <h2 className="font-bold text-xl lg:text-4xl">Upcoming Events</h2>
           <div className="flex items-center space-x-2">
             <button
               onClick={() => handleFilterButton('field')}
               className="lg:h-[39px] lg:w-[175px] h-auto lg:text-xl text-sm py-1 w-[130px] font-medium border rounded-[10px] border-red-500 flex justify-center items-center">
-              สนามบอล
+              สนามกีฬา
             </button>
             <button
               onClick={() => handleFilterButton('gym')}

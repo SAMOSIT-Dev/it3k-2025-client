@@ -39,7 +39,9 @@ export default function Home() {
       <HeroMain />
 
       {/* Podium Section By Ice */}
-      <PodiumSection scoreboardData={scoreboardData} />
+      <div className='sm:mt-20'>
+        <PodiumSection scoreboardData={scoreboardData} />
+      </div>
 
       {/* Sport Scoreboard Slider By Gun*/}
       <SportSlider title="รายงานการแข่งขัน" sportLists={scoreboardSports} />

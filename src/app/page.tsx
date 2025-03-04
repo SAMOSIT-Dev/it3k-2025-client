@@ -25,8 +25,8 @@ const scoreboardData = [
   },
   {
     name: 'KMUTNB PR',
-    logo: '/images/KMUTNB_logo.png',
-    scores: [999, 999, 999, 999, 999, 999, 999]
+    logo: '/images/KMUTNB_PR_logo.png',
+    scores: [0, 0, 0, 0, 0, 0, 0]
   }
 ]
 

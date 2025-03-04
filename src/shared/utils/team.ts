@@ -18,3 +18,10 @@ export const TeamName: Record<Team, string> = {
   [Team.KMUTNB]: "King Mongkut's North Bangkok",
   [Team.KMUTNBPR]: "King Mongkut's North Bangkok"
 }
+
+export const TeamMapping: Record<string, Team> = {
+  KMUTT: Team.KMUTT,
+  KMITL: Team.KMITL,
+  KMUTNB: Team.KMUTNB,
+  KMUTNB_PR: Team.KMUTNBPR
+}

@@ -21,7 +21,8 @@
 }
 
 .category-button:hover,
-.category-button:focus {
+.category-button:focus,
+.category-button-focus {
     background-color: var(--category-accent-color);
     box-shadow: 0 0 10px var(--category-accent-color), 0 0 7px var(--category-accent-color);
     outline: none;

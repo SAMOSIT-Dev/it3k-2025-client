@@ -34,7 +34,7 @@ const scoreboardData = [
 
 export default function Home() {
   return (
-    <main className="bg-black-300 relative z-10 max-w-screen overflow-x-hidden">
+    <main className="bg-black-300 relative z-10 max-w-screen overflow-hidden">
       {/* Hero Section By Nae*/}
       <HeroMain />
 

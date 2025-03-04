@@ -28,6 +28,11 @@ export const scoreboardSports = [
     name: 'E-sports',
     route: '/scoreboards/esports/valorant',
     icon: '/images/sport_icon/esports.png'
+  },
+  {
+    name: 'กีฬาพื้นบ้าน',
+    route: '/scoreboards/tradition-game',
+    icon: '/images/sport_icon/local_sports.png'
   }
 ]
 

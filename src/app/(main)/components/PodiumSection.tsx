@@ -34,13 +34,11 @@ const calculatePodiumTotalScore = (
     }
   )
   
-  console.log('Formatted', formatTotalScore)
   
   const sortedTotalScore: TRankedTeamScore[] = formatTotalScore.sort(
     (a, b) => b.totalScore - a.totalScore
   )
   
-  console.log('Sorted score', sortedTotalScore)
   
   return sortedTotalScore
 }
@@ -54,7 +52,6 @@ const PodiumSection: React.FC = () => {
   
   useEffect(() => {
     if (data) {
-      console.log('Raw', data)
       setRankedTeams(
         calculatePodiumTotalScore(mergePodiumScoreWithStaticData(data.data))
       )

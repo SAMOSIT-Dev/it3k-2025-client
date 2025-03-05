@@ -21,7 +21,7 @@ export default function LoginForm() {
         const success = await login(username, password);
 
         if (success) {
-            router.push("/scoreboards/badminton"); 
+            router.push("/"); 
         } else {
             setError("Invalid username or password.");
         }

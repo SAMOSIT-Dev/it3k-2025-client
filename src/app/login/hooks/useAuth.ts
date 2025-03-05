@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000"; // 🔥 เปลี่ยนเป็น URL ของ Backend
+const API_URL = "http://it3k-in.sit.kmutt.ac.th";
 
 export const useAuth = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -9,7 +9,7 @@ export const useAuth = () => {
 
     const login = async (username: string, password: string) => {
         try {
-            const res = await axios.post(`${API_URL}/api/auth/login`, { username, password });
+            const res = await axios.post(`${API_URL}/api/admin/auth/login/`, { username, password });
 
             setAccessToken(res.data.accessToken);
             setAdmin(res.data.admin);

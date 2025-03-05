@@ -2,7 +2,7 @@ import { BasketballMatch } from '../interfaces/basketball'
 
 const BasketballTable = ({ data }: { data: BasketballMatch }) => {
   return (
-    <table className="w-[30%] text-center text-[8px] sm:text-[12px] lg:text-[16px] mx-1 sm:mx-2 lg:mx-4  border-spacing-x-4  text-white">
+    <table className="w-[125px] sm:w-[160px] lg:w-[200px] text-center text-[8px] sm:text-[12px] lg:text-[16px] mx-1 sm:mx-2 lg:mx-4  border-spacing-x-4  text-white">
       <thead className="border-b border-gray-400">
         <tr>
           <th className="sm:pb-2 lg:pb-4 invisible ">Team</th>

@@ -81,10 +81,10 @@ export default function LiveSchedule() {
   }, [filter, response])
 
   return (
-    <div className="min-w-0 h-auto min-h-0 relative">
-      <div className="flex flex-col relative font-Prompt m-auto px-8 md:px-24 lg:px-0 z-[12] h-auto min-h-0 mx-auto w-auto lg:max-w-[1100] text-center text-white">
-        <div className="relative w-auto h-auto mx-auto p-5 md:p-10 ">
-          <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:z-[1] before:content-['กำหนดการ'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
+    <div id='match' className="min-w-0 h-auto min-h-0 relative">
+      <div className="flex flex-col relative font-Prompt m-auto px-8 md:px-24 lg:px-0 z-[12] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] text-center text-white">
+        <div className="relative w-auto h-auto mx-auto px-10 py-10">
+          <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:-z-[1] before:content-['กำหนดการ'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
         </div>
         <div className="flex w-full flex-col space-y-4 sm:space-y-0 items-center  sm:flex-row lg:mt-[55px] justify-between mx-auto">
           <h2 className="font-bold text-xl lg:text-4xl relative z-10">Upcoming Events</h2>

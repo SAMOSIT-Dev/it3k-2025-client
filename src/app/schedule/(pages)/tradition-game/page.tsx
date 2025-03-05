@@ -11,9 +11,9 @@ export default function TraditionGameSchedulePage() {
         </div>
       </header>
       <main className="my-[100px] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] relative z-20">
-        <div className="font-Prompt flex flex-col justify-center m-auto space-y-3 md:space-y-6 lg:space-y-[42px]">
+        <div className="font-Prompt flex flex-col justify-center m-auto space-y-5 md:space-y-6 lg:space-y-[42px]">
           {traditionGameScheduleData.map((data, i) => (
-            <ScheduleCard key={i} scheduleData={data} />
+            <ScheduleCard key={i} type="match" scheduleData={data} />
           ))}
         </div>
       </main>

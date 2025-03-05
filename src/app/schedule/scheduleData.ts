@@ -1,8 +1,12 @@
+import { Team, TeamLogos } from '@/shared/utils/team'
 import { JSX } from 'react'
 
-export type UniversityTeamName = 'KMUTT' | 'KMITL' | 'KMUTNB' | 'KMUTNB PR'
+export type UniversityTeamName =
+  | Team.KMUTT
+  | Team.KMITL
+  | Team.KMUTNB
+  | Team.KMUTNB_PR
 export type Sport =
-  | 'แบดบินตัน'
   | 'ฟุตบอล'
   | 'กีฬาพื้นบ้าน'
   | 'บาสเกตบอล'
@@ -10,11 +14,12 @@ export type Sport =
   | 'ชักเย่อ'
   | 'กินวิบาก'
   | 'วิ่งเปรี้ยว'
+  | 'แบดมินตัน'
 
 export interface ScheduleData {
   sportTitle: string
   icon?: string | JSX.Element
-  arena?: string
+  place?: string
   location: 'field' | 'gym'
   homeTeam?: {
     name: string
@@ -40,12 +45,12 @@ export const traditionGameScheduleData: ScheduleData[] = [
     sportTitle: 'ชักเย่อ',
     location: 'field',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMUTNB',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     preiod: {
       start: '15:00',
@@ -56,12 +61,12 @@ export const traditionGameScheduleData: ScheduleData[] = [
     sportTitle: 'ชักเย่อ',
     location: 'field',
     homeTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     awayTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB_PR,
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
       start: '15:00',
@@ -108,12 +113,12 @@ export const traditionGameScheduleData: ScheduleData[] = [
     sportTitle: 'วิ่งเปรี้ยว',
     location: 'field',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMUTNB',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     preiod: {
       start: '15:00',
@@ -124,12 +129,12 @@ export const traditionGameScheduleData: ScheduleData[] = [
     sportTitle: 'วิ่งเปรี้ยว',
     location: 'field',
     homeTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     awayTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB_PR,
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
       start: '15:00',
@@ -171,12 +176,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMUTNB',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     preiod: {
       start: '09:00',
@@ -187,12 +192,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB_PR,
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     awayTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     preiod: {
       start: '09:35',
@@ -203,12 +208,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     preiod: {
       start: '10:10',
@@ -219,12 +224,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTNB',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     awayTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB_PR,
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
       start: '10:45',
@@ -235,12 +240,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB_PR,
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
       start: '11:20',
@@ -251,12 +256,12 @@ export const basketballScheduleData: ScheduleData[] = [
     sportTitle: 'บาสเกตบอล',
     location: 'gym',
     homeTeam: {
-      name: 'KMUTNB',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     awayTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     preiod: {
       start: '11:55',
@@ -269,13 +274,14 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
+    place: 'สนามฟุตบอล',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
       name: 'KMUTNB RP',
-      logo: '/images/KMUTNB_logo.png'
+      logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
       start: '09:00',
@@ -285,13 +291,14 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
+    place: 'สนามฟุตบอล',
     homeTeam: {
-      name: 'KMUTNB PR',
-      logo: '/images/KMUTNB_logo.png'
+      name: Team.KMUTNB,
+      logo: TeamLogos.KMUTNB
     },
     awayTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     preiod: {
       start: '10:15',
@@ -301,13 +308,14 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
+    place: 'สนามฟุตบอล',
     homeTeam: {
-      name: 'KMUTT',
-      logo: '/images/KMUTT_logo.png'
+      name: Team.KMUTT,
+      logo: TeamLogos.KMUTT
     },
     awayTeam: {
-      name: 'KMITL',
-      logo: '/images/KMITL_logo.png'
+      name: Team.KMITL,
+      logo: TeamLogos.KMITL
     },
     preiod: {
       start: '11:30',
@@ -315,15 +323,14 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอลรอบชิง',
+    sportTitle: 'ฟุตบอลรอบชิงชนะเลิศ',
     location: 'field',
+    place: 'สนามฟุตบอล',
     homeTeam: {
       name: ''
-      // logo: '/images/KMUTT_logo.png'
     },
     awayTeam: {
       name: ''
-      // logo: '/images/KMUTNB_logo.png'
     },
     preiod: {
       start: '16:15',
@@ -339,14 +346,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (คู่ผสม)',
         location: 'gym',
-        arena: 'สนาม: 1',
+        place: 'สนาม: 1',
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
           start: '09:40',
@@ -356,14 +363,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (คู่ผสม)',
         location: 'gym',
-        arena: 'สนาม: 2',
+        place: 'สนาม: 2',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '10:20',
@@ -373,14 +380,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (คู่ผสม)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
           start: '11:00',
@@ -390,14 +397,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (คู่ผสม)',
         location: 'gym',
-        arena: 'สนาม: 3',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '11:40',
@@ -407,18 +414,18 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (คู่ผสม)',
         location: 'gym',
-        arena: 'สนาม: 2',
+        place: 'สนาม: 2',
         homeTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '18:40',
-          end: '11:35'
+          start: '11:40',
+          end: '12:15'
         }
       }
     ]
@@ -429,31 +436,31 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (ชายคู่)',
         location: 'gym',
-        arena: 'สนาม: 3',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '18:00',
+          start: '09:00',
           end: '09:35'
         }
       },
       {
         sportTitle: 'แบดมินตัน (ชายคู่)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '09:40',
@@ -463,31 +470,31 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (ชายคู่)',
         location: 'gym',
-        arena: 'สนาม: 1',
+        place: 'สนาม: 1',
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
           start: '11:00',
-          end: '11:15'
+          end: '11:35'
         }
       },
       {
         sportTitle: 'แบดมินตัน (ชายคู่)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '11:40',
@@ -502,14 +509,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 3',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '09:00',
@@ -519,14 +526,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '09:40',
@@ -536,31 +543,31 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 1',
+        place: 'สนาม: 1',
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '11:00',
-          end: '11:15'
+          start: '10:20',
+          end: '10:55'
         }
       },
       {
         sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '11:40',
@@ -575,14 +582,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 3',
+        place: 'สนาม: 2',
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         preiod: {
           start: '09:00',
@@ -592,14 +599,14 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '09:40',
@@ -609,35 +616,35 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 1',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '11:00',
-          end: '11:15'
+          start: '09:00',
+          end: '09:35'
         }
       },
       {
         sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 4',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '10:20',
+          end: '10:35'
         }
       }
     ]
@@ -648,69 +655,69 @@ export const badmintonScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'แบดมินตัน (หญิงคู่)',
         location: 'gym',
-        arena: 'สนาม: 3',
+        place: 'สนาม: 1',
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         preiod: {
-          start: '09:00',
-          end: '09:35'
+          start: '10:20',
+          end: '10:55'
         }
       },
       {
         sportTitle: 'แบดมินตัน (หญิงคู่)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 2',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
-        },
-        preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
-        location: 'gym',
-        arena: 'สนาม: 1',
-        homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
-        },
-        awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '11:00',
-          end: '11:15'
+          end: '11:35'
         }
       },
       {
         sportTitle: 'แบดมินตัน (หญิงคู่)',
         location: 'gym',
-        arena: 'สนาม: 4',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '11:40',
           end: '12:15'
+        }
+      },
+      {
+        sportTitle: 'แบดมินตัน (หญิงคู่)',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos['KMUTNB PR']
+        },
+        awayTeam: {
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '12:20',
+          end: '12:55'
         }
       }
     ]
@@ -724,67 +731,71 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
+        place: "สนาม 1",
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '09:00',
-          end: '09:35'
+          start: '10:10',
+          end: '10:40'
         }
       },
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
+        place: "สนาม 2",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
-        location: 'gym',
-        homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
-        },
-        awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
-        },
-        preiod: {
-          start: '11:00',
+          start: '10:45',
           end: '11:15'
         }
       },
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
+        place: "สนาม 3",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '11:20',
+          end: '11:50'
         }
-      }
+      },
+      {
+        sportTitle: 'ปิงปอง (หญิงคู่)',
+        location: 'gym',
+        place: "สนาม 4",
+        homeTeam: {
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
+        },
+        awayTeam: {
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '11:55',
+          end: '12:25'
+        }
+      },
     ]
   },
   {
@@ -793,65 +804,69 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
+        place: "สนาม 3",
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '09:00',
-          end: '09:35'
+          end: '09:30'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
+        place: "สนาม 4",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '09:40',
-          end: '10:25'
+          start: '09:35',
+          end: '10:05'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
+        place: "สนาม 1",
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '11:00',
+          start: '10:45',
           end: '11:15'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
+        place: "สนาม 4",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '11:20',
+          end: '11:50'
         }
       }
     ]
@@ -862,13 +877,14 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
+        place: "สนาม 2",
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         preiod: {
           start: '09:00',
@@ -878,49 +894,52 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
+        place: "สนาม 4",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '09:40',
-          end: '10:25'
+          start: '09:00',
+          end: '09:30'
         }
       },
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
+        place: "สนาม 3",
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '11:00',
-          end: '11:15'
+          start: '09:35',
+          end: '10:05'
         }
       },
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
+        place: "สนาม 4",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '10:10',
+          end: '10:40'
         }
       }
     ]
@@ -931,65 +950,69 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
+        place: "สนาม 1",
         homeTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
           start: '09:00',
-          end: '09:35'
+          end: '09:30'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
+        place: "สนาม 2",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '09:40',
-          end: '10:25'
+          start: '09:35',
+          end: '10:05'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
+        place: "สนาม 3",
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '11:00',
-          end: '11:15'
+          start: '10:10',
+          end: '10:40'
         }
       },
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
+        place: "สนาม 1",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '11:20',
+          end: '11:50'
         }
       }
     ]
@@ -1000,99 +1023,71 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
+        place: "สนาม 1",
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '09:40',
-          end: '10:25'
+          start: '09:35',
+          end: '10:05'
         }
       },
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
+        place: "สนาม 2",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTNB_PR,
+          logo: TeamLogos[Team.KMUTNB_PR]
         },
         preiod: {
-          start: '10:20',
-          end: '10:55'
+          start: '10:10',
+          end: '10:40'
         }
       },
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
+        place: "สนาม 3",
         homeTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMUTNB,
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         preiod: {
-          start: '11:00',
-          end: '11:35'
+          start: '10:45',
+          end: '11:15'
         }
       },
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
+        place: "สนาม 4",
         homeTeam: {
-          name: 'KMUTNB BKK',
-          logo: '/images/KMUTNB_logo.png'
+          name: Team.KMUTT,
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: 'KMUTT',
-          logo: '/images/KMUTT_logo.png'
+          name: Team.KMITL,
+          logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '11:40',
-          end: '11:35'
+          start: '10:40',
+          end: '11:15'
         }
       },
-      {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
-        location: 'gym',
-        homeTeam: {
-          name: 'KMUTNB PR',
-          logo: '/images/KMUTNB_logo.png'
-        },
-        awayTeam: {
-          name: 'KMITL',
-          logo: '/images/KMITL_logo.png'
-        },
-        preiod: {
-          start: '11:40',
-          end: '11:35'
-        }
-      }
     ]
   }
-]
-
-const splitMixedScheduleData = (data: MixedScheduleData[]): ScheduleData[] => {
-  const temps: ScheduleData[] = []
-  data.forEach((d) => {
-    d.scheduleData.forEach((sd) => temps.push(sd))
-  })
-  return temps
-}
-
-export const scheduleData: ScheduleData[] = [
-  ...footballScheduleData,
-  ...basketballScheduleData,
-  ...traditionGameScheduleData,
-  ...splitMixedScheduleData(badmintonScheduleData),
-  ...splitMixedScheduleData(pingpongScheduleData)
 ]

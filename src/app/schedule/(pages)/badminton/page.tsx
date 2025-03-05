@@ -1,8 +1,25 @@
+"use client";
+import { useEffect } from 'react'
 import PageTitle from '../../components/PageTitle'
 import ScheduleCard from '../../components/ScheduleCard'
 import { badmintonScheduleData } from '../../scheduleData'
+import { useAuth } from '@/app/login/hooks/useAuth'
+import { useRouter } from 'next/navigation'
 
 export default function BadmintonSchedulePage() {
+
+  const { accessToken } = useAuth()
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!accessToken) {
+      router.push("/login");
+    }
+  }, [accessToken, router]);
+
+  if (!accessToken) return null;
+
+
   return (
     <div className="w-screen px-8 md:px-24 lg:px-0 h-auto font-Prompt overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">

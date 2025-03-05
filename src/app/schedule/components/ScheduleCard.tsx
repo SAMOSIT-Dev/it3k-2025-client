@@ -6,12 +6,14 @@ import AutoOverflow from './AutoOverflow'
 import { universityLogoList } from '../utils/constants'
 
 export default function ScheduleCard({
-  scheduleData
+  scheduleData,
+  isActive = true
 }: {
   scheduleData: ScheduleData
+  isActive?: boolean
 }) {
   return (
-    <div className="py-4 px-5 md:py-7 lg:px-16 md:px-8 lg:py-10 relative items-center flex w-full border text-center text-white border-red-500 rounded-[10px]">
+    <div data-active={isActive} className="py-4 px-5 data-[active=false]:blur-sm md:py-7 lg:px-16 md:px-8 lg:py-10 relative items-center flex w-full border text-center text-white border-red-500 rounded-[10px]">
       <div className="flex items-center self-center space-x-2 lg:space-x-6 sm:space-x-4 w-1/2 md:space-x-3">
         {scheduleData.homeTeam && scheduleData.awayTeam ? (
           <>

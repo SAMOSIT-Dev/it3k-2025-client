@@ -35,6 +35,8 @@ const Table: React.FC = () => {
                   <Image
                     src={item.logo}
                     alt={item.name}
+                    width={24}
+                    height={24}
                     className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"
                   />
                   <span>{item.name}</span>

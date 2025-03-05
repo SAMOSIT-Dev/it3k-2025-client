@@ -1,20 +1,62 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { sportsIcons } from '../constants/constants'
+import useSWR, { SWRResponse } from 'swr'
+import { defaultFetcher } from '@/shared/utils/fetcher'
+import { TPodiumScoreboard } from '@/shared/types/PodiumScoreboard'
+import mapUniNameToLogo from '@/shared/utils/mapUniNameToLogo'
+import { mergePodiumScoreWithStaticData } from '../utils/mergePodiumScore'
+import { replaceUnderscoreWithSpace } from '@/shared/utils/replaceScoreboardWithSpace'
 
-interface Team {
+// {
+//   name: 'KMUTNB PR',
+//   logo: '/images/KMUTNB_PR_logo.png',
+//   scores: [0, 0, 0, 0, 0, 0, 0]
+// }
+
+type TPodiumScoreboardData = {
+  id: number;
   name: string
   logo: string
   scores: number[]
 }
 
-interface ScoreBoardProps {
-  scoreboardData: Team[]
+const convertPodiumScoreboard = (data: TPodiumScoreboard[]): TPodiumScoreboardData[] => {
+  return data.map(({id, universityName, ...scores }) => ({
+    id: id,
+    name: universityName,
+    logo: mapUniNameToLogo(universityName), // Example logo path
+    scores: Object.values(scores)
+  }))
 }
 
-const PodiumScoreBoard: React.FC<ScoreBoardProps> = ({ scoreboardData }) => {
+function sortPodiumScoreboard(
+  data: TPodiumScoreboardData[]
+): TPodiumScoreboardData[] {
+  return data.sort((a, b) => {
+    const totalScoreA = a.scores.reduce((sum, score) => sum + score, 0)
+    const totalScoreB = b.scores.reduce((sum, score) => sum + score, 0)
+    return totalScoreB - totalScoreA
+  })
+}
+
+const PodiumScoreBoard: React.FC = () => {
+  const { data } = useSWR<SWRResponse>(
+    `${process.env.NEXT_PUBLIC_DEFAULT_API_BASE_URL}/api/points`,
+    defaultFetcher
+  )
+
+  const [scoreboardData, setScoreboardData] = useState<TPodiumScoreboardData[]>([])
+  useEffect(() => {
+    if (data) {
+      setScoreboardData(
+        convertPodiumScoreboard(mergePodiumScoreWithStaticData(data.data))
+      )
+    }
+  }, [data])
+
   return (
     <div className="bg-black lg:max-w-[1280px] mx-auto my-1 sm:my-4 lg:my-20 text-white p-4 flex flex-col items-center font-BenguiatITCbyBT">
       <div className="w-full">
@@ -44,7 +86,7 @@ const PodiumScoreBoard: React.FC<ScoreBoardProps> = ({ scoreboardData }) => {
 
         {/* Scoreboard List */}
         <div className="flex flex-col items-center space-y-4 sm:space-y-[26px]">
-          {scoreboardData.map((item, index) => (
+          {sortPodiumScoreboard(scoreboardData).map((item, index) => (
             <div
               key={index}
               className="w-full h-[50px] sm:h-[150px] flex items-center justify-between px-4 sm:px-6 border border-[#E90000] bg-[#1E0707] rounded-md">
@@ -62,7 +104,7 @@ const PodiumScoreBoard: React.FC<ScoreBoardProps> = ({ scoreboardData }) => {
                 />
 
                 <div className="text-[10px] sm:text-[20px] lg:text-[26px] xl:text-[32px] mr-[45px] whitespace-nowrap flex-shrink-0">
-                  {item.name}
+                  {replaceUnderscoreWithSpace(item.name)}
                 </div>
               </div>
 

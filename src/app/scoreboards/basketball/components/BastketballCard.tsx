@@ -5,7 +5,6 @@ import BasketballTable from './BasketballTable'
 import BasketballTeamScore from './BasketballTeamScore'
 
 const BasketBallCard = ({ data }: { data: BasketballMatch }) => {
-  console.log(data.timeStart)
 
   return (
     <div className="relative  max-w-[375px] w-[90%] h-[70px] sm:max-w-[600px] sm:h-[120px] lg:max-w-[1000px] lg:h-[200px]">

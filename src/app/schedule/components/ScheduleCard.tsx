@@ -4,13 +4,13 @@ import Image from 'next/image'
 import { ScheduleData } from '../scheduleData'
 import AutoOverflow from './AutoOverflow'
 import { universityLogoList } from '../utils/constants'
-import { UpCommingEvent } from '../services/schedule.service'
+import { UpComingEvent } from '../services/schedule.service'
 import { Team, TeamLogos } from '@/shared/utils/team'
 import * as utils from '../utils/utils'
 
 type CardProps = {
   event: {
-    data: UpCommingEvent
+    data: UpComingEvent
   }
   match: {
     data: ScheduleData
@@ -198,12 +198,12 @@ export default function ScheduleCard({
   scheduleData,
   type
 }: {
-  scheduleData: UpCommingEvent | ScheduleData
+  scheduleData: UpComingEvent | ScheduleData
   type: 'evnet' | 'match'
 }) {
   switch (type) {
     case 'evnet':
-      return <EventCard data={scheduleData as UpCommingEvent} />
+      return <EventCard data={scheduleData as UpComingEvent} />
     case 'match':
       return <MatchCard data={scheduleData as ScheduleData} />
     default:

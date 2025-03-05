@@ -10,9 +10,9 @@ import {
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import Button from './Button'
 import {
-  getUpCommingEvents,
+  getUpComingEvents,
   Result,
-  UpCommingEvent
+  UpComingEvent
 } from '../services/schedule.service'
 import Image from 'next/image'
 
@@ -23,14 +23,14 @@ export default function LiveSchedule() {
   const swiperRef = useRef<SwiperClass>(null)
   const [containerHeight, setContainerHeight] = useState<number | null>(null)
   const [isPending, startTranstion] = useTransition()
-  const [response, setResponse] = useState<Result<UpCommingEvent[]> | null>(
+  const [response, setResponse] = useState<Result<UpComingEvent[]> | null>(
     null
   )
-  const [filteredResponse, setFilteredResponse] = useState<UpCommingEvent[]>([])
+  const [filteredResponse, setFilteredResponse] = useState<UpComingEvent[]>([])
 
   useEffect(() => {
     startTranstion(async () => {
-      const result = await getUpCommingEvents()
+      const result = await getUpComingEvents()
       setResponse(result)
     })
   }, [])

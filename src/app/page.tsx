@@ -1,6 +1,5 @@
 import PodiumScoreBoard from './(main)/components/PodiumScoreboard'
 import PodiumSection from './(main)/components/PodiumSection'
-import { scheduleData } from './schedule/scheduleData'
 import LiveSchedule from './schedule/components/LiveSchedule'
 import HeroMain from "./(main)/components/HeroMain";
 import Sponsor from "./(main)/components/Sponsor";
@@ -50,7 +49,7 @@ export default function Home() {
       <PodiumScoreBoard scoreboardData={scoreboardData} />
 
       {/* Live Schedule By C */}
-      <LiveSchedule scheduleData={scheduleData} />
+      <LiveSchedule/>
       {/* Full detail sport schedule slider By Gun*/}
       <div className='my-10'>
         <SportSlider title="กำหนดการแข่งขันกีฬา" sportLists={scheduleSports} />

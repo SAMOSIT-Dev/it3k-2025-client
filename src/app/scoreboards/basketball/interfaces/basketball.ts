@@ -19,6 +19,16 @@ export interface BasketballMatch {
     timeEnd: string
   }
 
+ export interface DashboardEntry {
+    rank: number;
+    university: string;
+    wins: number;
+    losses: number;
+    totalPointsScored: number;
+    totalPointsConceded: number;
+    pointDiff: number;
+  }
+
 export const mockBasketBallMatches: BasketballMatch[] = [
   {
     id: 1,
@@ -48,7 +58,7 @@ export const mockBasketBallMatches: BasketballMatch[] = [
     id: 2,
     team_A: {
       uniName: 'KMUTNB PR',
-      image: 'KMUTNB_logo.png',
+      image: 'KMUTNB_PR_logo.png',
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -105,7 +115,7 @@ export const mockBasketBallMatches: BasketballMatch[] = [
     },
     team_B: {
       uniName: 'KMUTNB PR',
-      image: 'KMUTNB_logo.png',
+      image: 'KMUTNB_PR_logo.png',
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -129,7 +139,7 @@ export const mockBasketBallMatches: BasketballMatch[] = [
     },
     team_B: {
       uniName: 'KMUTNB PR',
-      image: 'KMUTNB_logo.png',
+      image: 'KMUTNB_PR_logo.png',
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,

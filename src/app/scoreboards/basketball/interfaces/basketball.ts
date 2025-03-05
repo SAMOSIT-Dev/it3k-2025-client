@@ -1,5 +1,7 @@
+import { Team, TeamLogos } from "@/shared/utils/team"
+
 export interface BasketballTeam {
-    uniName: string
+    uniName: Team
     image: string
     color_code: string
     score_Q1: number
@@ -33,8 +35,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
   {
     id: 1,
     team_A: {
-      uniName: 'KMUTT',
-      image: 'KMUTT_logo.png',
+      uniName: Team.KMUTT,
+      image: TeamLogos[Team.KMUTT],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -42,8 +44,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMUTNB BKK',
-      image: 'KMUTNB_logo.png',
+      uniName: Team.KMUTNB,
+      image: TeamLogos[Team.KMUTNB],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -51,14 +53,14 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '09:00',
-    timeEnd: '09:25'
+    timeStart: '2025-03-09T02:00:00.000Z',
+    timeEnd: '2025-03-09T02:25:00.000Z'
   },
   {
     id: 2,
     team_A: {
-      uniName: 'KMUTNB PR',
-      image: 'KMUTNB_PR_logo.png',
+      uniName: Team.KMUTNBPR,
+      image: TeamLogos[Team.KMUTNBPR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -66,8 +68,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMITL',
-      image: 'KMITL_logo.png',
+      uniName: Team.KMITL,
+      image: TeamLogos[Team.KMITL],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -75,14 +77,14 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '09:35',
-    timeEnd: '10:00'
+    timeStart: '2025-03-09T02:35:00.000Z',
+    timeEnd: '2025-03-09T03:00:00.000Z'
   },
   {
     id: 3,
     team_A: {
-      uniName: 'KMUTT',
-      image: 'KMUTT_logo.png',
+      uniName: Team.KMUTT,
+      image: TeamLogos[Team.KMUTT],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -90,8 +92,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMITL',
-      image: 'KMITL_logo.png',
+      uniName: Team.KMITL,
+      image: TeamLogos[Team.KMITL],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -99,14 +101,14 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '10:10',
-    timeEnd: '10:35'
+    timeStart: '2025-03-09T03:10:00.000Z',
+    timeEnd: '2025-03-09T03:35:00.000Z'
   },
   {
     id: 4,
     team_A: {
-      uniName: 'KMUTNB BKK',
-      image: 'KMUTNB_logo.png',
+      uniName: Team.KMUTNB,
+      image: TeamLogos[Team.KMUTNB],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -114,8 +116,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMUTNB PR',
-      image: 'KMUTNB_PR_logo.png',
+      uniName: Team.KMUTNBPR,
+      image: TeamLogos[Team.KMUTNBPR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -123,14 +125,14 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '10:45',
-    timeEnd: '11:10'
+    timeStart: '2025-03-09T03:45:00.000Z',
+    timeEnd: '2025-03-09T04:10:00.000Z'
   },
   {
     id: 5,
     team_A: {
-      uniName: 'KMUTT',
-      image: 'KMUTT_logo.png',
+      uniName: Team.KMUTT,
+      image: TeamLogos[Team.KMUTT],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -138,8 +140,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMUTNB PR',
-      image: 'KMUTNB_PR_logo.png',
+      uniName: Team.KMUTNBPR,
+      image: TeamLogos[Team.KMUTNBPR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -147,14 +149,14 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '11:20',
-    timeEnd: '11:45'
+    timeStart: '2025-03-09T04:20:00.000Z',
+    timeEnd: '2025-03-09T04:45:00.000Z'
   },
   {
     id: 6,
     team_A: {
-      uniName: 'KMUTNB BKK',
-      image: 'KMUTNB_logo.png',
+      uniName: Team.KMUTNB,
+      image: TeamLogos[Team.KMUTNB],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -162,8 +164,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: 'KMITL',
-      image: 'KMITL_logo.png',
+      uniName: Team.KMITL,
+      image: TeamLogos[Team.KMITL],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -171,7 +173,7 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     status: 'upcoming',
-    timeStart: '11:55',
-    timeEnd: '12:20'
+    timeStart: '2025-03-09T04:55:00.000Z',
+    timeEnd: '2025-03-09T05:20:00.000Z'
   }
 ]

@@ -1,52 +1,19 @@
 'use client'
 
 import BasketBallCard from './components/BastketballCard'
-import { BasketballMatch } from './interfaces/basketball'
 import { mockBasketBallMatches } from './interfaces/basketball'
-// import { io } from 'socket.io-client'
-import { useEffect, useState } from 'react'
 import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
 import { Team } from '@/shared/utils/team'
 import BackButton from '@/shared/components/BackButton'
+// import { transformDashboardData } from './utils/transformTableData'
+import { useFetchBasketball } from './hooks/useFetchBasketball'
 
 const BasketBall = () => {
-  const [matches, setMatches] = useState<BasketballMatch[]>([])
-  useEffect(() => {
-    setMatches(mockBasketBallMatches);
-  }, []);
-  // useEffect(() => {
-  //   const socket = io(SOCKET_URL, {
-  //     transports: ['websocket'],
-  //     withCredentials: true,
-  //     path: SOCKET_PATH
-  //   })
-
-  //   socket.on('connect', () => {
-  //     console.log('✅ Connected to WebSocket:', socket.id)
-  //   })
-
-  //   socket.on('updateScoreboard', (data) => {
-  //     console.log('📢 Received updateScoreboard event:', data)
-  //     if (data.length === 0) {
-  //       console.warn('⚠️ No match data received!')
-  //     }
-  //     setMatches(data)
-  //   })
-
-  //   socket.on('connect_error', (err) => {
-  //     console.error('❌ WebSocket Connection Error:', err)
-  //   })
-
-  //   return () => {
-  //     socket.disconnect()
-  //   }
-  // }, [])
-  // const SOCKET_URL = 'http://it3k-in.sit.kmutt.ac.th/'
-  // const SOCKET_PATH = '/api/basketball-service/socket/'
+  // const { matches, entries } = useFetchBasketball()
 
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
-  const tableData = [
+  const mockTableData = [
     [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '0-0', '0-0', 0],
     [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '0-0', '0-0', 0],
     [1, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '0-0', '0-0', 0],
@@ -71,11 +38,24 @@ const BasketBall = () => {
         </h1>
       </div>
       <div className="w-[90%]">
+        {/* {entries && entries.length > 0 ? (
+          <TableComponent
+            highlighted={true}
+            edgeBorder={true}
+            header={header}
+            data={transformDashboardData(entries)}
+            columnStyles={getColumnstyle}
+          />
+        ) : (
+          <p className="text-white text-sm text-center py-10">
+            Loading ranking...
+          </p>
+        )} */}
         <TableComponent
           highlighted={true}
           edgeBorder={true}
           header={header}
-          data={tableData}
+          data={mockTableData}
           columnStyles={getColumnstyle}
         />
       </div>
@@ -83,16 +63,16 @@ const BasketBall = () => {
         Opening Match
       </p>
       <div className="flex flex-col items-center w-full h-full space-y-4 sm:space-y-6 lg:space-y-8">
-        {/* {matches?.length === 0 ? (
-          <p className="text-white text-sm">Loading...</p>
-        ) : ( */}
-        {/* matches?.map((match, index) => (
-             <BasketBallCard data={match} key={index} />
-           )) */}
-        {matches?.map((match, index) => (
+        {/* {matches && matches.length > 0 ? (
+          matches.map((match, index) => (
+            <BasketBallCard data={match} key={index} />
+          ))
+        ) : (
+          <p className="text-white text-sm py-10">Loading matches...</p>
+        )} */}
+        {mockBasketBallMatches.map((match, index) => (
           <BasketBallCard data={match} key={index} />
         ))}
-        {/* )} */}
       </div>
     </div>
   )

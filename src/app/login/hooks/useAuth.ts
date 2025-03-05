@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://it3k-in.sit.kmutt.ac.th";
+const API_URL = "https://it3k-in.sit.kmutt.ac.th";
+
+
 
 export const useAuth = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -12,7 +14,7 @@ export const useAuth = () => {
             const res = await axios.post(`${API_URL}/api/admin/auth/login/`, { username, password });
 
             setAccessToken(res.data.accessToken);
-            setAdmin(res.data.admin);
+            setAdmin(() => res.data.admin);
 
             document.cookie = `refreshToken=${res.data.refreshToken}; path=/;`;
 

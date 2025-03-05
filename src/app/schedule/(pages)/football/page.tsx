@@ -1,3 +1,4 @@
+import MatchList from '@/app/scoreboards/football/components/MatchList'
 import PageTitle from '../../components/PageTitle'
 import ScheduleCard from '../../components/ScheduleCard'
 import { footballScheduleData } from '../../scheduleData'
@@ -17,6 +18,7 @@ export default function FootballSchedulePage() {
           ))}
         </div>
       </main>
+      <MatchList />
     </div>
   )
 }

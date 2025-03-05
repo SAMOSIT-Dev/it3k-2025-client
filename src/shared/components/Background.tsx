@@ -1,6 +1,6 @@
 const Background = () => {
   return (
-    <div className="fixed -top-[100px] left-0 right-0 bottom-0 -z-50 bg-[#0a0a12] overflow-hidden">
+    <div className="fixed -top-[100px] left-0 right-0 bottom-0 -z-50 bg-black-300 overflow-hidden">
       <div className="absolute inset-0 bg-black"></div>
 
       <div className="absolute right-[-5%] bottom-[-5%] w-[50vw] h-[30vh] bg-red-700 blur-[200px] opacity-35 rotate-[-15deg]"></div>

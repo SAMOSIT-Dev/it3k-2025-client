@@ -1,24 +1,44 @@
 import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
 import { Team } from '@/shared/utils/team'
-import MatchList from './components/MatchList'
 import BackButton from '@/shared/components/BackButton'
-import Category from './components/Category'
 import Background from '@/shared/components/Background'
+import Category from '../components/Category'
+import MatchList from '../components/MatchList'
 
 const Page = () => {
-  const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
+  const game = 'rov'
+  const header = ['อันดับ', 'TEAM', 'WIN_LOSE']
   const tableData = [
-    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '0-0', '0-0', 0],
-    [2, <TeamCell key="team-kmitl" team={Team.KMITL} />, '0-0', '0-0', 0],
-    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '0-0', '0-0', 0],
-    [
-      4,
-      <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />,
-      '0-0',
-      '0-0',
-      0
-    ]
+    [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-0'],
+    [2, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '1-1'],
+    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />, '0-2']
+  ]
+  const matcheData = [
+    {
+      time: 'เวลา : 20:00 - 22:00',
+      match: 'MATCH 1',
+      teamA: Team.KMUTT,
+      teamB: Team.KMUTNBPR,
+      scoreA: 1,
+      scoreB: 0
+    },
+    {
+      time: 'เวลา : 20:00 - 22:00',
+      match: 'MATCH 2',
+      teamA: Team.KMUTNBPR,
+      teamB: Team.KMITL,
+      scoreA: 0,
+      scoreB: 1
+    },
+    {
+      time: 'เวลา : 21:00 - 23:00',
+      match: 'ชิงชนะเลิศ',
+      teamA: Team.KMUTT,
+      teamB: Team.KMITL,
+      scoreA: 0,
+      scoreB: 1
+    }
   ]
   const getColumnstyle = (colIndex: number) => {
     if (colIndex === 0) return 'font-black'
@@ -33,7 +53,7 @@ const Page = () => {
           <BackButton />
           <h1 className="text-2xl font-bold">Esports</h1>
         </div>
-        <Category />
+        <Category activeCategory={game} />
         <TableComponent
           highlighted={true}
           edgeBorder={true}
@@ -44,7 +64,7 @@ const Page = () => {
 
         <div className="flex flex-col w-full items-center lg:-ml-4 md:ml-2 ml-1 mt-8 md:mt-16">
           <div className="w-[100%] md:max-w-[550px] mb-8">
-            <MatchList />
+            <MatchList matches={matcheData} />
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { universityLogoList } from '../utils/constants'
 import { UpComingEvent } from '../services/schedule.service'
 import { Team, TeamLogos, TeamMapping } from '@/shared/utils/team'
 import * as utils from '../utils/utils'
+import { SportEnum, sportMap } from '../utils/sport'
 
 type CardProps = {
   event: {
@@ -82,7 +83,7 @@ function EventCard({ data }: CardProps['event']) {
       <div className="flex w-1/2 flex-col justify-center relative min-w-0 items-center text-center ml-5">
         <AutoOverflow className="flex items-center justify-center">
           <span className="font-bold md:text-2xl leading-normal lg:text-4xl text-sm capitalize">
-            {data.type}
+            {sportMap[data.type as SportEnum]}
           </span>
         </AutoOverflow>
         <AutoOverflow>

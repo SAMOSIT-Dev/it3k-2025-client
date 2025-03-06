@@ -20,13 +20,16 @@ export interface ScheduleData {
   sportTitle: string
   icon?: string | JSX.Element
   place?: string
+  isFinal?: boolean
   location: 'field' | 'gym'
   homeTeam?: {
     name: string
+    title?: string
     logo?: string
   }
   awayTeam?: {
     name: string
+    title?: string
     logo?: string
   }
   preiod: {
@@ -53,8 +56,8 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos.KMUTNB
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:15',
+      end: '15:20'
     }
   },
   {
@@ -69,44 +72,50 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
-    }
-  },
-  {
-    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
-    location: 'field',
-    homeTeam: {
-      name: 'แพ้คู่ 1'
-    },
-    awayTeam: {
-      name: 'แพ้คู่ 2'
-    },
-    preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:20',
+      end: '15:25'
     }
   },
   {
     sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 1',
     location: 'field',
+    isFinal: true,
     homeTeam: {
-      name: 'ชนะคู่ 1'
+      name: '',
+      title: 'ชนะคู่ 1'
     },
     awayTeam: {
-      name: 'ชนะคู่ 2'
+      name: '',
+      title: 'ชนะคู่ 2'
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:25',
+      end: '15:30'
+    }
+  },
+  {
+    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
+    location: 'field',
+    isFinal: true,
+    homeTeam: {
+      name: '',
+      title: 'แพ้คู่ 1'
+    },
+    awayTeam: {
+      name: '',
+      title: 'แพ้คู่ 2'
+    },
+    preiod: {
+      start: '15:30',
+      end: '15:35'
     }
   },
   {
     sportTitle: 'กินวิบาก',
     location: 'field',
     preiod: {
-      start: '15:20',
-      end: '15:35'
+      start: '15:40',
+      end: '15:50'
     }
   },
   {
@@ -121,8 +130,8 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos.KMUTNB
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:55',
+      end: '16:00'
     }
   },
   {
@@ -137,36 +146,42 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
-    }
-  },
-  {
-    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
-    location: 'field',
-    homeTeam: {
-      name: 'แพ้คู่ 1'
-    },
-    awayTeam: {
-      name: 'แพ้คู่ 2'
-    },
-    preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '16:00',
+      end: '16:05'
     }
   },
   {
     sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 1',
     location: 'field',
+    isFinal: true,
     homeTeam: {
-      name: 'ชนะคู่ 1'
+      name: '',
+      title: 'ชนะคู่ 1'
     },
     awayTeam: {
-      name: 'ชนะคู่ 2'
+      name: '',
+      title: 'ชนะคู่ 2'
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '16:05',
+      end: '16:10'
+    }
+  },
+  {
+    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
+    location: 'field',
+    isFinal: true,
+    homeTeam: {
+      name: '',
+      title: 'แพ้คู่ 1'
+    },
+    awayTeam: {
+      name: '',
+      title: 'แพ้คู่ 2'
+    },
+    preiod: {
+      start: '16:10',
+      end: '16:15'
     }
   }
 ]
@@ -274,7 +289,6 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTT,
       logo: TeamLogos.KMUTT
@@ -291,7 +305,6 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTNB,
       logo: TeamLogos.KMUTNB
@@ -308,7 +321,6 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอล',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTT,
       logo: TeamLogos.KMUTT
@@ -325,12 +337,14 @@ export const footballScheduleData: ScheduleData[] = [
   {
     sportTitle: 'ฟุตบอลรอบชิงชนะเลิศ',
     location: 'field',
-    place: 'สนามฟุตบอล',
+    isFinal: true,
     homeTeam: {
-      name: ''
+      name: '',
+      title: 'คะแนนรวมอันดับที่ 1'
     },
     awayTeam: {
-      name: ''
+      name: '',
+      title: 'คะแนนรวมอันดับที่ 2'
     },
     preiod: {
       start: '16:15',
@@ -731,7 +745,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม 1',
         homeTeam: {
           name: Team.KMITL,
           logo: TeamLogos.KMITL
@@ -748,7 +762,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
-        place: "สนาม 2",
+        place: 'สนาม 2',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -765,7 +779,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม 3',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -782,7 +796,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงคู่)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTNB_PR,
           logo: TeamLogos[Team.KMUTNB_PR]
@@ -795,7 +809,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
           start: '11:55',
           end: '12:25'
         }
-      },
+      }
     ]
   },
   {
@@ -804,7 +818,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม 3',
         homeTeam: {
           name: Team.KMITL,
           logo: TeamLogos.KMITL
@@ -821,7 +835,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -838,7 +852,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม 1',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -855,7 +869,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายคู่)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -877,7 +891,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
-        place: "สนาม 2",
+        place: 'สนาม 2',
         homeTeam: {
           name: Team.KMITL,
           logo: TeamLogos.KMITL
@@ -894,7 +908,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -911,7 +925,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม 3',
         homeTeam: {
           name: Team.KMITL,
           logo: TeamLogos.KMITL
@@ -928,7 +942,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -950,7 +964,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม 1',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -967,7 +981,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
-        place: "สนาม 2",
+        place: 'สนาม 2',
         homeTeam: {
           name: Team.KMITL,
           logo: TeamLogos.KMITL
@@ -984,7 +998,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม 3',
         homeTeam: {
           name: Team.KMUTNB_PR,
           logo: TeamLogos[Team.KMUTNB_PR]
@@ -1001,7 +1015,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (ชายเดี่ยว)',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม 1',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -1023,7 +1037,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม 1',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -1040,7 +1054,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
-        place: "สนาม 2",
+        place: 'สนาม 2',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -1057,7 +1071,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม 3',
         homeTeam: {
           name: Team.KMUTNB,
           logo: TeamLogos.KMUTNB
@@ -1074,7 +1088,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
       {
         sportTitle: 'ปิงปอง (คู่ผสม)',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม 4',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -1087,7 +1101,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
           start: '10:40',
           end: '11:15'
         }
-      },
+      }
     ]
   }
 ]

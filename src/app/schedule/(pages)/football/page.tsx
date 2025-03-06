@@ -13,7 +13,11 @@ export default function FootballSchedulePage() {
       <main className="my-[100px] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] relative z-20">
         <div className="font-Prompt flex flex-col justify-center m-auto  space-y-5 md:space-y-6 lg:space-y-[42px]">
           {footballScheduleData.map((data, i) => (
-            <ScheduleCard key={i} type="match" scheduleData={data} />
+            <ScheduleCard
+              key={i}
+              type={data.isFinal ? 'fianl-match' : 'match'}
+              scheduleData={data}
+            />
           ))}
         </div>
       </main>

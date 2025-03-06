@@ -1,14 +1,20 @@
+import { Team, TeamLogos } from '@/shared/utils/team'
+
 export const universityLogoList = [
   {
-    src: '/images/KMUTT_logo.png',
-    alt: 'KMUTT'
+    src: TeamLogos['KMUTT'],
+    alt: Team.KMUTT
   },
   {
-    src: '/images/KMUTNB_logo.png',
-    alt: 'KMUTNB'
+    src: TeamLogos['KMUTNB'],
+    alt: Team.KMUTNB
   },
   {
-    src: '/images/KMITL_logo.png',
-    alt: 'KMITL'
+    src: TeamLogos['KMITL'],
+    alt: Team.KMITL
+  },
+  {
+    src: TeamLogos['KMUTNB PR'],
+    alt: Team.KMUTNB_PR
   }
 ]

@@ -10,6 +10,6 @@ export function replaceSpaceFromUnderline(str: string) {
 }
 
 export function timeFormat(str: string): string {
-  const [hh, mm, ss] = str.split(':')
+  const [hh, mm] = str.split(':')
   return `${hh}:${mm}`
 }

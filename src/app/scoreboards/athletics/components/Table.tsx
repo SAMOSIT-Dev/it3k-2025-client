@@ -5,11 +5,12 @@ import Image from 'next/image'
 import style from '@/app/styles/scoreboards/athletics/table.module.css'
 import { IUniversity } from '../services/athletics.service'
 import { AxiosError } from 'axios'
+import mapUniNameToLogo from '@/shared/utils/mapUniNameToLogo'
 
 interface Props {
   data: IUniversity[]
   loading: boolean
-  error: AxiosError
+  error: AxiosError | null
 }
 
 const Table: React.FC<Props> = ({ data, loading, error }) => {
@@ -40,7 +41,7 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>
                   <div className="flex flex-row items-center justify-center">
                     <Image
-                      src={`/images/${item.image}`}
+                      src={`${mapUniNameToLogo(item.uniName)}`}
                       alt={item.uniName}
                       width={16}
                       height={16}

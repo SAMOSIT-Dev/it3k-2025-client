@@ -45,6 +45,6 @@ export const useFetchAthleticsData = (type: AthleticsCategory) => {
       url: `/athletics/event/${type}`,
       method: 'GET'
     },
-    { axios: apiClient }
+    // { axios: apiClient }
   )
 }

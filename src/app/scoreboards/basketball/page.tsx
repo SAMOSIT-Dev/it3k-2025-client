@@ -17,7 +17,7 @@ const BasketBall = () => {
     [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '0-0', '0-0', 0],
     [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '0-0', '0-0', 0],
     [1, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '0-0', '0-0', 0],
-    [1, <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />, '0-0', '0-0', 0]
+    [1, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />, '0-0', '0-0', 0]
   ]
   const getColumnstyle = (colIndex: number) => {
     if (colIndex === 0) return 'font-bold'

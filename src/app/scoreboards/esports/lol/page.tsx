@@ -12,7 +12,7 @@ const Page = () => {
   const tableData = [
     [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '2-1'],
     [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-1'],
-    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNBPR} />, '1-2'],
+    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB_PR} />, '1-2'],
     [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB} />, '1-2']
   ]
   const matcheData = [
@@ -20,7 +20,7 @@ const Page = () => {
       time: 'เวลา : 20:00 - 22:00',
       match: 'MATCH 1',
       teamA: Team.KMUTNB,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 0,
       scoreB: 1
     },
@@ -44,7 +44,7 @@ const Page = () => {
       time: 'เวลา : 15:30 - 17:30',
       match: 'MATCH 4',
       teamA: Team.KMUTT,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 1,
       scoreB: 0
     },
@@ -59,7 +59,7 @@ const Page = () => {
     {
       time: 'เวลา : 15:30 - 17:30',
       match: 'MATCH 6',
-      teamA: Team.KMUTNBPR,
+      teamA: Team.KMUTNB_PR,
       teamB: Team.KMITL,
       scoreA: 0,
       scoreB: 1
@@ -76,7 +76,7 @@ const Page = () => {
       time: '6/3/2025',
       match: 'ชิงที่ 3',
       teamA: Team.KMUTNB,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 0,
       scoreB: 0
     }

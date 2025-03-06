@@ -21,7 +21,7 @@ const Page = () => {
     ],
     [
       4,
-      <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />,
+      <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />,
       '0-3',
       '25-39',
       '-14'
@@ -40,7 +40,7 @@ const Page = () => {
       time: 'เวลา : 15:30 - 17:30',
       match: 'MATCH 2',
       teamA: Team.KMUTNB,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 13,
       scoreB: 10
     },
@@ -55,7 +55,7 @@ const Page = () => {
     {
       time: 'เวลา : 15:30 - 17:30',
       match: 'MATCH 4',
-      teamA: Team.KMUTNBPR,
+      teamA: Team.KMUTNB_PR,
       teamB: Team.KMITL,
       scoreA: 4,
       scoreB: 13
@@ -64,7 +64,7 @@ const Page = () => {
       time: 'เวลา : 20:00 - 22:00',
       match: 'MATCH 5',
       teamA: Team.KMUTT,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 13,
       scoreB: 11
     },

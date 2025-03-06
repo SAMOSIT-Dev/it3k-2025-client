@@ -1,95 +1,49 @@
-'use client'
-import React, { useState } from 'react'
-import { Button } from '../components/Button'
-import { Card, CardContent } from '../components/Card'
-import { Input } from '../components/Input'
+"use client";
 
-const initialData = [
-  { id: 1, name: 'John Doe', age: 25, role: 'Admin' },
-  { id: 2, name: 'Jane Smith', age: 30, role: 'Editor' },
-  { id: 3, name: 'Alice Johnson', age: 28, role: 'Viewer' }
-]
+import { useEffect, useState } from "react";
+import BasketBallCard from "@/app/scoreboards/basketball/components/BastketballCard";
+import Link from "next/link";
 
-const columns = Object.keys(initialData[0]).filter((key) => key !== 'id')
+const Page = () => {
+    const API_URL = 'https://it3k.sit.kmutt.ac.th';
+    const [scoreboard, setScoreboard] = useState([]);
 
-const BasketballAdminPage: React.FC = () => {
-  const [data, setData] = useState(initialData)
-  const [editing, setEditing] = useState<{ id: number; key: string } | null>(
-    null
-  )
-  const [tempValue, setTempValue] = useState<string>('')
+    useEffect(() => {
+        const fetchScoreboard = async () => {
+            try {
+                console.log("Fetching data from:", `${API_URL}/api/basketball/score-board`);
+                const res = await fetch(`${API_URL}/api/basketball/score-board`);
 
-  const handleEdit = (id: number, key: string) => {
-    setEditing({ id, key })
-    setTempValue(data.find((item) => item.id === id)?.[key as keyof typeof initialData[0]] as string)
-  }
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTempValue(e.target.value)
-  }
+                const data = await res.json();
+                console.log("Response:", data);
+                setScoreboard(data);
+            } catch (error) {
+                console.error("Error fetching scoreboard:", error);
+            }
+        };
 
-  const handleBlur = () => {
-    if (editing) {
-      const newData = data.map((item) =>
-        item.id === editing.id ? { ...item, [editing.key]: tempValue } : item
-      )
-      setData(newData)
-      setEditing(null)
-    }
-  }
+        fetchScoreboard();
+    }, []);
 
-  const handleSubmit = () => {
-    console.log('Updated Data:', data)
-    alert('Data submitted successfully!')
-  }
 
-  return (
-    <Card className="p-4 w-full max-w-3xl mx-auto mt-10">
-      <h2 className="text-xl font-bold mb-4">Admin Table</h2>
-      <CardContent>
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              {columns.map((column, index) => (
-                <th
-                  key={index}
-                  className="border border-gray-300 p-2 bg-gray-200">
-                  {column}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row) => (
-              <tr key={row.id}>
-                {columns.map((key, colIndex) => (
-                  <td
-                    key={colIndex}
-                    className="border border-gray-300 p-2 cursor-pointer"
-                    onClick={() => handleEdit(row.id, key)}>
-                    {editing?.id === row.id && editing?.key === key ? (
-                      <Input
-                        autoFocus
-                        value={tempValue}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className="w-full"
-                      />
-                    ) : (
-                      row[key as keyof (typeof initialData)[0]]
-                    )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Button className="mt-4" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </CardContent>
-    </Card>
-  )
+    return (
+        <div className="mt-40">
+            <h1>Basketball Scoreboard</h1>
+            <div className='w-full h-full'>
+                <div className='max-w-7xl mx-auto '>
+                    {scoreboard?.map((match, index) => (
+                        <Link href={`/admin/basketball/${match.id}`} key={match.id}>
+                            <BasketBallCard data={match} key={index} />
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default BasketballAdminPage
+export default Page;

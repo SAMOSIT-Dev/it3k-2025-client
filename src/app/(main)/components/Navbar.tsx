@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
@@ -19,26 +19,40 @@ const Navbar = () => {
   };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (pathname === "/") {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      }
     }
-  }
-  else {
-    router.push(`/#${id}`);
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    else {
+      router.push(`/#${id}`);
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      }
     }
-  }
   };
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
   return (
-<nav className="fixed top-0 left-0 w-full z-50 bg-[#111111] text-white shadow-md font-Prompt">
-<div className={isOpen ? 'border-none' : 'border-b-2 border-red-600'}>
+    <nav className={`${isScrolled ? "fixed" : "absolute"} top-0 left-0 w-full z-50 bg-[#111111] text-white shadow-md font-Prompt`}>
+      <div className={isOpen ? 'border-none' : 'border-b-2 border-red-600'}>
         <div className="max-w-7xl mx-auto lg:px-8">
           <div className="flex justify-center items-center py-2 pt-3 lg:justify-between">
             <button onClick={toggleMenu} className="text-white absolute left-[40px] lg:hidden">
@@ -49,7 +63,7 @@ const Navbar = () => {
                 <Image
                   src="/images/logoNav.svg"
                   alt="logoNav"
-                  width={200} 
+                  width={200}
                   height={80}
                   className="h-[5rem] w-auto"
                 />

@@ -10,4 +10,4 @@ const apiClient = axios.create({
   }
 })
 
-configure({ axios: apiClient })
+export default apiClient

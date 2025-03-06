@@ -1,4 +1,8 @@
 import useAxios from 'axios-hooks'
+import apiClient from '@/shared/utils/Axios'
+import { configure } from 'axios-hooks'
+
+configure({ axios: apiClient })
 
 export interface IUniversity {
   id: number
@@ -36,8 +40,11 @@ export interface IAthleticsApiResponse {
 }
 
 export const useFetchAthleticsData = (type: AthleticsCategory) => {
-  return useAxios<IAthleticsApiResponse>({
-    url: `/athletics/${type}`,
-    method: 'GET'
-  })
+  return useAxios<IAthleticsApiResponse>(
+    {
+      url: `/athletics/event/${type}`,
+      method: 'GET'
+    },
+    { axios: apiClient }
+  )
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "./(main)/components/Navbar";
 
 import "./globals.css";
+import PageWrapper from "./(main)/components/PageWrapper";
 
 export const metadata: Metadata = {
   title: "IT3K",
@@ -13,12 +14,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body>
         {/* NavBar */}
         <Navbar />
-        {children}
+        <PageWrapper>
+          {children}
+        </PageWrapper>
       </body>
     </html>
   );

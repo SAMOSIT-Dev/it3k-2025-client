@@ -1,41 +1,26 @@
 "use client";
-import { useEffect } from 'react'
 import PageTitle from '../../components/PageTitle'
 import ScheduleCard from '../../components/ScheduleCard'
 import { badmintonScheduleData } from '../../scheduleData'
-import { useAuth } from '@/app/login/hooks/useAuth'
-import { useRouter } from 'next/navigation'
 
 export default function BadmintonSchedulePage() {
-
-  const { accessToken } = useAuth()
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!accessToken) {
-      router.push("/login");
-    }
-  }, [accessToken, router]);
-
-  if (!accessToken) return null;
-
 
   return (
     <div className="w-screen px-8 md:px-24 lg:px-0 h-auto font-Prompt overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">
         <div className="w-auto lg:w-[1038.35px] mx-auto">
-          <PageTitle title="แบดบินตัน" />
+          <PageTitle title="แบดมินตัน" />
         </div>
       </header>
       <main className="my-[100px] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] relative z-20">
         {badmintonScheduleData.map((type) => (
           <div key={type.title}>
-            <span className="lg:text-5xl text-2xl flex justify-center font-bold text-center text-white mx-auto my-[86px]">
+            <span className="lg:text-5xl text-2xl flex justify-center font-bold text-center text-white mx-auto my-14 md:my-[86px]">
               {type.title}
             </span>
-            <div className="font-Prompt flex flex-col justify-center m-auto space-y-3 md:space-y-6 lg:space-y-[42px]">
+            <div className="font-Prompt flex flex-col justify-center m-auto space-y-5 md:space-y-6 lg:space-y-[42px]">
               {type.scheduleData.map((data, i) => (
-                <ScheduleCard key={i} scheduleData={data} />
+                <ScheduleCard key={i} type="match" scheduleData={data} />
               ))}
             </div>
           </div>

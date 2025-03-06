@@ -129,6 +129,7 @@ const AdminFootballScores = () => {
               : match
           )
         )
+        alert(`Update score on match id ${matchId} successful`)
       })
       .catch((error) => console.error('Error updating score:', error))
   }
@@ -161,6 +162,7 @@ const AdminFootballScores = () => {
         { headers: headers }
       )
       .then((response) => {
+        alert(`Create new match successful`)
         console.log('New match created:', response.data)
       })
       .catch((error) => {
@@ -187,9 +189,22 @@ const AdminFootballScores = () => {
             match.id === matchId ? { ...match, ...updatedMatch } : match
           )
         )
+        alert(`Update match id ${matchId} successful`)
         console.log(updateMatch)
       })
       .catch((error) => console.error('Error updating match:', error))
+  }
+
+  const deleteMatch = (matchId: number) => {
+    axios
+      .delete(`https://it3k.sit.kmutt.ac.th/api/admin/football/${matchId}`, {
+        headers: headers
+      })
+      .then(() => {
+        alert(`Delete match id ${matchId} successful`)
+        console.log('Delete successful')
+      })
+      .catch((error) => console.error('Error deleting match:', error))
   }
 
   const parseWinLose = (winLose: string) => {
@@ -258,7 +273,7 @@ const AdminFootballScores = () => {
       {/* Form for creating a new match */}
       <div className="mb-4 p-4 border border-gray-300 rounded-lg shadow">
         <h2 className="text-lg font-medium mb-2">
-          Create New Match (1:KMUTT, 2:KMITL, 3:KMUTNB, 4:KMUTNBPR)
+          Create New Match (1: KMUTT, 2: KMITL, 3: KMUTNB, 4: KMUTNB_PR)
         </h2>
 
         <div className="flex gap-4 mb-2">
@@ -319,6 +334,7 @@ const AdminFootballScores = () => {
               <input
                 type="number"
                 className="w-12 text-center border border-gray-400 rounded p-1"
+                min={0}
                 value={scores[match.id]?.team_A ?? match.team_A.score}
                 onChange={(e) =>
                   handleScoreChange(match.id, 'team_A', Number(e.target.value))
@@ -330,6 +346,7 @@ const AdminFootballScores = () => {
               <input
                 type="number"
                 className="w-12 text-center border border-gray-400 rounded p-1"
+                min={0}
                 value={scores[match.id]?.team_B ?? match.team_B.score}
                 onChange={(e) =>
                   handleScoreChange(match.id, 'team_B', Number(e.target.value))
@@ -351,6 +368,29 @@ const AdminFootballScores = () => {
           </button>
 
           <div className="mt-4 flex flex-col gap-2">
+            <div className="flex justify-start gap-4">
+              <input
+                type="number"
+                placeholder="Team A id"
+                className="border p-2"
+                min={1}
+                max={4}
+                onChange={(e) =>
+                  handleUpdateChange(match.id, 'team_A_id', e.target.value)
+                }
+              />
+              <input
+                type="number"
+                placeholder="Team B id"
+                className="border p-2"
+                min={1}
+                max={4}
+                onChange={(e) =>
+                  handleUpdateChange(match.id, 'team_B_id', e.target.value)
+                }
+              />
+            </div>
+
             <select
               className="border p-2"
               onChange={(e) =>
@@ -381,6 +421,11 @@ const AdminFootballScores = () => {
               className="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
               onClick={() => updateMatch(match.id)}>
               Update Match
+            </button>
+            <button
+              className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              onClick={() => deleteMatch(match.id)}>
+              Delete Match
             </button>
           </div>
         </div>

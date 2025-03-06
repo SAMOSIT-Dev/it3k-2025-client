@@ -8,7 +8,7 @@ import gooseShadow from '../../../public/images/pop_goose/goose-shadow.png'
 import styles from '@/app/styles/game/game.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
-import { initSocket } from './utils/socket'
+import { getSocket, initSocket } from './utils/socket'
 import UniversitySelectModal from './components/UniversitySelectModal'
 import Scorebar from './components/Scorebar'
 
@@ -34,9 +34,9 @@ const PopGoosePage = () => {
   useEffect(() => {
     const socket = initSocket()
 
-    // socket.on('connect', () => {
-    //   console.log('connected')
-    // })
+    socket.on('connect', () => {
+      console.log('connected')
+    })
 
     socket.on('updateLeaderboard', (data) => {
       setLeaderboardData(data)
@@ -54,9 +54,11 @@ const PopGoosePage = () => {
 
   const emitClicksToServer = useCallback(() => {
     if (clickBuffer.current > 0 && university) {
-      const socket = initSocket()
-      socket.emit('click', { university, clicks: clickBuffer.current })
-      clickBuffer.current = 0
+      const socket = getSocket()
+      if (socket) {
+        socket.emit('click', { university, clicks: clickBuffer.current })
+        clickBuffer.current = 0
+      }
     }
 
     emitTimeout.current = null
@@ -88,7 +90,9 @@ const PopGoosePage = () => {
     setIsPopped(true)
 
     if (typeof window !== 'undefined') {
-      audioRef.current = new Audio(popSound)
+      if (!audioRef.current) {
+        audioRef.current = new Audio(popSound)
+      }
       audioRef.current.currentTime = 0
       audioRef.current.play()
     }

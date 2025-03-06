@@ -3,18 +3,25 @@
 import { useEffect, useState } from "react";
 import BasketBallCard from "@/app/scoreboards/basketball/components/BastketballCard";
 import Link from "next/link";
-import { getScoreboard } from "./actions/scoreboard.action";
-import { BasketballMatch } from "@/app/scoreboards/basketball/interfaces/basketball";
 
 const Page = () => {
-    const [scoreboard, setScoreboard] = useState<BasketballMatch[]>([]);
+
+    const API_URL = 'https://it3k.sit.kmutt.ac.th';
+    const [scoreboard, setScoreboard] = useState([]);
 
     useEffect(() => {
         const fetchScoreboard = async () => {
             try {
-               const data = await getScoreboard()
+                console.log("Fetching data from:", `${API_URL}/api/basketball/score-board`);
+                const res = await fetch(`${API_URL}/api/basketball/score-board`);
 
-                setScoreboard(data as BasketballMatch[]);
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+
+                const data = await res.json();
+                console.log("Response:", data);
+                setScoreboard(data);
             } catch (error) {
                 console.error("Error fetching scoreboard:", error);
             }
@@ -26,16 +33,12 @@ const Page = () => {
 
     return (
         <div className="mt-40">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
-        Basketball Scoreboard
-      </h1>
+            <h1>Basketball Scoreboard</h1>
             <div className='w-full h-full'>
-                <div className='flex flex-col max-w-7xl mx-auto'>
+                <div className='max-w-7xl mx-auto '>
                     {scoreboard?.map((match, index) => (
                         <Link href={`/admin/basketball/${match.id}`} key={match.id}>
-                            <div className="mb-4 ml-7">
                             <BasketBallCard data={match} key={index} />
-                            </div>
                         </Link>
                     ))}
                 </div>

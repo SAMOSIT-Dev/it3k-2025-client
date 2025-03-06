@@ -8,7 +8,6 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import styles from '@/app/styles/scoreboards/athletics/category.module.css'
 import swiperStyles from '@/app/styles/swiper/swiper.module.css'
-import { useRouter } from 'next/navigation'
 import {
   AthleticsCategory,
   CATEGORY_LABELS

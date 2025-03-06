@@ -10,15 +10,15 @@ const HeroMain = () => {
     }
 
     return (
-        <div className="h-[700px] sm:h-[900px] w-full bg-black font-Prompt">
+        <div className="h-[840px] sm:h-[1100px] w-full bg-black font-Prompt">
             <div
-                className="h-[700px] sm:h-[900px] w-full flex flex-col justify-center items-center relative bg-[#000000]"
+                className="h-[840px] sm:h-[1100px] w-full flex flex-col justify-center items-center relative bg-[#000000]"
             >
                 <div className="absolute inset-0 opacity-90 z-0 bg-cover bg-no-repeat"
                     style={{ backgroundImage: `url(${props.bg})`, backgroundPosition: "50% 0%" }}
                 />
 
-                <div className="relative z-10 flex flex-col justify-center items-center mb-28">
+                <div className="relative z-10 flex flex-col justify-center items-center">
                     <div className="relative mb-[6rem] sm:mb-[7rem] flex justify-center items-center">
                         <Image
                             src={props.logo1}

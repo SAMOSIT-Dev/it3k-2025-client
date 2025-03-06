@@ -7,9 +7,10 @@ const Table: React.FC = () => {
     logo: string
   }
   const universityData: universityDataProps[] = [
-    { name: 'Dummy', rank: 0, logo: '/images/pop.png' },
     { name: 'Dummy', rank: 1, logo: '/images/pop.png' },
-    { name: 'Dummy', rank: 2, logo: '/images/pop.png' }
+    { name: 'Dummy', rank: 2, logo: '/images/pop.png' },
+    { name: 'Dummy', rank: 3, logo: '/images/pop.png' },
+    { name: 'Dummy', rank: 4, logo: '/images/pop.png' }
   ]
   const sortedData = universityData.sort((a, b) => a.rank - b.rank)
 
@@ -35,6 +36,8 @@ const Table: React.FC = () => {
                   <Image
                     src={item.logo}
                     alt={item.name}
+                    width={24}
+                    height={24}
                     className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"
                   />
                   <span>{item.name}</span>

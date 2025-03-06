@@ -1,12 +1,16 @@
 'use client'
 
 import React from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
-const Category = () => {
-  const params = useParams()
+interface CategoryProps {
+  activeCategory: string
+}
+
+const Category: React.FC<CategoryProps> = ({ activeCategory }) => {
   const router = useRouter()
-  const activeCategory = params?.category
+
+  console.log('activeCategory', activeCategory)
 
   const category = [
     { id: 1, name: 'Valorant', slug: 'valorant' },

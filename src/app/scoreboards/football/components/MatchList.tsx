@@ -1,56 +1,44 @@
 'use client'
+
 import MatchCard from '@/shared/components/MatchCard'
-import { Team } from '@/shared/utils/team'
+import { Team, TeamMapping } from '@/shared/utils/team'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { useState } from 'react'
 
-const mockMatches = [
-  {
-    time: 'เวลา : 18:30 - 20:00',
-    match: 'MATCH 1',
-    teamA: Team.KMUTT,
-    teamB: Team.KMITL,
-    scoreA: 2,
-    scoreB: 3
-  },
-  {
-    time: 'เวลา : 18:30 - 20:00',
-    match: 'MATCH 2',
-    teamA: Team.KMUTT,
-    teamB: Team.KMUTNBPR,
-    scoreA: 3,
-    scoreB: 3
-  },
-  {
-    time: 'เวลา : 18:30 - 20:00',
-    match: 'ชิงชนะเลิศ',
-    teamA: Team.KMUTT,
-    teamB: Team.KMUTNBPR,
-    scoreA: 3,
-    scoreB: 2
+interface UniTeam {
+  uniName: string
+  score: number
+}
+
+export interface FootballMatch {
+  id: number
+  team_A: UniTeam
+  team_B: UniTeam
+  status: string
+  timeStart: string
+  timeEnd: string
+}
+interface MatchListProps {
+  liveData: FootballMatch[]
+}
+
+const MatchList: React.FC<MatchListProps> = ({ liveData }) => {
+  if (!liveData.length) {
+    return <p className="text-white text-center">No ongoing matches...</p>
   }
-]
 
-const MatchList = () => {
-  const [matches] = useState<
-    {
-      time: string
-      match: string
-      teamA: Team
-      teamB: Team
-      scoreA: number
-      scoreB: number
-    }[]
-  >(mockMatches)
-
-  const [loading] = useState(false)
   return (
     <div className="flex flex-col gap-4 items-center">
-      {loading ? (
-        <p className="text-white text-center">Loading matches...</p>
-      ) : (
-        matches.map((match, index) => <MatchCard key={index} {...match} />)
-      )}
+      {liveData.map((match) => (
+        <MatchCard
+          key={match.id}
+          time={`เวลา : ${match.timeStart.slice(0, -3)} - ${match.timeEnd.slice(0, -3)}`}
+          match={`MATCH ${match.id}`}
+          teamA={TeamMapping[match.team_A.uniName] || Team.KMUTT}
+          teamB={TeamMapping[match.team_B.uniName] || Team.KMUTT}
+          scoreA={match.team_A.score}
+          scoreB={match.team_B.score}
+        />
+      ))}
       <div className="flex flex-col w-full items-center space-y-0">
         <hr className="w-full border-t-2 border-white m-0 p-0" />
         <Icon

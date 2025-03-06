@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Table from './components/Table'
 import Category from './components/Category'
 import { AthleticsCategory } from './services/athletics.service'

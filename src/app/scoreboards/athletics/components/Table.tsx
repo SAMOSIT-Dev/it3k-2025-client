@@ -8,7 +8,7 @@ import { IUniversity } from '../services/athletics.service'
 interface Props {
   data: IUniversity[]
   loading: boolean
-  error: any
+  error: string
 }
 
 const Table: React.FC<Props> = ({ data, loading, error }) => {

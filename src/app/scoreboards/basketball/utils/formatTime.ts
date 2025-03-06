@@ -16,8 +16,10 @@ export const formatTime = (isoString: string, timezone: string = "Asia/Bangkok")
       }).format(date);
   
       return formattedTime.replace(":", ".");
-    } catch (error: any) {
-      console.error(`Error formatting time: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(`Error formatting time: ${error.message}`)
+      }
       return "";
     }
   };

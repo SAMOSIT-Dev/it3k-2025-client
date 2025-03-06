@@ -21,7 +21,6 @@ interface Props {
 
 const Category: React.FC<Props> = ({ selected, onSelect }) => {
   const [isMobile, setIsMobile] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const checkMobile = () => {

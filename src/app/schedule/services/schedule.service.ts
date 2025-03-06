@@ -32,11 +32,10 @@ export interface UpComingEvent {
   }
 }
 
-export const getUpComingEvents = async (): Promise<
-  Result<UpComingEvent[]>
-> => {
+export const getUpComingEvents = async (): Promise<Result<UpComingEvent[]>> => {
   try {
-    const response = await axios.get(endpoints.schedule.events)
+    const signal = AbortSignal.timeout(2000)
+    const response = await axios.get(endpoints.schedule.events, { signal })
     if (response.status != 200) {
       return {
         success: false,

@@ -1,35 +1,35 @@
-import { Team, TeamLogos } from "@/shared/utils/team"
+import { Team, TeamLogos } from '@/shared/utils/team'
 
 export interface BasketballTeam {
-    uniName: Team
-    image: string
-    color_code: string
-    score_Q1: number
-    score_Q2: number
-    score_OT: number
-    totalScore: number
-  }
+  uniName: Team
+  image: string
+  color_code: string
+  score_Q1: number
+  score_Q2: number
+  score_OT: number
+  totalScore: number
+}
 
 export type MatchStatus = 'upcoming' | 'ongoing' | 'break' | 'finished'
 
 export interface BasketballMatch {
-    id: number
-    team_A: BasketballTeam 
-    team_B: BasketballTeam 
-    status: MatchStatus
-    timeStart: string
-    timeEnd: string
-  }
+  id: number
+  team_A: BasketballTeam
+  team_B: BasketballTeam
+  status: MatchStatus
+  timeStart: string
+  timeEnd: string
+}
 
- export interface DashboardEntry {
-    rank: number;
-    university: string;
-    wins: number;
-    losses: number;
-    totalPointsScored: number;
-    totalPointsConceded: number;
-    pointDiff: number;
-  }
+export interface DashboardEntry {
+  rank: number
+  university: string
+  wins: number
+  losses: number
+  totalPointsScored: number
+  totalPointsConceded: number
+  pointDiff: number
+}
 
 export const mockBasketBallMatches: BasketballMatch[] = [
   {
@@ -59,8 +59,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
   {
     id: 2,
     team_A: {
-      uniName: Team.KMUTNBPR,
-      image: TeamLogos[Team.KMUTNBPR],
+      uniName: Team.KMUTNB_PR,
+      image: TeamLogos[Team.KMUTNB_PR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -116,8 +116,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: Team.KMUTNBPR,
-      image: TeamLogos[Team.KMUTNBPR],
+      uniName: Team.KMUTNB_PR,
+      image: TeamLogos[Team.KMUTNB_PR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,
@@ -140,8 +140,8 @@ export const mockBasketBallMatches: BasketballMatch[] = [
       totalScore: 0
     },
     team_B: {
-      uniName: Team.KMUTNBPR,
-      image: TeamLogos[Team.KMUTNBPR],
+      uniName: Team.KMUTNB_PR,
+      image: TeamLogos[Team.KMUTNB_PR],
       color_code: '',
       score_Q1: 0,
       score_Q2: 0,

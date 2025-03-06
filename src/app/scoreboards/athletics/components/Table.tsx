@@ -4,11 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 import style from '@/app/styles/scoreboards/athletics/table.module.css'
 import { IUniversity } from '../services/athletics.service'
+import { AxiosError } from 'axios'
 
 interface Props {
   data: IUniversity[]
   loading: boolean
-  error: string
+  error: AxiosError
 }
 
 const Table: React.FC<Props> = ({ data, loading, error }) => {

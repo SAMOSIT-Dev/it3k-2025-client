@@ -64,12 +64,18 @@ const BasketBall = () => {
       </p>
       <div className="flex flex-col items-center w-full h-full space-y-4 sm:space-y-6 lg:space-y-8">
         {/* {matches && matches.length > 0 ? (
-          matches.map((match, index) => (
-            <BasketBallCard data={match} key={index} />
-          ))
+          matches
+            .slice()
+            .sort(
+              (a, b) =>
+                new Date(a.timeStart).getTime() -
+                new Date(b.timeStart).getTime()
+            ) 
+            .map((match, index) => <BasketBallCard data={match} key={index} />)
         ) : (
           <p className="text-white text-sm py-10">Loading matches...</p>
         )} */}
+
         {mockBasketBallMatches.map((match, index) => (
           <BasketBallCard data={match} key={index} />
         ))}

@@ -63,7 +63,7 @@ const PodiumScoreBoard: React.FC = () => {
         {/* Header Section */}
         <div className="flex justify-between items-center text-red-500 mb-2 sm:mb-4">
           <h2 className="text-xs text-nowrap sm:text-xl text-[#A4A4A4] font-Prompt">
-            อันดับเหรียญ
+            Ranking
           </h2>
           {/* Sports Icons Section */}
           <div className="flex pr-4 sm:pr-5 xl:pr-10 md:space-x-4 w-[730px] justify-end xl:justify-evenly">

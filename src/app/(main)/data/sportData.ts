@@ -1,26 +1,26 @@
 export const scoreboardSports = [
   {
-    name: 'ฟุตบอล',
+    name: 'Football',
     route: '/scoreboards/football',
     icon: '/images/sport_icon/football.png'
   },
   {
-    name: 'บาสเกตบอล',
+    name: 'Basketball',
     route: '/scoreboards/basketball',
     icon: '/images/sport_icon/basketball.png'
   },
   {
-    name: 'ปิงปอง',
+    name: 'Table Tennis',
     route: '/bracket/pingpong',
     icon: '/images/sport_icon/table_tennis.png'
   },
   {
-    name: 'แบดมินตัน',
+    name: 'Badminton',
     route: '/bracket/badminton',
     icon: '/images/sport_icon/badminton.png'
   },
   {
-    name: 'กรีฑา',
+    name: 'Athletics',
     route: '/scoreboards/athletics',
     icon: '/images/sport_icon/athletics.png'
   },
@@ -38,22 +38,22 @@ export const scoreboardSports = [
 
 export const scheduleSports = [
   {
-    name: 'ฟุตบอล',
+    name: 'Football',
     route: '/schedule/football',
     icon: '/images/sport_icon/football.png'
   },
   {
-    name: 'บาสเกตบอล',
+    name: 'Basketball',
     route: '/schedule/basketball',
     icon: '/images/sport_icon/basketball.png'
   },
   {
-    name: 'ปิงปอง',
+    name: 'Table Tennis',
     route: '/schedule/pingpong',
     icon: '/images/sport_icon/table_tennis.png'
   },
   {
-    name: 'แบดมินตัน',
+    name: 'Badminton',
     route: '/schedule/badminton',
     icon: '/images/sport_icon/badminton.png'
   },

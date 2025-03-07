@@ -9,7 +9,7 @@ import { useFetchBasketball } from './hooks/useFetchBasketball'
 const BasketBall = () => {
   const { matches, entries } = useFetchBasketball()
 
-  const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
+  const header = ['RANK', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
 
   const getColumnstyle = (colIndex: number) => {
     if (colIndex === 0) return 'font-bold'
@@ -19,7 +19,7 @@ const BasketBall = () => {
 
   return (
     <div
-      className=" flex flex-col w-full min-h-[calc(100vh-100px)] flex-1  items-center pb-12  bg-black-300 font-Prompt bg-cover bg-bottom"
+      className="mt-[100px] flex flex-col w-full min-h-[calc(100vh-100px)] flex-1  items-center pb-12  bg-black-300 font-Prompt bg-cover bg-bottom"
       style={{
         backgroundImage: "url('/images/backgrounds/basketballBackground.png')"
       }}>

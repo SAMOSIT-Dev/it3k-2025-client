@@ -7,14 +7,11 @@ export type UniversityTeamName =
   | Team.KMUTNB
   | Team.KMUTNB_PR
 export type Sport =
-  | 'ฟุตบอล'
+  | 'Football'
   | 'กีฬาพื้นบ้าน'
-  | 'บาสเกตบอล'
-  | 'ปิงปอง'
-  | 'ชักเย่อ'
-  | 'กินวิบาก'
-  | 'วิ่งเปรี้ยว'
-  | 'แบดมินตัน'
+  | 'Basketball'
+  | 'Table Tennis'
+  | 'Badminton'
 
 export interface ScheduleData {
   sportTitle: string
@@ -188,7 +185,7 @@ export const traditionGameScheduleData: ScheduleData[] = [
 
 export const basketballScheduleData: ScheduleData[] = [
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -204,7 +201,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB_PR,
@@ -220,7 +217,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -236,7 +233,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB,
@@ -252,7 +249,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -268,7 +265,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB,
@@ -287,7 +284,7 @@ export const basketballScheduleData: ScheduleData[] = [
 
 export const footballScheduleData: ScheduleData[] = [
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
     homeTeam: {
       name: Team.KMUTT,
@@ -303,7 +300,7 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
     homeTeam: {
       name: Team.KMUTNB,
@@ -319,7 +316,7 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
     homeTeam: {
       name: Team.KMUTT,
@@ -335,7 +332,7 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอลรอบชิงชนะเลิศ',
+    sportTitle: 'Football Final',
     location: 'field',
     isFinal: true,
     homeTeam: {
@@ -355,10 +352,10 @@ export const footballScheduleData: ScheduleData[] = [
 
 export const badmintonScheduleData: MixedScheduleData[] = [
   {
-    title: 'คู่ผสม',
+    title: "Mixed's Doubles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX)',
         location: 'gym',
         place: 'สนาม: 1',
         homeTeam: {
@@ -375,7 +372,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX)',
         location: 'gym',
         place: 'สนาม: 2',
         homeTeam: {
@@ -392,7 +389,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -409,7 +406,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX)',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
@@ -426,7 +423,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX)',
         location: 'gym',
         place: 'สนาม: 2',
         homeTeam: {
@@ -445,10 +442,10 @@ export const badmintonScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'ชายคู่',
+    title: "Men's Doubles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
+        sportTitle: 'Badminton (MD)',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
@@ -465,7 +462,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
+        sportTitle: 'Badminton (MD)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -482,7 +479,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
+        sportTitle: 'Badminton (MD)',
         location: 'gym',
         place: 'สนาม: 1',
         homeTeam: {
@@ -499,7 +496,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
+        sportTitle: 'Badminton (MD)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -518,10 +515,10 @@ export const badmintonScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'ชายเดี่ยว',
+    title: "Men's Singles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
+        sportTitle: 'Badminton (MS)',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
@@ -538,7 +535,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
+        sportTitle: 'Badminton (MS)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -555,7 +552,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
+        sportTitle: 'Badminton (MS)',
         location: 'gym',
         place: 'สนาม: 1',
         homeTeam: {
@@ -572,7 +569,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
+        sportTitle: 'Badminton (MS)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -591,10 +588,10 @@ export const badmintonScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'หญิงเดี่ยว',
+    title: "Women's Single",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (WS)',
         location: 'gym',
         place: 'สนาม: 2',
         homeTeam: {
@@ -611,7 +608,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (WS)',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
@@ -628,7 +625,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (WS)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -645,7 +642,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (WS)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -664,10 +661,10 @@ export const badmintonScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'หญิงคู่',
+    title: "Women's Doubles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
+        sportTitle: 'Badminton (WD)',
         location: 'gym',
         place: 'สนาม: 1',
         homeTeam: {
@@ -684,7 +681,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
+        sportTitle: 'Badminton (WD)',
         location: 'gym',
         place: 'สนาม: 2',
         homeTeam: {
@@ -701,7 +698,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
+        sportTitle: 'Badminton (WD)',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
@@ -718,7 +715,7 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
+        sportTitle: 'Badminton (WD)',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
@@ -740,10 +737,10 @@ export const badmintonScheduleData: MixedScheduleData[] = [
 
 export const pingpongScheduleData: MixedScheduleData[] = [
   {
-    title: 'หญิงคู่',
+    title: "Women's Doubles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (WD)',
         location: 'gym',
         place: 'สนาม 1',
         homeTeam: {
@@ -760,7 +757,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (WD)',
         location: 'gym',
         place: 'สนาม 2',
         homeTeam: {
@@ -777,7 +774,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (WD)',
         location: 'gym',
         place: 'สนาม 3',
         homeTeam: {
@@ -794,7 +791,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (WD)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {
@@ -813,10 +810,10 @@ export const pingpongScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'ชายคู่',
+    title: "Men's Doubles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (MD)',
         location: 'gym',
         place: 'สนาม 3',
         homeTeam: {
@@ -833,7 +830,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (MD)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {
@@ -850,7 +847,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (MD)',
         location: 'gym',
         place: 'สนาม 1',
         homeTeam: {
@@ -867,7 +864,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (MD)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {
@@ -886,10 +883,10 @@ export const pingpongScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'หญิงเดี่ยว',
+    title: "Women's Singles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
+        sportTitle: 'Table Tennis (WS)',
         location: 'gym',
         place: 'สนาม 2',
         homeTeam: {
@@ -906,7 +903,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
+        sportTitle: 'Table Tennis (WS)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {
@@ -923,7 +920,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
+        sportTitle: 'Table Tennis (WS)',
         location: 'gym',
         place: 'สนาม 3',
         homeTeam: {
@@ -940,7 +937,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
+        sportTitle: 'Table Tennis (WS)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {
@@ -959,10 +956,10 @@ export const pingpongScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'ชายเดี่ยว',
+    title: "Men's Singles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
+        sportTitle: 'Table Tennis (MS)',
         location: 'gym',
         place: 'สนาม 1',
         homeTeam: {
@@ -979,7 +976,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
+        sportTitle: 'Table Tennis (MS)',
         location: 'gym',
         place: 'สนาม 2',
         homeTeam: {
@@ -996,7 +993,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
+        sportTitle: 'Table Tennis (MS)',
         location: 'gym',
         place: 'สนาม 3',
         homeTeam: {
@@ -1013,7 +1010,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
+        sportTitle: 'Table Tennis (MS)',
         location: 'gym',
         place: 'สนาม 1',
         homeTeam: {
@@ -1032,10 +1029,10 @@ export const pingpongScheduleData: MixedScheduleData[] = [
     ]
   },
   {
-    title: 'คู่ผสม',
+    title: "Mixed's Doubles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
+        sportTitle: 'Table Tennis (MX)',
         location: 'gym',
         place: 'สนาม 1',
         homeTeam: {
@@ -1052,7 +1049,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
+        sportTitle: 'Table Tennis (MX)',
         location: 'gym',
         place: 'สนาม 2',
         homeTeam: {
@@ -1069,7 +1066,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
+        sportTitle: 'Table Tennis (MX)',
         location: 'gym',
         place: 'สนาม 3',
         homeTeam: {
@@ -1086,7 +1083,7 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
+        sportTitle: 'Table Tennis (MX)',
         location: 'gym',
         place: 'สนาม 4',
         homeTeam: {

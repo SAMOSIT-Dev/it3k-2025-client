@@ -20,12 +20,12 @@ const useFootballSocket = () => {
       console.log('Connected to WebSocket:', socket.id)
     })
 
-    socket.on('updateScoreboard', (data) => {
-      console.log('Received scoreboard update:', data)
+    socket.on('updateDashboard', (data) => {
+      console.log('Received dashboard update:', data)
       setScoreboard(data)
     })
 
-    socket.on('updateOpeningMatch', (data) => {
+    socket.on('updateScoreboard', (data) => {
       console.log('Received opening match update:', data)
       setMatches(data)
     })

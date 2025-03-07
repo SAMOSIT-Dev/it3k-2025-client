@@ -13,23 +13,26 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ categoryId }) => {
   const universityData: Record<number, UniversityDataProps[]> = {
-    1: [ // ชักเย่อ
-      { rank: 1, team: Team.KMUTT },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD }
+    1: [
+      // ชักเย่อ
+      { rank: 0, team: Team.KMUTT },
+      { rank: 0, team: Team.KMITL },
+      { rank: 0, team: Team.KMUTNB },
+      { rank: 0, team: Team.KMUTNB_PR }
     ],
-    2: [ // กินวิบาก
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD }
+    2: [
+      // กินวิบาก
+      { rank: 0, team: Team.KMUTT },
+      { rank: 0, team: Team.KMITL },
+      { rank: 0, team: Team.KMUTNB },
+      { rank: 0, team: Team.KMUTNB_PR }
     ],
-    3: [ // วิ่งเปรี้ยว
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD },
-      { rank: 1, team: Team.TBD }
+    3: [
+      // วิ่งเปรี้ยว
+      { rank: 0, team: Team.KMUTT },
+      { rank: 0, team: Team.KMITL },
+      { rank: 0, team: Team.KMUTNB },
+      { rank: 0, team: Team.KMUTNB_PR }
     ]
   }
 
@@ -62,9 +65,9 @@ const Table: React.FC<TableProps> = ({ categoryId }) => {
                     src={TeamLogos[item.team]}
                     alt={item.team}
                     width={0}
-                      height={0}
-                      sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
-                      className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
+                    height={0}
+                    sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
+                    className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
                   />
                   <span>{item.team}</span>
                 </div>

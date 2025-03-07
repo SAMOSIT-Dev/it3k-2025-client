@@ -159,7 +159,7 @@ const playAudio = () => {
 
   return (
     <section
-      className={`bg-[#9FC5E8] relative bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
+      className={`bg-[#9FC5E8] relative mt-[100px] bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
       {isModal && <UniversitySelectModal onSubmit={handleUniSelect} />}
 
       <Link href={'/'}>
@@ -184,23 +184,23 @@ const playAudio = () => {
               playAudio()
             }}
             onPointerDown={() => {
-              
               handlePressFinn()
               setIsPopped(true)
             }}
             onPointerUp={handleRelease}>
-            <Image
-              src={gooseShadow}
-              alt="Shadow"
-              width={300}
-              height={80}
-              priority
-              className="absolute right-[70px] sm:right-[100px]  bottom-[30px] sm:bottom-[40px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
-              draggable="false"
-            />
-
-            <PoppedGoose isPopped={isPopped} />
-            <DefaultGoose isPopped={isPopped} />
+            <div className='relative w-fit z-20'>
+              <PoppedGoose isPopped={isPopped} />
+              <DefaultGoose isPopped={isPopped} />
+              <Image
+                src={gooseShadow}
+                alt="Shadow"
+                width={300}
+                height={80}
+                priority
+                className="absolute left-1/2 -translate-x-1/2 -z-10 bottom-[30px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
+                draggable="false"
+              />
+            </div>
           </div>
 
           <Scorebar leaderboardData={leaderboardData} />

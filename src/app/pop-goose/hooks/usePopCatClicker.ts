@@ -38,7 +38,7 @@ const usePopCatClicker = (university: string) => {
   }, [socket])
 
   const serverRequestCriteria = useCallback(() => {
-    const CPS_LIMIT = 100
+    const CPS_LIMIT = 50
     currentCPS.current = calculateCPS(tempTotalClick.current)
     return currentCPS.current < CPS_LIMIT
   }, [calculateCPS])
@@ -59,7 +59,6 @@ const usePopCatClicker = (university: string) => {
           tempTotalClick.current = 0 // Reset session click count
         }
       }, 1000), // Trigger after 1 second of inactivity
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [university]
   )
   const registerClick = () => {

@@ -38,7 +38,7 @@ const usePopCatClicker = (university: string) => {
   }, [socket])
 
   const serverRequestCriteria = useCallback(() => {
-    const CPS_LIMIT = 40
+    const CPS_LIMIT = 100
     currentCPS.current = calculateCPS(tempTotalClick.current)
     return currentCPS.current < CPS_LIMIT
   }, [calculateCPS])

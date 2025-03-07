@@ -1,4 +1,8 @@
 export interface IBasketball {
+    data: IGame[]
+}
+
+interface IGame {
     id: number;
     team_A: ITeam
     team_B: ITeam
@@ -13,6 +17,7 @@ interface ITeam {
     score_Q2: number;
     score_OT: number;
     totalScore: number;
+    color_code: string;
 }
 
 export interface IBaskballUpdate {

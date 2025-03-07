@@ -36,6 +36,7 @@ export default function ScoreUpdateForm({ id }: IProps) {
       setLoading(true)
       try {
         const gameData = await getBasketballMatchById(Number(id))
+        console.log(gameData)
 
         if (gameData) {
           const { team_A, team_B, status } = gameData
@@ -101,11 +102,11 @@ export default function ScoreUpdateForm({ id }: IProps) {
 
   const doUpdate = async () => {
     try {
-        const socket = getSocket()
+      const socket = getSocket()
 
-        socket?.emit('updateMatchScore', {
-          ...scores
-        })
+      socket?.emit('updateMatchScore', {
+        ...scores
+      })
     } catch (error) {
       console.error("Error updating scores:", error)
       showNotification("error", "Failed to update scores")
@@ -141,10 +142,10 @@ export default function ScoreUpdateForm({ id }: IProps) {
         {matchStatus && (
           <div className="mt-2">
             <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${matchStatus === "FINISHED"
-                ? "bg-green-100 text-green-800"
-                : matchStatus === "ONGOING"
-                  ? "bg-blue-100 text-blue-800"
-                  : "bg-gray-100 text-gray-800"
+              ? "bg-green-100 text-green-800"
+              : matchStatus === "ONGOING"
+                ? "bg-blue-100 text-blue-800"
+                : "bg-gray-100 text-gray-800"
               }`}>
               {matchStatus}
             </span>
@@ -154,10 +155,10 @@ export default function ScoreUpdateForm({ id }: IProps) {
 
       {notification.type && (
         <div className={`mb-6 p-4 rounded-md ${notification.type === "success"
-            ? "bg-green-100 text-green-800 border border-green-200"
-            : notification.type === "error"
-              ? "bg-red-100 text-red-800 border border-red-200"
-              : "bg-blue-100 text-blue-800 border border-blue-200"
+          ? "bg-green-100 text-green-800 border border-green-200"
+          : notification.type === "error"
+            ? "bg-red-100 text-red-800 border border-red-200"
+            : "bg-blue-100 text-blue-800 border border-blue-200"
           }`}>
           {notification.message}
         </div>

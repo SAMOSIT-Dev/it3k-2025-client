@@ -23,10 +23,10 @@ export const getScoreboard = async () => {
 
 export const getBasketballMatchById = async (id: number) => {
     try {
-        const data = await getScoreboard()
-        if (!data) return null
+        const res = await getScoreboard()
+        if (!res) return null
 
-        return data.find((game) => game.id === id)
+        return res.data.find((game) => game.id === id)
     } catch (error) {
         console.error("Error updating score:", error);
         return null;

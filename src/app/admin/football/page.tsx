@@ -2,17 +2,25 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import {
+  getFootballSocket,
+  initFootballSocket
+} from './hooks/useFootballAdminSocket'
+// import { useAuth } from '@/app/login/hooks/useAuth'
 
 interface Team {
-  uniName: string
+  name: string
   score: number
 }
 
 interface TeamData {
-  id: number
+  rank: number
   university: string
-  winLose: string
-  point: string
+  wins: number
+  losses: number
+  draws: number
+  totalPointsScored: number
+  totalPointsConceded: number
   pointDiff: number
 }
 
@@ -26,6 +34,7 @@ interface Match {
 }
 
 const AdminFootballScores = () => {
+  // const { accessToken } = useAuth()
   const [accessToken, setAccessToken] = useState<string | null>(null)
   const [headers, setHeaders] = useState({})
   const [teams, setTeams] = useState<TeamData[]>([])
@@ -62,11 +71,15 @@ const AdminFootballScores = () => {
       setHeaders({ Authorization: `Bearer ${token}` })
     }
 
+    const socket = initFootballSocket()
+
+    socket.on('connect', () => {})
+
     const fetchTeams = async () => {
       await axios
-        .get('https://it3k.sit.kmutt.ac.th/api/football/score-board')
+        .get('https://it3k.sit.kmutt.ac.th/api/football/dashboard')
         .then((response) => {
-          setTeams(response.data)
+          setTeams(response.data.data)
         })
         .catch((error) => console.error('Error fetching teams:', error))
     }
@@ -81,6 +94,10 @@ const AdminFootballScores = () => {
     }
     fetchTeams()
     fetchMatches()
+
+    return () => {
+      socket.disconnect()
+    }
   }, [accessToken])
 
   const handleScoreChange = (
@@ -104,9 +121,32 @@ const AdminFootballScores = () => {
     }))
   }
 
+  const handleUpdateChange = (
+    matchId: number,
+    field: string,
+    value: string | number
+  ) => {
+    setUpdates((prev) => ({
+      ...prev,
+      [matchId]: {
+        ...prev[matchId],
+        [field]: value
+      }
+    }))
+  }
+
   const updateScore = (matchId: number) => {
     const updatedScore = scores[matchId]
     if (!updatedScore) return
+
+    const socket = getFootballSocket()
+    if (socket) {
+      socket.emit('updateMatchScore', {
+        score_A: updatedScore.team_A,
+        score_B: updatedScore.team_B
+      })
+      socket.disconnect()
+    }
 
     axios
       .put(
@@ -132,20 +172,6 @@ const AdminFootballScores = () => {
         alert(`Update score on match id ${matchId} successful`)
       })
       .catch((error) => console.error('Error updating score:', error))
-  }
-
-  const handleUpdateChange = (
-    matchId: number,
-    field: string,
-    value: string | number
-  ) => {
-    setUpdates((prev) => ({
-      ...prev,
-      [matchId]: {
-        ...prev[matchId],
-        [field]: value
-      }
-    }))
   }
 
   const createNewMatch = () => {
@@ -207,16 +233,6 @@ const AdminFootballScores = () => {
       .catch((error) => console.error('Error deleting match:', error))
   }
 
-  const parseWinLose = (winLose: string) => {
-    const [wins, draws, losses] = winLose.split('-').map(Number)
-    return { wins, draws, losses }
-  }
-
-  const parsePoints = (points: string) => {
-    const [goalsScored, goalsLost] = points.split('-').map(Number)
-    return { goalsScored, goalsLost }
-  }
-
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Admin Football Match Control</h1>
@@ -232,34 +248,31 @@ const AdminFootballScores = () => {
         </thead>
         <tbody>
           {teams.map((team) => {
-            const { wins, draws, losses } = parseWinLose(team.winLose)
-            const { goalsScored, goalsLost } = parsePoints(team.point)
-
             return (
-              <tr key={team.id} className="hover:bg-gray-50">
+              <tr key={team.rank} className="hover:bg-gray-50">
                 <td className="border p-2 text-center sm:text-left">
                   {team.university}
                 </td>
                 <td className="border p-2">
                   <div className="flex justify-center flex-wrap sm:flex-nowrap">
                     <span className="w-16 text-center border rounded p-1 mr-1">
-                      {wins}
+                      {team.wins}
                     </span>
                     <span className="w-16 text-center border rounded p-1 mr-1">
-                      {draws}
+                      {team.draws}
                     </span>
                     <span className="w-16 text-center border rounded p-1 mr-1">
-                      {losses}
+                      {team.losses}
                     </span>
                   </div>
                 </td>
                 <td className="border p-2">
                   <div className="flex justify-center flex-wrap sm:flex-nowrap">
                     <span className="w-16 text-center border rounded p-1 mr-1">
-                      {goalsScored}
+                      {team.totalPointsScored}
                     </span>
                     <span className="w-16 text-center border rounded p-1 mr-1">
-                      {goalsLost}
+                      {team.totalPointsConceded}
                     </span>
                   </div>
                 </td>
@@ -299,14 +312,14 @@ const AdminFootballScores = () => {
 
         <div className="flex gap-4 mb-2">
           <input
-            type="time"
+            type="datetime-local"
             placeholder="Start Time"
             className="border p-2"
             value={newMatch.timeStart}
             onChange={(e) => handleInputChange('timeStart', e.target.value)}
           />
           <input
-            type="time"
+            type="datetime-local"
             placeholder="End Time"
             className="border p-2"
             value={newMatch.timeEnd}
@@ -328,14 +341,12 @@ const AdminFootballScores = () => {
           className="p-4 border border-gray-300 rounded-lg mb-4 shadow">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <span className="text-lg font-medium">
-                {match.team_A.uniName}
-              </span>
+              <span className="text-lg font-medium">{match.team_A.name}</span>
               <input
                 type="number"
                 className="w-12 text-center border border-gray-400 rounded p-1"
                 min={0}
-                value={scores[match.id]?.team_A ?? match.team_A.score}
+                value={scores[match.id]?.team_A ?? match.team_A.score ?? 0}
                 onChange={(e) =>
                   handleScoreChange(match.id, 'team_A', Number(e.target.value))
                 }
@@ -347,14 +358,12 @@ const AdminFootballScores = () => {
                 type="number"
                 className="w-12 text-center border border-gray-400 rounded p-1"
                 min={0}
-                value={scores[match.id]?.team_B ?? match.team_B.score}
+                value={scores[match.id]?.team_B ?? match.team_B.score ?? 0}
                 onChange={(e) =>
                   handleScoreChange(match.id, 'team_B', Number(e.target.value))
                 }
               />
-              <span className="text-lg font-medium">
-                {match.team_B.uniName}
-              </span>
+              <span className="text-lg font-medium">{match.team_B.name}</span>
             </div>
           </div>
           <p className="text-sm mt-2">
@@ -402,7 +411,7 @@ const AdminFootballScores = () => {
               <option value="finished">Finished</option>
             </select>
             <input
-              type="time"
+              type="datetime-local"
               placeholder="Start Time"
               className="border p-2"
               onChange={(e) =>
@@ -410,7 +419,7 @@ const AdminFootballScores = () => {
               }
             />
             <input
-              type="time"
+              type="datetime-local"
               placeholder="End Time"
               className="border p-2"
               onChange={(e) =>

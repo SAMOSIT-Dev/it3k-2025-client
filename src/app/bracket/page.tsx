@@ -21,6 +21,13 @@ interface Match {
   type?: string;
 }
 
+const UniIdToName: Record<number | string, string> = {
+  1: 'KMUTT',
+  2: 'KMITL',
+  3: 'KMUTNB',
+  4: 'KMUTNB PR'
+} 
+
 type TeamKey = 'team1' | 'team2';
 
 const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK', 'BLANK', 'Null'] as const;
@@ -36,6 +43,8 @@ interface SportMatch {
   type: string;
   team_A_id: number;
   team_B_id: number;
+  team_A_number: number;
+  team_B_number: number;
   locationId: number;
   locationName?: string;
   time: string;
@@ -90,13 +99,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const [sport] = useState<string>(propSport || 'pingpong');
   const [isAdmin] = useState<boolean>(() => checkAdminStatus());
   const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<string | null>('mix');
 
   const { data, error, isLoading, mutate } = useSWR<ApiResponse>(
     sport && selectedType
       ? `https://it3k.sit.kmutt.ac.th/api/${sport}/${selectedType}`
       : sport
-      ? `https://it3k.sit.kmutt.ac.th/api/${sport}`
+      ? `https://it3k.sit.kmutt.ac.th/api/${sport}/mix`
       : null,
     fetcher,
     {
@@ -107,31 +116,41 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   );
 
   const computedMatches = useMemo(() => {
-    if (!data || !data.success || !data.data.length) {
+    if (!data || !data.data.length) {
       return {
-        round1: [...Array(4)].map((_, i) => ({ matchId: i + 1, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' })),
-        round2: [...Array(2)].map((_, i) => ({ matchId: i + 5, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' })),
-        final: { matchId: 7, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' },
-        third: { matchId: 8, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' },
-      };
+        round1: [],
+        round2: [],
+        final: null,
+        third: null
+      }
+      // return {
+      //   round1: [...Array(4)].map((_, i) => ({ matchId: i + 1, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' })),
+      //   round2: [...Array(2)].map((_, i) => ({ matchId: i + 5, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' })),
+      //   final: { matchId: 7, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' },
+      //   third: { matchId: 8, team1: null, team2: null, score1: 0, score2: 0, type: 'mix' },
+      // };
     }
 
     const transformedMatches: Match[] = data.data.map((item: SportMatch) => ({
       matchId: item.matchId,
-      team1: item.team_A_details?.uniName || `Team_${item.team_A_id}`,
-      team2: item.team_B_details?.uniName || `Team_${item.team_B_id}`,
-      score1: item.result_A ?? (
-        sport === 'pingpong'
-          ? (item.pingpong_sets?.reduce((sum, set) => sum + set.score_A, 0) || 0)
-          : (item.badminton_sets?.reduce((sum, set) => sum + set.score_A, 0) || 0)
-      ),
-      score2: item.result_B ?? (
-        sport === 'pingpong'
-          ? (item.pingpong_sets?.reduce((sum, set) => sum + set.score_B, 0) || 0)
-          : (item.badminton_sets?.reduce((sum, set) => sum + set.score_B, 0) || 0)
-      ),
-      type: item.type || 'mix',
-    }));
+      team1: UniIdToName[item.team_A_number] || `TBD`,
+      team2: UniIdToName[item.team_B_number] || `TBD`,
+      score1:
+        item.result_A ??
+        (sport === 'pingpong'
+          ? item.pingpong_sets?.reduce((sum, set) => sum + set.score_A, 0) || 0
+          : item.badminton_sets?.reduce((sum, set) => sum + set.score_A, 0) ||
+            0),
+      score2:
+        item.result_B ??
+        (sport === 'pingpong'
+          ? item.pingpong_sets?.reduce((sum, set) => sum + set.score_B, 0) || 0
+          : item.badminton_sets?.reduce((sum, set) => sum + set.score_B, 0) ||
+            0),
+      type: item.type || 'mix'
+    }))
+
+    console.log(transformedMatches)
 
     const round1Ids = [1, 2, 3, 4];
     const round2Ids = [5, 6];
@@ -209,7 +228,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (!isAdmin) return;
 
     // อัปเดตข้อมูลใน API โดยตรงและเรียก mutate เพื่อรีเฟรชข้อมูล
-    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m.matchId === matchId);
+    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m?.matchId === matchId);
     if (!match) return;
 
     const updatedMatch = { ...match, [team]: Math.max(0, match[team] + delta) };
@@ -220,7 +239,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const handleTeamNameChange = async (oldName: string | null, newName: string, matchId: number, teamKey: TeamKey): Promise<void> => {
     if (!isAdmin || oldName === newName || !newName.trim()) return;
 
-    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m.matchId === matchId);
+    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m?.matchId === matchId);
     if (!match) return;
 
     const updatedMatch = { ...match, [teamKey]: newName };
@@ -275,16 +294,21 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
           <BackButton />
           {SPORT_NAMES[sport]}
         </h1>
-        <div className="flex gap-2 w-full max-w-4xl">
+        <div className="flex gap-2 w-full max-w-4xl overflow-x-auto">
           {BUTTON_TYPES[sport]?.map((type) => (
             <button
               key={type}
-              className={`btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs ${
-                selectedType === type ? 'bg-red-700' : 'bg-transparent border border-red-600'
-              }`}
-              onClick={() => handleFilterClick(type)}
-            >
-              {type === 'mix' ? "Mixed Doubles" : type === 'single_male' ? "Men's Singles" : type === 'single_female' ? "Women's Singles" : type === "Men's Doubles" ? 'ชายคู่' : "Women's Doubles"}
+              className={`btn-bracket ${selectedType === type ? 'btn-bracket-hover' : 'bg-transparent border border-red-600'}`}
+              onClick={() => handleFilterClick(type)}>
+              {type === 'mix'
+                ? 'Mixed Doubles'
+                : type === 'single_male'
+                  ? "Men's Singles"
+                  : type === 'single_female'
+                    ? "Women's Singles"
+                    : type === "Men's Doubles"
+                      ? 'ชายคู่'
+                      : "Women's Doubles"}
             </button>
           ))}
         </div>
@@ -302,64 +326,93 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
               boxShadow: '0 4px 8px rgba(255, 0, 0, 0.5)',
               width: '80%',
               maxWidth: '1200px',
+              height: 'fit-content'
             }}
-            contentStyle={{ transform: 'scale(1)' }}
-          >
+            contentStyle={{ transform: 'scale(1)' }}>
             <div className="p-8 bg-black min-h-screen bracket-container">
-              <div className="relative flex gap-32 ml-48 font-bold">
+              <div className="relative flex gap-32 ml-0 md:ml-48 font-bold">
                 <div className="flex flex-col gap-24">
                   {computedMatches.round1.map((match, index) => (
                     <div key={match.matchId} className="relative match-wrapper">
-                      <h2 className="text-white text-center text-xl mb-4">Quarter-Final</h2>
+                      <h2 className="text-white text-center text-xl mb-4">
+                        Quarter-Final
+                      </h2>
                       <div className="w-60 bg-black border border-red-600 rounded">
                         <div className="flex justify-between items-center p-3 border-b border-red-700">
                           <div className="flex items-center gap-3 relative">
-                            <Image width={32} height={32} src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team1)}
+                              alt={match.team1 || 'TBD'}
+                              className="w-8 h-8"
+                            />
                             {renderTeamSelector(match, 'team1')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score1', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score1', -1)
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score1}</span>
+                            <span className="text-white mx-2">
+                              {match.score1}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score1', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score1', 1)
+                              }>
                               +
                             </button>
                           </div>
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <Image width={32} height={32} src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team2)}
+                              alt={match.team2 || 'TBD'}
+                              className="w-8 h-8"
+                            />
                             {renderTeamSelector(match, 'team2')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score2', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score2', -1)
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score2}</span>
+                            <span className="text-white mx-2">
+                              {match.score2}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score2', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score2', 1)
+                              }>
                               +
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div className={`connector-wrapper ${index % 2 === 0 ? 'connector-top' : 'connector-bottom'}`}>
+                      <div
+                        className={`connector-wrapper ${index % 2 === 0 ? 'connector-top' : 'connector-bottom'}`}>
                         <div className="connector-horizontal" />
-                        {index % 2 === 0 && <div className="connector-vertical" />}
+                        {index % 2 === 0 && (
+                          <div className="connector-vertical" />
+                        )}
                       </div>
                     </div>
                   ))}
@@ -367,55 +420,84 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
                 <div className="flex flex-col gap-48 mt-24">
                   {computedMatches.round2.map((match, index) => (
-                    <div key={match.matchId} className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
-                      <h2 className="text-white text-center text-xl mb-4">Semi Final</h2>
+                    <div
+                      key={match.matchId}
+                      className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}>
+                      <h2 className="text-white text-center text-xl mb-4">
+                        Semi Final
+                      </h2>
                       <div className="w-60 bg-black border border-red-600 rounded-lg">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
-                            <Image width={32} height={32} src={getTeamLogo(match.team1)} alt={match.team1 || 'TBD'} className="w-8 h-8" />
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team1)}
+                              alt={match.team1 || 'TBD'}
+                              className="w-8 h-8"
+                            />
                             {renderTeamSelector(match, 'team1')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score1', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score1', -1)
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score1}</span>
+                            <span className="text-white mx-2">
+                              {match.score1}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score1', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score1', 1)
+                              }>
                               +
                             </button>
                           </div>
                         </div>
                         <div className="flex justify-between items-center p-3">
                           <div className="flex items-center gap-3 relative">
-                            <Image width={32} height={32} src={getTeamLogo(match.team2)} alt={match.team2 || 'TBD'} className="w-8 h-8" />
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team2)}
+                              alt={match.team2 || 'TBD'}
+                              className="w-8 h-8"
+                            />
                             {renderTeamSelector(match, 'team2')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score2', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score2', -1)
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score2}</span>
+                            <span className="text-white mx-2">
+                              {match.score2}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(match.matchId, 'score2', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(match.matchId, 'score2', 1)
+                              }>
                               +
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div className={`connector-wrapper ${index === 0 ? 'connector-top' : 'connector-bottom'}`}>
+                      <div
+                        className={`connector-wrapper ${index === 0 ? 'connector-top' : 'connector-bottom'}`}>
                         <div className="connector-horizontal" />
                         {index === 0 && <div className="connector-vertical1" />}
                       </div>
@@ -429,44 +511,84 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                     <div className="w-60 bg-black border border-red-600 rounded">
                       <div className="flex justify-between items-center p-3 border-b border-red-600">
                         <div className="flex items-center gap-3 relative">
-                          <Image width={32} height={32} src={getTeamLogo(computedMatches.final.team1)} alt={computedMatches.final.team1 || 'TBD'} className="w-8 h-8" />
+                          <Image
+                            width={32}
+                            height={32}
+                            src={getTeamLogo(computedMatches.final.team1)}
+                            alt={computedMatches.final.team1 || 'TBD'}
+                            className="w-8 h-8"
+                          />
                           {renderTeamSelector(computedMatches.final, 'team1')}
                         </div>
-                        <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                        <div
+                          className={isAdmin ? 'hidden' : 'score-separator'}
+                        />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(computedMatches.final.matchId, 'score1', -1)}
-                          >
+                            onClick={() =>
+                              handleScoreChange(
+                                computedMatches.final.matchId,
+                                'score1',
+                                -1
+                              )
+                            }>
                             -
                           </button>
-                          <span className="text-white mx-2">{computedMatches.final.score1}</span>
+                          <span className="text-white mx-2">
+                            {computedMatches.final.score1}
+                          </span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(computedMatches.final.matchId, 'score1', 1)}
-                          >
+                            onClick={() =>
+                              handleScoreChange(
+                                computedMatches.final.matchId,
+                                'score1',
+                                1
+                              )
+                            }>
                             +
                           </button>
                         </div>
                       </div>
                       <div className="flex justify-between items-center p-3">
                         <div className="flex items-center gap-3 relative">
-                          <Image width={32} height={32} src={getTeamLogo(computedMatches.final.team2)} alt={computedMatches.final.team2 || 'TBD'} className="w-8 h-8" />
+                          <Image
+                            width={32}
+                            height={32}
+                            src={getTeamLogo(computedMatches.final.team2)}
+                            alt={computedMatches.final.team2 || 'TBD'}
+                            className="w-8 h-8"
+                          />
                           {renderTeamSelector(computedMatches.final, 'team2')}
                         </div>
-                        <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                        <div
+                          className={isAdmin ? 'hidden' : 'score-separator'}
+                        />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(computedMatches.final.matchId, 'score2', -1)}
-                          >
+                            onClick={() =>
+                              handleScoreChange(
+                                computedMatches.final.matchId,
+                                'score2',
+                                -1
+                              )
+                            }>
                             -
                           </button>
-                          <span className="text-white mx-2">{computedMatches.final.score2}</span>
+                          <span className="text-white mx-2">
+                            {computedMatches.final.score2}
+                          </span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
-                            onClick={() => handleScoreChange(computedMatches.final.matchId, 'score2', 1)}
-                          >
+                            onClick={() =>
+                              handleScoreChange(
+                                computedMatches.final.matchId,
+                                'score2',
+                                1
+                              )
+                            }>
                             +
                           </button>
                         </div>
@@ -475,9 +597,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                   )}
 
                   <div className="w-60 rounded mt-6" id="third">
-                    <h2 className="text-white text-center text-xl ">Third Place</h2>
+                    <h2 className="text-white text-center text-xl ">
+                      Third Place
+                    </h2>
                     {computedMatches.third && (
-                      <div className="w-60 bg-black border border-red-600 rounded mt-6" id="third">
+                      <div
+                        className="w-60 bg-black border border-red-600 rounded mt-6"
+                        id="third">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
                             <Image
@@ -489,19 +615,33 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(computedMatches.third, 'team1')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(computedMatches.third.matchId, 'score1', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(
+                                  computedMatches.third.matchId,
+                                  'score1',
+                                  -1
+                                )
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{computedMatches.third.score1}</span>
+                            <span className="text-white mx-2">
+                              {computedMatches.third.score1}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(computedMatches.third.matchId, 'score1', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(
+                                  computedMatches.third.matchId,
+                                  'score1',
+                                  1
+                                )
+                              }>
                               +
                             </button>
                           </div>
@@ -517,19 +657,33 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(computedMatches.third, 'team2')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(computedMatches.third.matchId, 'score2', -1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(
+                                  computedMatches.third.matchId,
+                                  'score2',
+                                  -1
+                                )
+                              }>
                               -
                             </button>
-                            <span className="text-white mx-2">{computedMatches.third.score2}</span>
+                            <span className="text-white mx-2">
+                              {computedMatches.third.score2}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
-                              onClick={() => handleScoreChange(computedMatches.third.matchId, 'score2', 1)}
-                            >
+                              onClick={() =>
+                                handleScoreChange(
+                                  computedMatches.third.matchId,
+                                  'score2',
+                                  1
+                                )
+                              }>
                               +
                             </button>
                           </div>
@@ -544,7 +698,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
         </TransformWrapper>
       </div>
     </div>
-  );
+  )
 };
 
 export default Bracket;

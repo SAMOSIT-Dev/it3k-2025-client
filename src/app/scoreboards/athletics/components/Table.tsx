@@ -43,9 +43,10 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
                     <Image
                       src={`${mapUniNameToLogo(item.uniName)}`}
                       alt={item.uniName}
-                      width={16}
-                      height={16}
-                      className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"
+                      width={0}
+                      height={0}
+                      sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
+                      className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
                     />
                     {item.uniName}
                   </div>

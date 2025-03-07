@@ -31,7 +31,7 @@ const BasketBallCard = ({ data }: { data: BasketballMatch }) => {
           data={{
             team: {
               ...data.team_B,
-              uniName: TeamMapping[data.team_A.uniName] || Team.KMUTT
+              uniName: TeamMapping[data.team_B.uniName] || Team.KMUTT
             },
             side: 'right',
             status:

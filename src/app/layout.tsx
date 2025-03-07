@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Navbar from "./(main)/components/Navbar";
 
 import "./globals.css";
-import PageWrapper from "./(main)/components/PageWrapper";
 
 export const metadata: Metadata = {
   title: "IT3K",
@@ -19,9 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <PageWrapper>
-          {children}
-        </PageWrapper>
+        {children}
       </body>
     </html>
   );

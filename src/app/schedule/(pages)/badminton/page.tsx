@@ -6,7 +6,7 @@ import { badmintonScheduleData } from '../../scheduleData'
 export default function BadmintonSchedulePage() {
 
   return (
-    <div className="w-screen px-8 md:px-24 lg:px-0 h-auto font-Prompt overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
+    <div className="mt-[100px] w-screen px-8 md:px-24 lg:px-0 h-auto font-Prompt overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">
         <div className="w-auto lg:w-[1038.35px] mx-auto">
           <PageTitle title="แบดมินตัน" />

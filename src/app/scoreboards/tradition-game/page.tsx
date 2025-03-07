@@ -20,13 +20,13 @@ const TraditionScoreboardPage = () => {
     categories[0]
   )
   return (
-    <div className="font-Prompt min-h-[calc(100vh-100px)] w-full bg-black-300 px-10 pt-2 md:p-16 lg:px-24 text-white">
-        <div className=" w-[90%] mt-8 mb-4 md:mb-8 md:mt-8 flex flex-row items-center lg:-ml-4 md:-ml-2 -ml-1 text-white ">
-          <BackButton />
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold ">
-            พื้นบ้าน
-          </h1>
-        </div>
+    <div className="mt-[100px] font-Prompt min-h-[calc(100vh-100px)] w-full bg-black-300 px-10 pt-2 md:p-16 lg:px-24 text-white">
+      <div className=" w-[90%] mt-8 mb-4 md:mb-8 md:mt-8 flex flex-row items-center lg:-ml-4 md:-ml-2 -ml-1 text-white ">
+        <BackButton />
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold ">
+          พื้นบ้าน
+        </h1>
+      </div>
       <Category
         categories={categories}
         categoryState={currentCategory}

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useMemo, JSX } from 'react';
-import Link from 'next/link';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -10,6 +9,7 @@ import kmitlLogo from '../../../public/images/KMITL_logo.png';
 import kmuttLogo from '../../../public/images/KMUTT_logo.png';
 import kmutnbLogo from '../../../public/images/KMUTNB_logo.png';
 import gooseLogo from '../../../public/images/pop_goose/default_goose.png';
+import BackButton from '@/shared/components/BackButton';
 
 // Interfaces
 interface Match {
@@ -269,12 +269,10 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   if (error) return <div className="text-white text-center p-4">เกิดข้อผิดพลาดในการโหลดข้อมูล: {error.message}</div>;
 
   return (
-    <div className="brackets-wrapper-container">
+    <div className="brackets-wrapper-container mt-[100px]">
       <div className="sport-section mb-8 flex flex-col">
-        <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold">
-          <Link href="/">
-            <button className="btn-back">◀</button>
-          </Link>
+        <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold flex">
+          <BackButton />
           {SPORT_NAMES[sport]}
         </h1>
         <div className="flex gap-2 w-full max-w-4xl">

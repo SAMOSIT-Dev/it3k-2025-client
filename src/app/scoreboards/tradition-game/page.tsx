@@ -33,7 +33,7 @@ const TraditionScoreboardPage = () => {
         </h1>
       </div>
       <Category categories={categories} categoryState={currentCategory} setCategoryStateAction={setCurrentCategory} />
-      <Table />
+      <Table categoryId={currentCategory.id}/>
     </div>
   )
 }

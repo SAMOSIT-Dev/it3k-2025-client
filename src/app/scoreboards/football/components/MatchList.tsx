@@ -3,6 +3,7 @@
 import MatchCard from '@/shared/components/MatchCard'
 import { Team, TeamMapping } from '@/shared/utils/team'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { formatTime } from '../utils/formatTime'
 
 interface UniTeam {
   uniName: string
@@ -31,10 +32,10 @@ const MatchList: React.FC<MatchListProps> = ({ liveData }) => {
       {liveData.map((match) => (
         <MatchCard
           key={match.id}
-          time={`เวลา : ${match.timeStart.slice(0, -3)} - ${match.timeEnd.slice(0, -3)}`}
+          time={`เวลา : ${formatTime(match.timeStart)} - ${formatTime(match.timeEnd)}`}
           match={`MATCH ${match.id}`}
-          teamA={TeamMapping[match.team_A.uniName] || Team.KMUTT}
-          teamB={TeamMapping[match.team_B.uniName] || Team.KMUTT}
+          teamA={TeamMapping[match.team_A.uniName] || Team.TBD}
+          teamB={TeamMapping[match.team_B.uniName] || Team.TBD}
           scoreA={match.team_A.score}
           scoreB={match.team_B.score}
         />

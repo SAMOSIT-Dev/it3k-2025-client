@@ -21,7 +21,7 @@ export default function Home() {
       </div>
 
       {/* Sport Scoreboard Slider By Gun*/}
-      <SportSlider title="รายงานการแข่งขัน" sportLists={scoreboardSports} />
+      <SportSlider title="Scoreboard" sportLists={scoreboardSports} />
 
       {/* Podium Scoreboard By Ice */}
       <PodiumScoreBoard />
@@ -30,7 +30,7 @@ export default function Home() {
       <LiveSchedule/>
       {/* Full detail sport schedule slider By Gun*/}
       <div className='my-10'>
-        <SportSlider title="กำหนดการแข่งขันกีฬา" sportLists={scheduleSports} />
+        <SportSlider title="Sport Schedule" sportLists={scheduleSports} />
       </div>
 
       {/* Sponsers */}

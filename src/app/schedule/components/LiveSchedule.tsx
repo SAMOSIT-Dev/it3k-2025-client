@@ -61,9 +61,9 @@ export default function LiveSchedule() {
 
   useEffect(() => {
     const currentTime = new Date().getHours()
-    const location: Record<Location, number[]> = {
-      field: [1, 2],
-      gym: [3, 4]
+    const sports: Record<Location, string[]> = {
+      field: ["athletics", "football"],
+      gym: ["pingpong", "badminton", "basketball"]
     }
     if (response?.data) {
       let filteredData = response.data.filter(
@@ -72,7 +72,7 @@ export default function LiveSchedule() {
       if (filter) {
         filteredData = response.data.filter(
           (v) =>
-            location[filter].includes(v.location.locationId) &&
+            sports[filter].includes(v.type) &&
             parseInt(v.time.split(':')[0]) >= currentTime
         )
       }
@@ -83,10 +83,10 @@ export default function LiveSchedule() {
   return (
     <div id='match' className="min-w-0 h-auto min-h-0 relative">
       <div className="flex flex-col relative font-Prompt m-auto px-8 md:px-24 lg:px-0 z-[12] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] text-center text-white">
-        <div className="relative w-auto h-auto mx-auto px-10 py-10">
-          <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:-z-[1] before:content-['กำหนดการ'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
+        <div className="relative w-auto h-auto mx-auto px-10 py-5 sm:py-10">
+          <span className="font-bold text-3xl md:text-5xl flex justify-center after:bg-[#FF0000] after:-z-[1] before:content-['Schedule'] before:z-10 after:blur-[70px] relative after:absolute after:w-full after:h-full"></span>
         </div>
-        <div className="flex w-full flex-col space-y-4 sm:space-y-0 items-center  sm:flex-row lg:mt-[55px] justify-between mx-auto">
+        <div className="flex w-full flex-col space-y-5 sm:space-y-0 items-center sm:flex-row lg:mt-[55px] justify-between mx-auto">
           <h2 className="font-bold text-xl lg:text-4xl relative z-10">Upcoming Events</h2>
           <div className="flex items-center space-x-2">
             <Button
@@ -184,7 +184,7 @@ export default function LiveSchedule() {
             </p>
           )
         ) : (
-          <p>{response?.message}</p>
+          <p className='my-12'>{response?.message}</p>
         )}
       </div>
     </div>

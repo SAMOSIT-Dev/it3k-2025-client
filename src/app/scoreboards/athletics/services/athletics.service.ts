@@ -20,10 +20,10 @@ export enum AthleticsCategory {
 }
 
 export const CATEGORY_LABELS: Record<AthleticsCategory, string> = {
-  [AthleticsCategory.FEMALE_100M]: 'วิ่ง 100 เมตร หญิง',
-  [AthleticsCategory.MALE_100M]: 'วิ่ง 100 เมตร ชาย',
-  [AthleticsCategory.FEMALE_400M]: 'วิ่ง 4x100 เมตร หญิง',
-  [AthleticsCategory.MALE_400M]: 'วิ่ง 4x100 เมตร ชาย'
+  [AthleticsCategory.FEMALE_100M]: '100m men',
+  [AthleticsCategory.MALE_100M]: '100m women',
+  [AthleticsCategory.FEMALE_400M]: '4x100m men',
+  [AthleticsCategory.MALE_400M]: '4x100m women'
 }
 
 export interface IMatchData {
@@ -45,6 +45,6 @@ export const useFetchAthleticsData = (type: AthleticsCategory) => {
       url: `/athletics/event/${type}`,
       method: 'GET'
     },
-    { axios: apiClient }
+    // { axios: apiClient }
   )
 }

@@ -8,3 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 export function replaceSpaceFromUnderline(str: string) {
   return str.replace(/_/, ' ')
 }
+
+export function timeFormat(str: string): string {
+  const [hh, mm] = str.split(':')
+  return `${hh}:${mm}`
+}

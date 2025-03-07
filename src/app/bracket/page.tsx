@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, JSX } from 'react';
 import Link from 'next/link';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import useSWR from 'swr';
@@ -160,7 +160,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const getTeamLogo = (teamName: string | null): string =>
     teamName && teamName in TEAM_LOGOS ? TEAM_LOGOS[teamName] : gooseLogo.src;
 
-  const apiCall = async (url: string, method: string, body?: any): Promise<void> => {
+  const apiCall = async (url: string, method: string, body?: unknown): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     if (!token || !isAdmin) return;
 
@@ -174,16 +174,16 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (method !== 'GET') mutate(); // เรียก mutate เฉพาะเมื่อมีการเปลี่ยนแปลงข้อมูล
   };
 
-  const createMatch = async (match: Match) => {
-    const [teamAId, teamBId] = [match.team1, match.team2].map((t) => (t ? TEAM_OPTIONS.findIndex((tn) => tn === t) + 1 : 0));
-    await apiCall(`https://it3k.sit.kmutt.ac.th/api/admin/${sport}/matches`, 'POST', {
-      type: match.type || 'mix',
-      team_A_id: teamAId,
-      team_B_id: teamBId,
-      time: new Date().toISOString(),
-      locationId: 2,
-    });
-  };
+  // const createMatch = async (match: Match) => {
+  //   const [teamAId, teamBId] = [match.team1, match.team2].map((t) => (t ? TEAM_OPTIONS.findIndex((tn) => tn === t) + 1 : 0));
+  //   await apiCall(`https://it3k.sit.kmutt.ac.th/api/admin/${sport}/matches`, 'POST', {
+  //     type: match.type || 'mix',
+  //     team_A_id: teamAId,
+  //     team_B_id: teamBId,
+  //     time: new Date().toISOString(),
+  //     locationId: 2,
+  //   });
+  // };
 
   const updateMatch = async (match: Match) => {
     const [teamAId, teamBId] = [match.team1, match.team2].map((t) => (t ? TEAM_OPTIONS.findIndex((tn) => tn === t) + 1 : 0));

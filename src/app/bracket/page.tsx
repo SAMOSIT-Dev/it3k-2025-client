@@ -389,7 +389,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   }
 
   const handleFilterClick = (type: string): void => {
-    setSelectedType(type);
+    setSelectedType(type)
   }
 
   if (!sport)
@@ -404,25 +404,27 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     )
 
   return (
-    <div className="brackets-wrapper-container mt-[100px]">
-      <div className="sport-section mb-8 flex flex-col">
-        <h1 className="text-white text-3xl sm:text-4xl mb-6 font-extrabold flex">
+    <div className="brackets-wrapper-container mt-[100px] flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8">
+      <div className="sport-section w-[90%]">
+        <div className="flex flex-row items-center mt-2 -ml-1 md:-ml-2 lg:-ml-4 md:mb-4">
           <BackButton />
-          {SPORT_NAMES[sport]}
-        </h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+            {SPORT_NAMES[sport]}
+          </h1>
+        </div>
         <div
-          className="font-Prompt flex overflow-x-scroll h-[65px] justify-center items-center mb-3"
+          className="font-Prompt flex overflow-x-scroll h-[65px] justify-center items-center"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch'
           }}>
-          <div className="relative w-full whitespace-nowrap mb-4 scrollbar-hide md:flex md:justify-center md:space-x-2">
+          <div className="relative w-full whitespace-nowrap scrollbar-hide md:flex md:justify-center md:space-x-2">
             <div className="w-full flex space-x-2 px-2 md:px-0">
               {BUTTON_TYPES[sport]?.map((type) => (
                 <button
                   key={type}
-                  className={`rounded-lg px-4 py-2 transition-all duration-300 ${
+                  className={`rounded-lg px-4 py-2 transition-all duration-300 text-xs sm:text-sm md:text-base ${
                     selectedType == type
                       ? 'bg-red-500 text-white shadow-[0_0_5px_4px_rgba(255,0,0,0.4)]'
                       : 'border border-red-500 text-white hover:shadow-[0_0_5px_4px_rgba(255,0,0,0.4)] hover:border-red-500'
@@ -444,19 +446,19 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
         </div>
       </div>
 
-      <div className="flex justify-center w-full">
-        <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+      <div className="flex justify-center w-full pb-24">
+        <TransformWrapper initialScale={0.7} minScale={0.3} maxScale={5}>
           <TransformComponent
             wrapperStyle={{
               border: '2px solid #ff0000',
               background: '#000',
-              padding: '10px',
+              // padding: '2px',
               overflow: 'hidden',
               cursor: 'grab',
               boxShadow: '0 4px 8px rgba(255, 0, 0, 0.5)',
               width: '80%',
               maxWidth: '1200px',
-              height: 'fit-content'
+              height: '60vh'
             }}
             contentStyle={{ transform: 'scale(1)' }}>
             <div className="p-8 bg-black min-h-screen bracket-container">

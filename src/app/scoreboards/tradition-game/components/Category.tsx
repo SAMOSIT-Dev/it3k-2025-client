@@ -28,7 +28,7 @@ const Category = ({ categories, categoryState, setCategoryStateAction }: Props) 
               <button
                 key={category.id}
                 onClick={() => setCategoryStateAction(() => category)}
-                className={`rounded-lg px-4 py-2 transition-all duration-300 ${
+                className={`rounded-lg px-4 py-2 transition-all duration-300 text-xs sm:text-sm md:text-base ${
                   isActive
                     ? 'bg-red-500 text-white shadow-[0_0_5px_4px_rgba(255,0,0,0.4)]'
                     : 'border border-red-500 text-white hover:shadow-[0_0_5px_4px_rgba(255,0,0,0.4)] hover:border-red-500'

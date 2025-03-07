@@ -7,7 +7,7 @@ export default function PingpongSchedulePage() {
     <div className="mt-[100px] w-screen px-8 md:px-24 lg:px-0 h-auto overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">
         <div className="w-auto lg:w-[1038.35px] mx-auto">
-          <PageTitle title="ปิงปอง" />
+          <PageTitle title="Table Tennis" />
         </div>
       </header>
       <main className="my-[100px] h-auto min-h-0 mx-auto w-auto lg:w-[1038.35px] relative z-20">

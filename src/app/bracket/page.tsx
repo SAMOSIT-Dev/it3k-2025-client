@@ -53,8 +53,8 @@ interface BracketProps {
 
 // Constants
 const SPORT_NAMES: Record<string, string> = {
-  badminton: 'แบดมินตัน',
-  pingpong: 'ปิงปอง',
+  badminton: 'Badminton',
+  pingpong: 'Table Tennis',
 };
 
 const BUTTON_TYPES: Record<string, readonly string[]> = {
@@ -265,8 +265,8 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   };
 
   if (!sport) return <div className="text-white text-center p-4">No sport specified</div>;
-  if (isLoading) return <div className="text-white text-center p-4">กำลังโหลด...</div>;
-  if (error) return <div className="text-white text-center p-4">เกิดข้อผิดพลาดในการโหลดข้อมูล: {error.message}</div>;
+  if (isLoading) return <div className="text-white text-center p-4">Loading...</div>;
+  if (error) return <div className="text-white text-center p-4">Error Loading Data: {error.message}</div>;
 
   return (
     <div className="brackets-wrapper-container mt-[100px]">
@@ -284,7 +284,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
               }`}
               onClick={() => handleFilterClick(type)}
             >
-              {type === 'mix' ? 'คู่ผสม' : type === 'single_male' ? 'ชายเดี่ยว' : type === 'single_female' ? 'หญิงเดี่ยว' : type === 'pair_male' ? 'ชายคู่' : 'หญิงคู่'}
+              {type === 'mix' ? "Mixed Doubles" : type === 'single_male' ? "Men's Singles" : type === 'single_female' ? "Women's Singles" : type === "Men's Doubles" ? 'ชายคู่' : "Women's Doubles"}
             </button>
           ))}
         </div>

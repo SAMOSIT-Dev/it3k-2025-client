@@ -9,7 +9,7 @@ import { useFetchBasketball } from './hooks/useFetchBasketball'
 const BasketBall = () => {
   const { matches, entries } = useFetchBasketball()
 
-  const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
+  const header = ['RANK', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
 
   const getColumnstyle = (colIndex: number) => {
     if (colIndex === 0) return 'font-bold'

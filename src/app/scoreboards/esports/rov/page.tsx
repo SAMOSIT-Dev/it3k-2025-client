@@ -8,7 +8,7 @@ import MatchList from '../components/MatchList'
 
 const Page = () => {
   const game = 'rov'
-  const header = ['อันดับ', 'TEAM', 'WIN_LOSE']
+  const header = ['RANK', 'TEAM', 'WIN_LOSE']
   const tableData = [
     [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-0'],
     [2, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '1-1'],

@@ -20,7 +20,7 @@ interface FootballTableProps {
 }
 
 const FootballTable: React.FC<FootballTableProps> = ({ liveData }) => {
-  const header = ['อันดับ', 'TEAM', 'WIN_DRAW_LOSE', 'GOAL', 'GOAL DIFF']
+  const header = ['RANK', 'TEAM', 'WIN_DRAW_LOSE', 'GOAL', 'GOAL DIFF']
 
   const tableData = liveData.map((entry) => {
     const team= TeamMapping[entry.university] || Team.TBD; 

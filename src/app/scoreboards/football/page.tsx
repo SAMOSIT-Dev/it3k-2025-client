@@ -8,7 +8,7 @@ const Page = () => {
       <div className="w-[90%]">
         <div className="mt-8 mb-4 md:mb-8 md:mt-8 flex flex-row items-center lg:-ml-4 md:-ml-2 -ml-1">
           <BackButton />
-          <h1 className="text-2xl font-bold">Football</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Football</h1>
         </div>
         <FootballLive />
       </div>

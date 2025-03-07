@@ -51,7 +51,7 @@ const Page = () => {
       <div className="w-[90%]">
         <div className="flex flex-row items-center mt-8 mb-4 -ml-1 md:-ml-2 lg:-ml-4 md:mb-4">
           <BackButton />
-          <h1 className="text-2xl font-bold">Esports</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Esports</h1>
         </div>
         <Category activeCategory={game} />
         <TableComponent

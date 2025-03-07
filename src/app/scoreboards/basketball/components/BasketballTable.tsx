@@ -13,7 +13,7 @@ const BasketballTable = ({ data }: { data: BasketballMatch }) => {
       </thead>
       <tbody>
         <tr>
-          <td className="sm:py-1 pr-6 text-left font-medium">
+          <td className="sm:py-1 pr-1 text-left font-medium">
             {data.team_A.uniName}
           </td>
           <td className="sm:py-1 lg:py-2  px-1  text-gray-400">
@@ -25,7 +25,7 @@ const BasketballTable = ({ data }: { data: BasketballMatch }) => {
           <td className="sm:px-1 lg:py-2 ">{data.team_A.totalScore}</td>
         </tr>
         <tr>
-          <td className="sm:py-1 pr-6 text-left font-medium">
+          <td className="sm:py-1 pr-2 text-left font-medium">
             {data.team_B.uniName}
           </td>
           <td className="sm:py-1 px-1  text-gray-400">

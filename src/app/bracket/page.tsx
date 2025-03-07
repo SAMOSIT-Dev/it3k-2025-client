@@ -46,19 +46,41 @@ interface ApiResponse {
 }
 
 interface SportMatch {
-  matchId: number;
-  type: string;
-  team_A_id: number;
-  team_B_id: number;
-  locationId: number;
-  locationName?: string;
-  time: string;
-  team_A_details?: { id: number; uniName: string; image: string; color_code: string };
-  team_B_details?: { id: number; uniName: string; image: string; color_code: string };
-  pingpong_sets?: Array<{ id: number; pingpong_match_id: number; round: number; score_A: number; score_B: number }>;
-  badminton_sets?: Array<{ id: number; badminton_match_id: number; round: number; score_A: number; score_B: number }>;
-  result_A?: number;
-  result_B?: number;
+  matchId: number
+  type: string
+  team_A_id: number
+  team_B_id: number
+  locationId: number
+  locationName?: string
+  time: string
+  team_A_details?: {
+    id: number
+    uniName: string
+    image: string
+    color_code: string
+  }
+  team_B_details?: {
+    id: number
+    uniName: string
+    image: string
+    color_code: string
+  }
+  pingpong_sets?: Array<{
+    id: number
+    pingpong_match_id: number
+    round: number
+    score_A: number
+    score_B: number
+  }>
+  badminton_sets?: Array<{
+    id: number
+    badminton_match_id: number
+    round: number
+    score_A: number
+    score_B: number
+  }>
+  result_A?: number
+  result_B?: number
 }
 
 interface BracketProps {
@@ -110,21 +132,25 @@ const checkAdminStatus = (): boolean => {
 
 // Component
 const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
-  const [sport] = useState<string>(propSport || 'pingpong');
-  const [isAdmin] = useState<boolean>(() => checkAdminStatus());
-  const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [sport] = useState<string>(propSport || 'pingpong')
+  const [isAdmin] = useState<boolean>(() => checkAdminStatus())
+  const [editingTeam, setEditingTeam] = useState<{
+    matchId: number
+    teamKey: TeamKey
+  } | null>(null)
+  const [selectedType, setSelectedType] = useState<string>('mix')
 
-  const { data, error, isLoading, mutate } = useSWR<ApiResponse>(
+  const { data, error, mutate } = useSWR<ApiResponse>(
     sport && selectedType
       ? `https://it3k.sit.kmutt.ac.th/api/${sport}/${selectedType}`
       : sport
-      ? `https://it3k.sit.kmutt.ac.th/api/${sport}`
-      : null,
+        ? `https://it3k.sit.kmutt.ac.th/api/${sport}`
+        : null,
     fetcher,
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      keepPreviousData: true,
       fallbackData: { success: false, message: 'No data available', data: [] }
     }
   )
@@ -147,8 +173,8 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
     const transformedMatches: Match[] = data.data.map((item: SportMatch) => ({
       matchId: item.matchId,
-      team1: UniIdToName[item.team_A_number] || `TBD`,
-      team2: UniIdToName[item.team_B_number] || `TBD`,
+      team1: UniIdToName[item.team_A_id] || `TBD`,
+      team2: UniIdToName[item.team_B_id] || `TBD`,
       score1:
         item.result_A ??
         (sport === 'pingpong'
@@ -164,12 +190,10 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       type: item.type || 'mix'
     }))
 
-    console.log(transformedMatches)
-
     const round1Ids = [1, 2, 3, 4]
     const round2Ids = [5, 6]
-    const finalId = 7
-    const thirdPlaceId = 8
+    const finalId = 8
+    const thirdPlaceId = 7
 
     return {
       round1: round1Ids.map(
@@ -286,8 +310,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (!isAdmin) return
 
     // อัปเดตข้อมูลใน API โดยตรงและเรียก mutate เพื่อรีเฟรชข้อมูล
-    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m.matchId === matchId);
-    if (!match) return;
+    const match = [
+      ...computedMatches.round1,
+      ...computedMatches.round2,
+      computedMatches.final,
+      computedMatches.third
+    ].find((m) => m.matchId === matchId)
+    if (!match) return
 
     const updatedMatch = { ...match, [team]: Math.max(0, match[team] + delta) }
     await updateMatch(updatedMatch)
@@ -302,8 +331,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   ): Promise<void> => {
     if (!isAdmin || oldName === newName || !newName.trim()) return
 
-    const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find((m) => m.matchId === matchId);
-    if (!match) return;
+    const match = [
+      ...computedMatches.round1,
+      ...computedMatches.round2,
+      computedMatches.final,
+      computedMatches.third
+    ].find((m) => m.matchId === matchId)
+    if (!match) return
 
     const updatedMatch = { ...match, [teamKey]: newName }
     await updateMatch(updatedMatch)
@@ -355,13 +389,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   }
 
   const handleFilterClick = (type: string): void => {
-    setSelectedType((prev) => (prev === type ? null : type))
+    setSelectedType(type);
   }
 
   if (!sport)
     return <div className="text-white text-center p-4">No sport specified</div>
-  if (isLoading)
-    return <div className="text-white text-center p-4">Loading...</div>
+  // if (isLoading)
+  //   return <div className="text-white text-center p-4">Loading...</div>
   if (error)
     return (
       <div className="text-white text-center p-4">
@@ -376,18 +410,37 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
           <BackButton />
           {SPORT_NAMES[sport]}
         </h1>
-        <div className="flex gap-2 w-full max-w-4xl overflow-x-auto">
-          {BUTTON_TYPES[sport]?.map((type) => (
-            <button
-              key={type}
-              className={`btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs ${
-                selectedType === type ? 'bg-red-700' : 'bg-transparent border border-red-600'
-              }`}
-              onClick={() => handleFilterClick(type)}
-            >
-              {type === 'mix' ? "Mixed Doubles" : type === 'single_male' ? "Men's Singles" : type === 'single_female' ? "Women's Singles" : type === "pair_male" ? "Men's Doubles" : "Women's Doubles"}
-            </button>
-          ))}
+        <div
+          className="font-Prompt flex overflow-x-scroll h-[65px] justify-center items-center mb-3"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}>
+          <div className="relative w-full whitespace-nowrap mb-4 scrollbar-hide md:flex md:justify-center md:space-x-2">
+            <div className="w-full flex space-x-2 px-2 md:px-0">
+              {BUTTON_TYPES[sport]?.map((type) => (
+                <button
+                  key={type}
+                  className={`rounded-lg px-4 py-2 transition-all duration-300 ${
+                    selectedType == type
+                      ? 'bg-red-500 text-white shadow-[0_0_5px_4px_rgba(255,0,0,0.4)]'
+                      : 'border border-red-500 text-white hover:shadow-[0_0_5px_4px_rgba(255,0,0,0.4)] hover:border-red-500'
+                  }`}
+                  onClick={() => handleFilterClick(type)}>
+                  {type === 'mix'
+                    ? 'Mixed Doubles'
+                    : type === 'single_male'
+                      ? "Men's Singles"
+                      : type === 'single_female'
+                        ? "Women's Singles"
+                        : type === 'pair_male'
+                          ? "Men's Doubles"
+                          : "Women's Doubles"}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -775,7 +828,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
         </TransformWrapper>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Bracket

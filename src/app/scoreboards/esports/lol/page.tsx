@@ -10,10 +10,10 @@ const Page = () => {
   const game = 'lol'
   const header = ['อันดับ', 'TEAM', 'WIN_LOSE']
   const tableData = [
-    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '2-1'],
-    [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-1'],
-    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB_PR} />, '1-2'],
-    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB} />, '1-2']
+    [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '3-1'],
+    [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-2'],
+    [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '2-2'],
+    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />, '1-3']
   ]
   const matcheData = [
     {
@@ -69,7 +69,7 @@ const Page = () => {
       match: 'ชิงชนะเลิศ',
       teamA: Team.KMUTT,
       teamB: Team.KMITL,
-      scoreA: 0,
+      scoreA: 2,
       scoreB: 0
     },
     {
@@ -77,7 +77,7 @@ const Page = () => {
       match: 'ชิงที่ 3',
       teamA: Team.KMUTNB,
       teamB: Team.KMUTNB_PR,
-      scoreA: 0,
+      scoreA: 2,
       scoreB: 0
     }
   ]

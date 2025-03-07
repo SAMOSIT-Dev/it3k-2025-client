@@ -14,7 +14,7 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ categoryId }) => {
   const universityData: Record<number, UniversityDataProps[]> = {
     1: [ // ชักเย่อ
-      { rank: 1, team: Team.TBD },
+      { rank: 1, team: Team.KMUTT },
       { rank: 1, team: Team.TBD },
       { rank: 1, team: Team.TBD },
       { rank: 1, team: Team.TBD }
@@ -61,9 +61,10 @@ const Table: React.FC<TableProps> = ({ categoryId }) => {
                   <Image
                     src={TeamLogos[item.team]}
                     alt={item.team}
-                    width={24}
-                    height={24}
-                    className="mr-2 sm:mr-4 rounded-full w-6 h-6 sm:w-12 sm:h-12"
+                    width={0}
+                      height={0}
+                      sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
+                      className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
                   />
                   <span>{item.team}</span>
                 </div>

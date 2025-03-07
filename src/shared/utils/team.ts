@@ -23,5 +23,5 @@ export const TeamMapping: Record<string, Team> = {
   KMUTT: Team.KMUTT,
   KMITL: Team.KMITL,
   KMUTNB: Team.KMUTNB,
-  KMUTNB_PR: Team.KMUTNBPR
+  KMUTNB_PR: Team.KMUTNB_PR
 }

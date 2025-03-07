@@ -12,21 +12,21 @@ const Page = () => {
   const tableData = [
     [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-0'],
     [2, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '1-1'],
-    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNBPR} />, '0-2']
+    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />, '0-2']
   ]
   const matcheData = [
     {
       time: 'เวลา : 20:00 - 22:00',
       match: 'MATCH 1',
       teamA: Team.KMUTT,
-      teamB: Team.KMUTNBPR,
+      teamB: Team.KMUTNB_PR,
       scoreA: 1,
       scoreB: 0
     },
     {
       time: 'เวลา : 20:00 - 22:00',
       match: 'MATCH 2',
-      teamA: Team.KMUTNBPR,
+      teamA: Team.KMUTNB_PR,
       teamB: Team.KMITL,
       scoreA: 0,
       scoreB: 1

@@ -19,7 +19,9 @@
     transition: all 0.3s ease;
     white-space: nowrap;
 }
-
+.active {
+    background-color: #E90000;
+}
 .category-button:hover,
 .category-button:focus,
 .category-button-focus {

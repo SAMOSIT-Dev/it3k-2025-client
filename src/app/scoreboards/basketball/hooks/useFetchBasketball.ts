@@ -38,7 +38,7 @@ export const useFetchBasketball = () => {
     return () => {
       socket.disconnect()
     }
-  }, [])
+  }, [SOCKET_URL])
 
   return { matches, entries }
 }

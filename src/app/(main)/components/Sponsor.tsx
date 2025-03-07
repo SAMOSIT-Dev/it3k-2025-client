@@ -9,9 +9,22 @@ type SponsorProps = {
 }[];
 
 const sponsors: SponsorProps = [
-  { name:"kohkae", logo: '/images/sponsors/kohkae.png',link: 'https://www.kohkae.com/'},
-  { name:"jele",logo: '/images/sponsors/jele.png',link: 'https://jeledoubleice.com/'},
-];
+  {
+    name: 'kohkae',
+    logo: '/images/sponsors/kohkae.png',
+    link: 'https://www.kohkae.com/'
+  },
+  {
+    name: 'jele',
+    logo: '/images/sponsors/jele.png',
+    link: 'https://jeledoubleice.com/'
+  },
+  {
+    name: 'lactasoy',
+    logo: '/images/sponsors/lactasoy.png',
+    link: 'https://www.lactasoy.com/'
+  }
+]
 
 const Sponsor = () => {
   const layoutSponsor = sponsors.length > 3 ? "grid grid-cols-3 place-items-center" : "flex";

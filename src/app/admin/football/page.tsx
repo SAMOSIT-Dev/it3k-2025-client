@@ -234,7 +234,7 @@ const AdminFootballScores = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 mt-28">
       <h1 className="text-xl font-bold mb-4">Admin Football Match Control</h1>
 
       <table className="w-full border-collapse mb-6 overflow-x-auto">

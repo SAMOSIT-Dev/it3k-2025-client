@@ -1,20 +1,14 @@
 'use client'
 
 import ScheduleCard from './ScheduleCard'
-import {
-  useEffect,
-  useRef,
-  useState,
-  useTransition
-} from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import Button from './Button'
-import {
-  getUpComingEvents,
-  Result,
-  UpComingEvent
-} from '../services/schedule.service'
-import Image from 'next/image'
+import useSWR from 'swr'
+import * as endponts from '../utils/endpoints'
+import { fetcher } from '../utils/utils'
+import Loading from './Loading'
+import { Schedule, ScheduleResponse } from '../utils/types'
 
 type Location = 'field' | 'gym'
 
@@ -22,18 +16,19 @@ export default function LiveSchedule() {
   const [filter, setFilter] = useState<Location>('field')
   const swiperRef = useRef<SwiperClass>(null)
   const [containerHeight, setContainerHeight] = useState<number | null>(null)
-  const [isPending, startTranstion] = useTransition()
-  const [response, setResponse] = useState<Result<UpComingEvent[]> | null>(
-    null
+  const [filteredResponse, setFilteredResponse] = useState<Schedule[]>([])
+  const { data, isLoading } = useSWR<ScheduleResponse>(
+    endponts.schedule.schedules,
+    fetcher
   )
-  const [filteredResponse, setFilteredResponse] = useState<UpComingEvent[]>([])
+  const [date, setDate] = useState<Date>(new Date())
 
   useEffect(() => {
-    startTranstion(async () => {
-      const result = await getUpComingEvents()
-      setResponse(result)
-    })
-  }, [])
+    const timeout = setTimeout(() => {
+      setDate(new Date())
+    }, 1000)
+    return () => clearTimeout(timeout)
+  }, [date])
 
   useEffect(() => {
     const updateHeight = () => {
@@ -52,7 +47,7 @@ export default function LiveSchedule() {
 
     window.addEventListener('resize', updateHeight)
     return () => window.removeEventListener('resize', updateHeight)
-  }, [isPending, filteredResponse])
+  }, [filteredResponse, isLoading])
 
   const handleFilterButton = (location: Location) => {
     swiperRef.current?.slideTo(0)
@@ -61,24 +56,28 @@ export default function LiveSchedule() {
 
   useEffect(() => {
     const currentTime = new Date().getHours()
-    const sports: Record<Location, string[]> = {
-      field: ["athletics", "football"],
-      gym: ["pingpong", "badminton", "basketball"]
+    const locations: Record<Location, string> = {
+      field: 'Football Field',
+      gym: 'Gymnasium'
     }
-    if (response?.data) {
-      let filteredData = response.data.filter(
-        (v) => parseInt(v.time.split(':')[0]) >= currentTime
+    if (data) {
+      let filteredData = data.data.filter(
+        (v) =>
+          parseInt(v.period.start.split('T')[1].split(':')[0]) >= currentTime &&
+          parseInt(v.period.end.split('T')[1].split(':')[0]) >= currentTime
       )
       if (filter) {
-        filteredData = response.data.filter(
+        filteredData = data.data.filter(
           (v) =>
-            sports[filter].includes(v.type) &&
-            parseInt(v.time.split(':')[0]) >= currentTime
+            locations[filter] == v.location &&
+            parseInt(v.period.start.split('T')[1].split(':')[0]) >=
+              currentTime &&
+            parseInt(v.period.end.split('T')[1].split(':')[0]) >= currentTime
         )
       }
       setFilteredResponse(filteredData)
     }
-  }, [filter, response])
+  }, [filter, data, date])
 
   return (
     <div id="match" className="min-w-0 h-auto min-h-0 relative">
@@ -94,43 +93,18 @@ export default function LiveSchedule() {
             <Button
               active={filter == 'field'}
               onClick={() => handleFilterButton('field')}>
-              สนามกีฬา
+              Football Field
             </Button>
             <Button
               active={filter == 'gym'}
               onClick={() => handleFilterButton('gym')}>
-              โรงยิม
+              Gymnasium
             </Button>
           </div>
         </div>
-        {isPending ? (
-          <div className="relative flex w-auto m-auto justify-center items-center gap-5 my-24">
-            <div className="size-16 md:size-24 relative">
-              <Image
-                className="animate-[bounce_1s_infinite_100ms]"
-                src="/images/pop.png"
-                fill
-                alt="pop_loading"
-              />
-            </div>
-            <div className="size-16 md:size-24 relative">
-              <Image
-                className="animate-[bounce_1s_infinite_200ms]"
-                src="/images/pop.png"
-                fill
-                alt="pop_loading-1"
-              />
-            </div>
-            <div className="size-16 md:size-24 relative">
-              <Image
-                className="animate-[bounce_1s_infinite_300ms]"
-                src="/images/pop.png"
-                fill
-                alt="pop_loading-2"
-              />
-            </div>
-          </div>
-        ) : response?.success ? (
+        {isLoading ? (
+          <Loading />
+        ) : data?.success ? (
           filteredResponse.length > 0 ? (
             filteredResponse.length > 2 ? (
               <>
@@ -146,7 +120,10 @@ export default function LiveSchedule() {
                     className="!w-full h-full">
                     {filteredResponse.map((item, i) => (
                       <SwiperSlide key={i} className="!h-auto">
-                        <ScheduleCard type="evnet" scheduleData={item} />
+                        <ScheduleCard
+                          type={!item.teamA && !item.teamB ? 'info' : 'match'}
+                          scheduleData={item}
+                        />
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -176,14 +153,16 @@ export default function LiveSchedule() {
             ) : (
               <div className="flex flex-col justify-center items-center space-y-[19px] md:space-y-[24px] mt-5 md:mt-[30px] h-max">
                 {filteredResponse.map((item, i) => (
-                  <ScheduleCard type="evnet" key={i} scheduleData={item} />
+                  <ScheduleCard
+                    type={!item.teamA && !item.teamB ? 'info' : 'match'}
+                    key={i}
+                    scheduleData={item}
+                  />
                 ))}
               </div>
             )
           ) : (
-            <p className="font-bold text-xl md:text-2xl my-12 lg:text-4xl">
-              No Upcoming Event
-            </p>
+            <p className="my-12">No Upcoming Event</p>
           )
         ) : (
           <p className="my-12">No Upcoming Event</p>

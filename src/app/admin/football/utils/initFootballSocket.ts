@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client'
 
 let socket: Socket
 const socketServerUrl =
-  process.env.NEXT_PUBLIC_DEFAULT_API_BASE_URL || 'http://localhost:8083'
+  process.env.NEXT_PUBLIC_VM_SOCKET_URL || 'http://localhost:8083'
 
 export const initFootballSocket = (): Socket => {
   socket = io(socketServerUrl, {

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import MatchList from '@/app/scoreboards/football/components/MatchList'
-=======
 import StaggeredFadeIn from '@/shared/components/animations/StaggeredFadeIn'
->>>>>>> 1b92679a340fbc0587bb7d005a63c4183b328abe
 import PageTitle from '../../components/PageTitle'
 import ScheduleCard from '../../components/ScheduleCard'
 import { footballScheduleData } from '../../scheduleData'

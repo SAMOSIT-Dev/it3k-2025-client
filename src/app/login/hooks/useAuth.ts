@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const API_URL = "https://it3k-in.sit.kmutt.ac.th";

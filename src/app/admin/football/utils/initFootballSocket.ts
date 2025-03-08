@@ -8,7 +8,7 @@ export const initFootballSocket = (): Socket => {
   socket = io(socketServerUrl, {
     transports: ['websocket'],
     withCredentials: true,
-    path: '/api/football-service/socket'
+    path: '/api/admin-service/socket'
   })
 
   if (!socket) {

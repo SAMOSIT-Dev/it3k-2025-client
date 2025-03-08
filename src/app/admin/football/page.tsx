@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import {
   getFootballSocket,
   initFootballSocket
 } from './utils/initFootballSocket'
-import { useRouter } from 'next/navigation'
-// import { useAuth } from '@/app/login/hooks/useAuth'
+import { useAuth } from '@/app/login/hooks/useAuth'
 
 interface Team {
   name: string
@@ -35,8 +35,7 @@ interface Match {
 }
 
 const AdminFootballScores = () => {
-  // const { accessToken } = useAuth()
-  const [accessToken, setAccessToken] = useState<string | null>(null)
+  const { accessToken } = useAuth()
   const [headers, setHeaders] = useState({})
   const [teams, setTeams] = useState<TeamData[]>([])
   const [matches, setMatches] = useState<Match[]>([])
@@ -68,11 +67,13 @@ const AdminFootballScores = () => {
   const router = useRouter()
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken')
-    if (token) {
-      setAccessToken(token)
-      setHeaders({ Authorization: `Bearer ${token}` })
+    if (accessToken) {
+      setHeaders({ Authorization: `Bearer ${accessToken}` })
     }
+
+    const socket = initFootballSocket()
+
+    socket.on('connect', () => {})
 
     const fetchTeams = async () => {
       await axios
@@ -93,6 +94,10 @@ const AdminFootballScores = () => {
     }
     fetchTeams()
     fetchMatches()
+
+    return () => {
+      socket.disconnect()
+    }
   }, [accessToken])
 
   const handleScoreChange = (
@@ -140,61 +145,54 @@ const AdminFootballScores = () => {
       updatedScore.team_B = 0
     }
 
-    // const socket = getFootballSocket()
-    // if (socket) {
-    //   console.log('update')
-    //   console.log(typeof updatedScore.team_A)
-    //   console.log(typeof updatedScore.team_B)
-    //   console.log(matchId)
-    //   if (socket.connected) {
-    //     socket.emit('updateMatchScore', {
-    //       id: matchId,
-    //       score_A: updatedScore.team_A,
-    //       score_B: updatedScore.team_B
-    //     })
-    //   } else {
-    //     console.error('Socket is not connected, cannot emit event')
-    //   }
-    // }
-
-    axios
-      .put(
-        `https://it3k.sit.kmutt.ac.th/api/admin/football/score/${matchId}`,
-        {
+    const socket = getFootballSocket()
+    if (socket) {
+      if (socket.connected) {
+        socket.emit('updateMatchScore', {
           id: matchId,
           score_A: updatedScore.team_A,
           score_B: updatedScore.team_B
-        },
-        { headers: headers }
-      )
-      .then(() => {
-        setMatches((prev) =>
-          prev.map((match) =>
-            match.id === matchId
-              ? {
-                  ...match,
-                  team_A: { ...match.team_A, score: updatedScore.team_A },
-                  team_B: { ...match.team_B, score: updatedScore.team_B }
-                }
-              : match
-          )
-        )
-        alert(`Update score on match id ${matchId} successful`)
-        router.refresh()
-      })
-      .catch((error) => console.error('Error updating score:', error))
+        })
+      } else {
+        console.error('Socket is not connected, cannot emit event')
+      }
+    }
+
+    // axios
+    //   .put(
+    //     `https://it3k.sit.kmutt.ac.th/api/admin/football/score/${matchId}`,
+    //     {
+    //       id: matchId,
+    //       score_A: updatedScore.team_A,
+    //       score_B: updatedScore.team_B
+    //     },
+    //     { headers: headers }
+    //   )
+    //   .then(() => {
+    //     setMatches((prev) =>
+    //       prev.map((match) =>
+    //         match.id === matchId
+    //           ? {
+    //               ...match,
+    //               team_A: { ...match.team_A, score: updatedScore.team_A },
+    //               team_B: { ...match.team_B, score: updatedScore.team_B }
+    //             }
+    //           : match
+    //       )
+    //     )
+    //     alert(`Update score on match id ${matchId} successful`)
+    //     router.refresh()
+    //   })
+    //   .catch((error) => console.error('Error updating score:', error))
   }
 
   const createNewMatch = () => {
     axios
       .post(
-        'https://it3k.sit.kmutt.ac.th/api/admin/football',
+        'https://it3k.sit.kmutt.ac.th/api/admin/basketball/final-match',
         {
           team_A_id: newMatch.team_A_id,
-          team_B_id: newMatch.team_B_id,
-          timeStart: newMatch.timeStart,
-          timeEnd: newMatch.timeEnd,
-          locationId: newMatch.locationId
+          team_B_id: newMatch.team_B_id
         },
         { headers: headers }
       )
@@ -212,38 +210,37 @@ const AdminFootballScores = () => {
 
     updatedMatch.locationId = 2
 
-    // const socket = getFootballSocket()
-    // if (socket) {
-    //   console.log('update status')
-    //   console.log(matchId)
-    //   if (socket.connected) {
-    //     socket.emit('updateMatchStatus', {
-    //       id: matchId,
-    //       status: updatedMatch.status
-    //     })
-    //   } else {
-    //     console.error('Socket is not connected, cannot emit event')
-    //   }
-    // }
-
-    axios
-      .put(
-        `https://it3k.sit.kmutt.ac.th/api/admin/football/status/${matchId}`,
-        {
+    const socket = getFootballSocket()
+    if (socket) {
+      if (socket.connected) {
+        socket.emit('updateMatchStatus', {
+          id: matchId,
           status: updatedMatch.status
-        },
-        { headers: headers }
-      )
-      .then(() => {
-        setMatches((prev) =>
-          prev.map((match) =>
-            match.id === matchId ? { ...match, ...updatedMatch } : match
-          )
-        )
-        alert(`Update match id ${matchId} successful`)
+        })
         router.refresh()
-      })
-      .catch((error) => console.error('Error updating match:', error))
+      } else {
+        console.error('Socket is not connected, cannot emit event')
+      }
+    }
+
+    // axios
+    //   .put(
+    //     `https://it3k.sit.kmutt.ac.th/api/admin/football/status/${matchId}`,
+    //     {
+    //       status: updatedMatch.status
+    //     },
+    //     { headers: headers }
+    //   )
+    //   .then(() => {
+    //     setMatches((prev) =>
+    //       prev.map((match) =>
+    //         match.id === matchId ? { ...match, ...updatedMatch } : match
+    //       )
+    //     )
+    //     alert(`Update match id ${matchId} successful`)
+    //     router.refresh()
+    //   })
+    //   .catch((error) => console.error('Error updating match:', error))
   }
 
   const deleteMatch = (matchId: number) => {
@@ -402,29 +399,6 @@ const AdminFootballScores = () => {
           </button>
 
           <div className="mt-4 flex flex-col gap-2">
-            {/* <div className="flex justify-start gap-4">
-              <input
-                type="number"
-                placeholder="Team A id"
-                className="border p-2"
-                min={1}
-                max={4}
-                onChange={(e) =>
-                  handleUpdateChange(match.id, 'team_A_id', e.target.value)
-                }
-              />
-              <input
-                type="number"
-                placeholder="Team B id"
-                className="border p-2"
-                min={1}
-                max={4}
-                onChange={(e) =>
-                  handleUpdateChange(match.id, 'team_B_id', e.target.value)
-                }
-              />
-            </div> */}
-
             <select
               className="border p-2"
               onChange={(e) =>

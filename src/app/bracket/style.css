@@ -65,7 +65,7 @@
 
 .connector-vertical {
   width: 2px;
-  height: 253px;
+  height: 269px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
@@ -89,8 +89,8 @@
   scale: 1;
   font-weight: 600;
   margin-top: 10px;
-  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
-  min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
+  white-space: nowrap; 
+  min-width: 0; 
   max-width: none; 
  
 }
@@ -114,7 +114,7 @@
 }
 .connector-vertical1 {
   width: 2px;
-  height: 470px;
+  height: 510px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;

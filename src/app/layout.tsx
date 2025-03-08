@@ -18,10 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <PageWrapper>
+        <Navbar />  
           {children}
-        </PageWrapper>
       </body>
     </html>
   );

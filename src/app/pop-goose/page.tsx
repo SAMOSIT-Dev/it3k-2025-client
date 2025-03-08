@@ -2,107 +2,153 @@
 
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import defaultGoose from '../../../public/images/pop_goose/default_goose.png'
-import popGoose from '../../../public/images/pop_goose/pop_goose.png'
 import gooseShadow from '../../../public/images/pop_goose/goose-shadow.png'
 import styles from '@/app/styles/game/game.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Link from 'next/link'
-import { initSocket } from './utils/socket'
 import UniversitySelectModal from './components/UniversitySelectModal'
 import Scorebar from './components/Scorebar'
+import usePopCatClicker from './hooks/usePopCatClicker'
+import { Howl } from 'howler'
 
-interface LeaderboardEntry {
-  rank: string
-  university: string
-  clicks: string
+const PoppedGoose = ({ isPopped }: { isPopped: boolean }) => {
+  return (
+    <Image
+      src={'/images/pop_goose/pop_goose.png'}
+      alt="Pop Goose"
+      width={500}
+      height={500}
+      draggable="false"
+      priority
+      className={`${isPopped ? 'block' : 'hidden'} transition-transform transform active:scale-105 object-contain w-[340px] h-[340px] sm:w-[500px] sm:h-[500px]`}
+    />
+  )
+}
+
+const DefaultGoose = ({ isPopped }: { isPopped: boolean }) => {
+  return (
+    <Image
+      src={'/images/pop_goose/default_goose.png'}
+      alt="Pop Goose"
+      width={500}
+      height={500}
+      draggable="false"
+      priority
+      className={`${isPopped ? 'hidden' : 'block'} transition-transform transform active:scale-105 object-contain w-[340px] h-[340px] sm:w-[500px] sm:h-[500px]`}
+    />
+  )
 }
 
 const PopGoosePage = () => {
   const [isModal, setIsModal] = useState(true)
   const [university, setUniversity] = useState('')
-  const [clickCount, setClickCount] = useState(0)
+  // const [clickCount, setClickCount] = useState(0)
   const [isPopped, setIsPopped] = useState(false)
-  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([])
-  const popSound = '/audio/popSound.mp3'
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const lastClickTime = useRef(0)
-  const clickBuffer = useRef(0)
-  const emitTimeout = useRef<NodeJS.Timeout | null>(null)
-  const clickTimestamps = useRef<number[]>([])
+  const [totalClick, setTotalClick] = useState<number>(0)
+  // const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([])
+  const audioRef = useRef<Howl>(null)
 
   useEffect(() => {
-    const socket = initSocket()
-
-    // socket.on('connect', () => {
-    //   console.log('connected')
-    // })
-
-    socket.on('updateLeaderboard', (data) => {
-      setLeaderboardData(data)
+    audioRef.current = new Howl({
+      src: '/audio/popSound.mp3',
+      preload: true
     })
+  }, []) // Initialize once when the component mounts
 
-    socket.emit('requestLeaderboard')
+  const playAudio = () => {
+    audioRef.current?.play()
+  }
 
-    return () => {
-      if (emitTimeout.current) {
-        clearTimeout(emitTimeout.current)
-      }
-      socket.disconnect()
-    }
-  }, [])
+  // const lastClickTime = useRef(0)
+  // const clickBuffer = useRef(0)
+  // const emitTimeout = useRef<NodeJS.Timeout | null>(null)
+  // const clickTimestamps = useRef<number[]>([])
+  // const [socketState, setSocketState] = useState<Socket>(null)
 
-  const emitClicksToServer = useCallback(() => {
-    if (clickBuffer.current > 0 && university) {
-      const socket = initSocket()
-      socket.emit('click', { university, clicks: clickBuffer.current })
-      clickBuffer.current = 0
-    }
+  const { leaderboardData, registerClick } = usePopCatClicker(university)
 
-    emitTimeout.current = null
-  }, [university])
+  // useEffect(() => {
+  //   const socket = initSocket()
 
-  const handlePress = useCallback(() => {
-    const now = Date.now()
-    const timeSinceLastClick = now - lastClickTime.current
+  //   socket.on('connect', () => {
+  //     console.log('connected')
+  //     setSocketState(socket)
+  //   })
 
-    if (timeSinceLastClick < 10) {
-      setIsModal(true)
-      console.error('Error 403: Big Brain Not Found.')
-      return
-    }
-    clickTimestamps.current = clickTimestamps.current.filter(
-      (timestamp) => now - timestamp < 1000
-    )
+  //   socket.on('updateLeaderboard', (data) => {
+  //     setLeaderboardData(data)
+  //   })
 
-    if (clickTimestamps.current.length >= 40) {
-      setIsModal(true)
-      console.error('Error 403: Big Brain Not Found.')
-      return
-    }
+  //   socket.emit('requestLeaderboard')
 
-    clickTimestamps.current.push(now)
-    lastClickTime.current = now
+  //   return () => {
+  //     if (emitTimeout.current) {
+  //       clearTimeout(emitTimeout.current)
+  //     }
+  //     socket.disconnect()
+  //   }
+  // }, [])
 
-    setClickCount((prev) => prev + 1)
-    setIsPopped(true)
+  // const emitClicksToServer = useCallback(() => {
+  //   if (clickBuffer.current > 0 && university) {
+  //     if (socketState) {
+  //       socketState.emit('click', { university, clicks: clickBuffer.current })
+  //       clickBuffer.current = 0
+  //     }
+  //   }
 
-    if (typeof window !== 'undefined') {
-      audioRef.current = new Audio(popSound)
-      audioRef.current.currentTime = 0
-      audioRef.current.play()
-    }
+  //   emitTimeout.current = null
+  // }, [university, socketState])
 
-    clickBuffer.current += 1
+  // const handlePress = () => {
+  // const now = Date.now()
+  // const timeSinceLastClick = now - lastClickTime.current
 
-    if (!emitTimeout.current) {
-      emitTimeout.current = setTimeout(emitClicksToServer, 500)
-    }
-  }, [emitClicksToServer])
+  // if (timeSinceLastClick < 10) {
+  //   console.log('Limit 1')
+  //   setIsModal(true)
+  //   console.error('Error 403: Big Brain Not Found.')
+  //   return
+  // }
+  // clickTimestamps.current = clickTimestamps.current.filter(
+  //   (timestamp) => now - timestamp < 1000
+  // )
 
-  const handleRelease = useCallback(() => {
+  // if (clickTimestamps.current.length >= 40) {
+  //   setIsModal(true)
+  //   console.log('Limit 2')
+  //   console.error('Error 403: Big Brain Not Found.')
+  //   return
+  // }
+
+  // clickTimestamps.current.push(now)
+  // lastClickTime.current = now
+
+  // setClickCount((prev) => prev + 1)
+  // setIsPopped(true)
+
+  // if (typeof window !== 'undefined') {
+  //   if (!audioRef.current) {
+  //     audioRef.current = new Audio(popSound)
+  //   }
+  //   audioRef.current.currentTime = 0
+  //   audioRef.current.play()
+  // }
+
+  // clickBuffer.current += 1
+
+  // emitTimeout.current = setTimeout(emitClicksToServer, 500)
+
+  // }
+
+  const handlePressFinn = () => {
+    registerClick()
+    setTotalClick((prev) => prev + 1)
+  }
+
+  const handleRelease = () => {
     setIsPopped(false)
-  }, [])
+  }
 
   const handleUniSelect = useCallback((selectedUni: string) => {
     setIsModal(false)
@@ -111,7 +157,7 @@ const PopGoosePage = () => {
 
   return (
     <section
-      className={`bg-[#9FC5E8] relative bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
+      className={`bg-[#9FC5E8] relative pt-[100px] bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
       {isModal && <UniversitySelectModal onSubmit={handleUniSelect} />}
 
       <Link href={'/'}>
@@ -126,34 +172,33 @@ const PopGoosePage = () => {
             POP GOOSE
           </h1>
           <p className="text-3xl sm:text-4xl font-ReemKufiInk text-[#FFF] pt-2">
-            {clickCount}
+            {totalClick}
           </p>
         </div>
 
         <div className="relative flex flex-col items-center justify-center">
           <div
-            className="relative"
-            onPointerDown={handlePress}
+            onClick={() => {
+              playAudio()
+            }}
+            onPointerDown={() => {
+              handlePressFinn()
+              setIsPopped(true)
+            }}
             onPointerUp={handleRelease}>
-            <Image
-              src={gooseShadow}
-              alt="Shadow"
-              width={300}
-              height={80}
-              priority
-              className="absolute right-[70px] sm:right-[100px]  bottom-[30px] sm:bottom-[40px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
-              draggable="false"
-            />
-
-            <Image
-              src={isPopped ? popGoose : defaultGoose}
-              alt="Pop Goose"
-              width={500}
-              height={500}
-              draggable="false"
-              priority
-              className="transition-transform transform active:scale-105 object-contain w-[340px] h-[340px] sm:w-[500px] sm:h-[500px]"
-            />
+            <div className="relative w-fit z-20">
+              <PoppedGoose isPopped={isPopped} />
+              <DefaultGoose isPopped={isPopped} />
+              <Image
+                src={gooseShadow}
+                alt="Shadow"
+                width={300}
+                height={80}
+                priority
+                className="absolute left-1/2 -translate-x-1/2 -z-10 bottom-[30px] w-[180px] h-[30px] sm:w-[280px] sm:h-[50px]"
+                draggable="false"
+              />
+            </div>
           </div>
 
           <Scorebar leaderboardData={leaderboardData} />

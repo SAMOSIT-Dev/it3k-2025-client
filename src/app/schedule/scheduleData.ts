@@ -7,26 +7,26 @@ export type UniversityTeamName =
   | Team.KMUTNB
   | Team.KMUTNB_PR
 export type Sport =
-  | 'ฟุตบอล'
+  | 'Football'
   | 'กีฬาพื้นบ้าน'
-  | 'บาสเกตบอล'
-  | 'ปิงปอง'
-  | 'ชักเย่อ'
-  | 'กินวิบาก'
-  | 'วิ่งเปรี้ยว'
-  | 'แบดมินตัน'
+  | 'Basketball'
+  | 'Table Tennis'
+  | 'Badminton'
 
 export interface ScheduleData {
   sportTitle: string
   icon?: string | JSX.Element
   place?: string
+  isFinal?: boolean
   location: 'field' | 'gym'
   homeTeam?: {
     name: string
+    title?: string
     logo?: string
   }
   awayTeam?: {
     name: string
+    title?: string
     logo?: string
   }
   preiod: {
@@ -53,8 +53,8 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos.KMUTNB
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:15',
+      end: '15:20'
     }
   },
   {
@@ -69,44 +69,50 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
-    }
-  },
-  {
-    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
-    location: 'field',
-    homeTeam: {
-      name: 'แพ้คู่ 1'
-    },
-    awayTeam: {
-      name: 'แพ้คู่ 2'
-    },
-    preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:20',
+      end: '15:25'
     }
   },
   {
     sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 1',
     location: 'field',
+    isFinal: true,
     homeTeam: {
-      name: 'ชนะคู่ 1'
+      name: '',
+      title: 'ชนะคู่ 1'
     },
     awayTeam: {
-      name: 'ชนะคู่ 2'
+      name: '',
+      title: 'ชนะคู่ 2'
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:25',
+      end: '15:30'
+    }
+  },
+  {
+    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
+    location: 'field',
+    isFinal: true,
+    homeTeam: {
+      name: '',
+      title: 'แพ้คู่ 1'
+    },
+    awayTeam: {
+      name: '',
+      title: 'แพ้คู่ 2'
+    },
+    preiod: {
+      start: '15:30',
+      end: '15:35'
     }
   },
   {
     sportTitle: 'กินวิบาก',
     location: 'field',
     preiod: {
-      start: '15:20',
-      end: '15:35'
+      start: '15:40',
+      end: '15:50'
     }
   },
   {
@@ -121,8 +127,8 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos.KMUTNB
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '15:55',
+      end: '16:00'
     }
   },
   {
@@ -137,43 +143,49 @@ export const traditionGameScheduleData: ScheduleData[] = [
       logo: TeamLogos[Team.KMUTNB_PR]
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
-    }
-  },
-  {
-    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
-    location: 'field',
-    homeTeam: {
-      name: 'แพ้คู่ 1'
-    },
-    awayTeam: {
-      name: 'แพ้คู่ 2'
-    },
-    preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '16:00',
+      end: '16:05'
     }
   },
   {
     sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 1',
     location: 'field',
+    isFinal: true,
     homeTeam: {
-      name: 'ชนะคู่ 1'
+      name: '',
+      title: 'ชนะคู่ 1'
     },
     awayTeam: {
-      name: 'ชนะคู่ 2'
+      name: '',
+      title: 'ชนะคู่ 2'
     },
     preiod: {
-      start: '15:00',
-      end: '15:15'
+      start: '16:05',
+      end: '16:10'
+    }
+  },
+  {
+    sportTitle: 'ชักเย่อชิงชนะเลิศอันดับ 3',
+    location: 'field',
+    isFinal: true,
+    homeTeam: {
+      name: '',
+      title: 'แพ้คู่ 1'
+    },
+    awayTeam: {
+      name: '',
+      title: 'แพ้คู่ 2'
+    },
+    preiod: {
+      start: '16:10',
+      end: '16:15'
     }
   }
 ]
 
 export const basketballScheduleData: ScheduleData[] = [
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -189,7 +201,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB_PR,
@@ -205,7 +217,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -221,7 +233,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB,
@@ -237,7 +249,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTT,
@@ -253,7 +265,7 @@ export const basketballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'บาสเกตบอล',
+    sportTitle: 'Basketball',
     location: 'gym',
     homeTeam: {
       name: Team.KMUTNB,
@@ -272,9 +284,8 @@ export const basketballScheduleData: ScheduleData[] = [
 
 export const footballScheduleData: ScheduleData[] = [
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTT,
       logo: TeamLogos.KMUTT
@@ -289,9 +300,8 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTNB,
       logo: TeamLogos.KMUTNB
@@ -306,9 +316,8 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอล',
+    sportTitle: 'Football',
     location: 'field',
-    place: 'สนามฟุตบอล',
     homeTeam: {
       name: Team.KMUTT,
       logo: TeamLogos.KMUTT
@@ -323,14 +332,16 @@ export const footballScheduleData: ScheduleData[] = [
     }
   },
   {
-    sportTitle: 'ฟุตบอลรอบชิงชนะเลิศ',
+    sportTitle: 'Football Final',
     location: 'field',
-    place: 'สนามฟุตบอล',
+    isFinal: true,
     homeTeam: {
-      name: ''
+      name: '',
+      title: 'คะแนนรวมอันดับที่ 1'
     },
     awayTeam: {
-      name: ''
+      name: '',
+      title: 'คะแนนรวมอันดับที่ 2'
     },
     preiod: {
       start: '16:15',
@@ -341,36 +352,19 @@ export const footballScheduleData: ScheduleData[] = [
 
 export const badmintonScheduleData: MixedScheduleData[] = [
   {
-    title: 'คู่ผสม',
+    title: "Mixed's Doubles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX) 1',
         location: 'gym',
-        place: 'สนาม: 1',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMUTT,
+          name: Team.KMUTT+' MX1',
           logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
-        location: 'gym',
-        place: 'สนาม: 2',
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
+          name: Team.KMUTNB_PR+' MX1',
+          logo: TeamLogos['KMUTNB PR']
         },
         preiod: {
           start: '10:20',
@@ -378,15 +372,15 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
+        sportTitle: 'Badminton (MX) 2',
         location: 'gym',
-        place: 'สนาม: 4',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
+          name: Team.KMUTNB+' MX1',
+          logo: TeamLogos.KMUTNB
         },
         awayTeam: {
-          name: Team.KMITL,
+          name: Team.KMITL+' MX1',
           logo: TeamLogos.KMITL
         },
         preiod: {
@@ -395,162 +389,16 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
-        location: 'gym',
-        place: 'สนาม: 3',
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '11:40',
-          end: '11:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (คู่ผสม)',
-        location: 'gym',
-        place: 'สนาม: 2',
-        homeTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        preiod: {
-          start: '11:40',
-          end: '12:15'
-        }
-      }
-    ]
-  },
-  {
-    title: 'ชายคู่',
-    scheduleData: [
-      {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
-        location: 'gym',
-        place: 'สนาม: 3',
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
+        sportTitle: 'Badminton (MX) 3',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
-        location: 'gym',
-        place: 'สนาม: 1',
-        homeTeam: {
-          name: Team.KMUTT,
+          name: Team.KMUTT+' MX2',
           logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        preiod: {
-          start: '11:00',
-          end: '11:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (ชายคู่)',
-        location: 'gym',
-        place: 'สนาม: 4',
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '11:40',
-          end: '12:15'
-        }
-      }
-    ]
-  },
-  {
-    title: 'ชายเดี่ยว',
-    scheduleData: [
-      {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
-        location: 'gym',
-        place: 'สนาม: 3',
-        homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
-        location: 'gym',
-        place: 'สนาม: 4',
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
-        location: 'gym',
-        place: 'สนาม: 1',
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
+          name: Team.KMUTNB_PR+' MX2',
+          logo: TeamLogos['KMUTNB PR']
         },
         preiod: {
           start: '10:20',
@@ -558,38 +406,89 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (ชายเดี่ยว)',
+        sportTitle: 'Badminton (MX) 5',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '13:00',
+          end: '13:35'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MX) 6',
         location: 'gym',
         place: 'สนาม: 4',
         homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
+          name: "Winner of 3",
+          logo: TeamLogos.TBD
         },
         awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
+          name: "Winner of 4",
+          logo: TeamLogos.TBD
         },
         preiod: {
-          start: '11:40',
-          end: '12:15'
+          start: '13:00',
+          end: '13:35'
         }
-      }
+      },
+      {
+        sportTitle: 'Badminton (MX) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '17:25',
+          end: '18:00'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MX) Final',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '17:25',
+          end: '18:00'
+        }
+      },
     ]
   },
   {
-    title: 'หญิงเดี่ยว',
+    title: "Men's Doubles",
     scheduleData: [
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (MD) 1',
         location: 'gym',
-        place: 'สนาม: 2',
+        place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
+          name: Team.KMUTT+' MD1',
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
+          name: Team.KMITL+' MD1',
+          logo: TeamLogos.KMITL
         },
         preiod: {
           start: '09:00',
@@ -597,127 +496,460 @@ export const badmintonScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
+        sportTitle: 'Badminton (MD) 4',
         location: 'gym',
         place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '09:40',
-          end: '10:25'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
-        location: 'gym',
-        place: 'สนาม: 4',
-        homeTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงเดี่ยว)',
-        location: 'gym',
-        place: 'สนาม: 4',
-        homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        awayTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        preiod: {
-          start: '10:20',
-          end: '10:35'
-        }
-      }
-    ]
-  },
-  {
-    title: 'หญิงคู่',
-    scheduleData: [
-      {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
-        location: 'gym',
-        place: 'สนาม: 1',
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        preiod: {
-          start: '10:20',
-          end: '10:55'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
-        location: 'gym',
-        place: 'สนาม: 2',
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '11:00',
-          end: '11:35'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
-        location: 'gym',
-        place: 'สนาม: 3',
-        homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '11:40',
-          end: '12:15'
-        }
-      },
-      {
-        sportTitle: 'แบดมินตัน (หญิงคู่)',
-        location: 'gym',
-        place: 'สนาม: 4',
-        homeTeam: {
-          name: Team.KMUTNB_PR,
+          name: Team.KMUTNB_PR+' MD2',
           logo: TeamLogos['KMUTNB PR']
         },
         awayTeam: {
-          name: Team.KMITL,
+          name: Team.KMITL+' MD2',
           logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '09:40',
+          end: '10:25'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MD) 5',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MD1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '11:40',
+          end: '12:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MD) 6',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMUTT+' MD2',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: "Winner of 4",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '11:40',
+          end: '12:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MD) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:45',
+          end: '17:20'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MD) Final',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:45',
+          end: '17:20'
+        }
+      }
+    ]
+  },
+  {
+    title: "Men's Singles",
+    scheduleData: [
+      {
+        sportTitle: 'Badminton (MS) 1',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMUTT+' MS1',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: Team.KMITL+' MS1',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:35'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 2',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMUTNB+' MS1',
+          logo: TeamLogos.KMUTNB
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MS1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:40',
+          end: '10:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 3',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMUTT+' MS2',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MS2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '10:20',
+          end: '10:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 4',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMUTNB+' MS2',
+          logo: TeamLogos.KMUTNB
+        },
+        awayTeam: {
+          name: Team.KMITL+' MS2',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '11:00',
+          end: '11:35'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 5',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
         },
         preiod: {
           start: '12:20',
           end: '12:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 6',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: "Winner of 3",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 4",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '12:20',
+          end: '12:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:05',
+          end: '16:40'
+        }
+      },
+      {
+        sportTitle: 'Badminton (MS) Final',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:05',
+          end: '16:40'
+        }
+      }
+    ]
+  },
+  {
+    title: "Women's Single",
+    scheduleData: [
+      {
+        sportTitle: 'Badminton (WS) 1',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMUTT+' WS1',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WS1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:35'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) 2',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMUTNB+' WS1',
+          logo: TeamLogos.KMUTNB
+        },
+        awayTeam: {
+          name: Team.KMITL+' WS1',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '09:40',
+          end: '10:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) 4',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMITL+' WS2',
+          logo: TeamLogos.KMITL
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WS2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '10:20',
+          end: '10:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) 5',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '12:20',
+          end: '12:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) 6',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: Team.KMUTT+' WS2',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '12:20',
+          end: '12:55'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:45',
+          end: '17:20'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WS) Final',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:45',
+          end: '17:20'
+        }
+      }
+    ]
+  },
+  {
+    title: "Women's Doubles",
+    scheduleData: [
+      {
+        sportTitle: 'Badminton (WD) 1',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: Team.KMUTT+' WD1',
+          logo: TeamLogos.KMITL
+        },
+        awayTeam: {
+          name: Team.KMITL+' WD1',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:35'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WD) 3',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: Team.KMUTT+' WD2',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WD2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:40',
+          end: '10:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WD) 5',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WD1',
+          logo: TeamLogos[Team.KMUTNB_PR]
+        },
+        preiod: {
+          start: '11:40',
+          end: '12:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WD) 6',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Winner of 3",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMITL+' WD2',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '11:40',
+          end: '12:15'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WD) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:05',
+          end: '16:40'
+        }
+      },
+      {
+        sportTitle: 'Badminton (WD) Final',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:05',
+          end: '16:40'
         }
       }
     ]
@@ -726,53 +958,92 @@ export const badmintonScheduleData: MixedScheduleData[] = [
 
 export const pingpongScheduleData: MixedScheduleData[] = [
   {
-    title: 'หญิงคู่',
+    title: "Women's Doubles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (WD) 5',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
+          name: Team.KMUTT+' WD1',
+          logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
+          name: Team.KMUTNB_PR+' WD1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:30'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (WD) Final',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WD2',
+          logo: TeamLogos['KMUTNB PR']
         },
         preiod: {
           start: '10:10',
           end: '10:40'
         }
       },
+    ]
+  },
+  {
+    title: "Men's Doubles",
+    scheduleData: [
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (MD) 1',
         location: 'gym',
-        place: "สนาม 2",
+        place: 'สนาม: 3',
         homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
+          name: Team.KMUTT+' MD1',
           logo: TeamLogos.KMUTT
         },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MD1',
+          logo: TeamLogos['KMUTNB PR']
+        },
         preiod: {
-          start: '10:45',
-          end: '11:15'
+          start: '09:35',
+          end: '10:05'
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (MD) 3',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม: 4',
         homeTeam: {
-          name: Team.KMUTT,
+          name: Team.KMUTT+' MD2',
           logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
+          name: Team.KMITL+' MD2',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:30'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MD) 5',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Winner of 1",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMITL+' MD1',
+          logo: TeamLogos.KMITL
         },
         preiod: {
           start: '11:20',
@@ -780,55 +1051,72 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (หญิงคู่)',
+        sportTitle: 'Table Tennis (MD) 6',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม: 4',
         homeTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
+          name: "Winner of 3",
+          logo: TeamLogos.TBD
         },
         awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
+          name: Team.KMUTNB_PR+' MD2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:35',
+          end: '10:05'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MD) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: "loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
         },
         preiod: {
           start: '11:55',
           end: '12:25'
         }
       },
+      {
+        sportTitle: 'Table Tennis (MD) Final',
+        location: 'gym',
+        place: 'สนาม: 4',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '11:55',
+          end: '12:25'
+        }
+      }
     ]
   },
   {
-    title: 'ชายคู่',
+    title: "Women's Singles",
     scheduleData: [
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (WS) 2',
         location: 'gym',
-        place: "สนาม 3",
+        place: 'สนาม: 1',
         homeTeam: {
-          name: Team.KMITL,
+          name: Team.KMUTNB_PR+' WS1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        awayTeam: {
+          name: Team.KMITL+' WS1',
           logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:30'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (ชายคู่)',
-        location: 'gym',
-        place: "สนาม 4",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
         },
         preiod: {
           start: '09:35',
@@ -836,16 +1124,157 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (WS) 5',
         location: 'gym',
-        place: "สนาม 1",
+        place: 'สนาม: 1',
         homeTeam: {
-          name: Team.KMUTT,
+          name: Team.KMUTT+' WS1',
           logo: TeamLogos.KMUTT
         },
         awayTeam: {
-          name: Team.KMITL,
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '11:20',
+          end: '11:50'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (WS) 6',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMITL+' WS2',
           logo: TeamLogos.KMITL
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' WS2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:35',
+          end: '10:05'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (WS) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '11:55',
+          end: '12:25'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (WS) Final',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '11:55',
+          end: '12:25'
+        }
+      }
+    ]
+  },
+  {
+    title: "Men's Singles",
+    scheduleData: [
+      {
+        sportTitle: 'Table Tennis (MS) 2',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMITL+' MS1',
+          logo: TeamLogos.KMITL
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MS1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:30'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MS) 3',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: Team.KMUTT+' MS2',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: Team.KMUTNB_PR+' MS2',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        preiod: {
+          start: '09:00',
+          end: '09:30'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MS) 5',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: Team.KMUTT+' MS1',
+          logo: TeamLogos.KMUTT
+        },
+        awayTeam: {
+          name: "Winner of 2",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '10:10',
+          end: '10:40'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MS) 6',
+        location: 'gym',
+        place: 'สนาม: 2',
+        homeTeam: {
+          name: "Winner of 3",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: Team.KMITL+' MS2',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '10:10',
+          end: '10:40'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MS) 3rd Place',
+        location: 'gym',
+        place: 'สนาม: 1',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
         },
         preiod: {
           start: '10:45',
@@ -853,228 +1282,48 @@ export const pingpongScheduleData: MixedScheduleData[] = [
         }
       },
       {
-        sportTitle: 'ปิงปอง (ชายคู่)',
+        sportTitle: 'Table Tennis (MS) Final',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม: 2',
         homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
         },
         awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '11:20',
-          end: '11:50'
-        }
-      }
-    ]
-  },
-  {
-    title: 'หญิงเดี่ยว',
-    scheduleData: [
-      {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 2",
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:35'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 4",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:30'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 3",
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '09:35',
-          end: '10:05'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (หญิงเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 4",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '10:10',
-          end: '10:40'
-        }
-      }
-    ]
-  },
-  {
-    title: 'ชายเดี่ยว',
-    scheduleData: [
-      {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 1",
-        homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '09:00',
-          end: '09:30'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 2",
-        homeTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '09:35',
-          end: '10:05'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 3",
-        homeTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        preiod: {
-          start: '10:10',
-          end: '10:40'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (ชายเดี่ยว)',
-        location: 'gym',
-        place: "สนาม 1",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        preiod: {
-          start: '11:20',
-          end: '11:50'
-        }
-      }
-    ]
-  },
-  {
-    title: 'คู่ผสม',
-    scheduleData: [
-      {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
-        location: 'gym',
-        place: "สนาม 1",
-        homeTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
-        },
-        awayTeam: {
-          name: Team.KMITL,
-          logo: TeamLogos.KMITL
-        },
-        preiod: {
-          start: '09:35',
-          end: '10:05'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
-        location: 'gym',
-        place: "สนาม 2",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTNB_PR,
-          logo: TeamLogos[Team.KMUTNB_PR]
-        },
-        preiod: {
-          start: '10:10',
-          end: '10:40'
-        }
-      },
-      {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
-        location: 'gym',
-        place: "สนาม 3",
-        homeTeam: {
-          name: Team.KMUTNB,
-          logo: TeamLogos.KMUTNB
-        },
-        awayTeam: {
-          name: Team.KMUTT,
-          logo: TeamLogos.KMUTT
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
         },
         preiod: {
           start: '10:45',
           end: '11:15'
         }
+      }
+    ]
+  },
+  {
+    title: "Mixed's Doubles",
+    scheduleData: [
+      {
+        sportTitle: 'Table Tennis (MX) 5',
+        location: 'gym',
+        place: 'สนาม: 3',
+        homeTeam: {
+          name: Team.KMUTNB_PR+' MX1',
+          logo: TeamLogos['KMUTNB PR']
+        },
+        awayTeam: {
+          name: Team.KMITL+' MX1',
+          logo: TeamLogos.KMITL
+        },
+        preiod: {
+          start: '12:30',
+          end: '13:00'
+        }
       },
       {
-        sportTitle: 'ปิงปอง (คู่ผสม)',
+        sportTitle: 'Table Tennis (MX) 6',
         location: 'gym',
-        place: "สนาม 4",
+        place: 'สนาม: 4',
         homeTeam: {
           name: Team.KMUTT,
           logo: TeamLogos.KMUTT
@@ -1084,10 +1333,44 @@ export const pingpongScheduleData: MixedScheduleData[] = [
           logo: TeamLogos.KMITL
         },
         preiod: {
-          start: '10:40',
-          end: '11:15'
+          start: '10:10',
+          end: '10:40'
         }
       },
+      {
+        sportTitle: 'Table Tennis (MX) 3rd Place',
+        location: 'gym',
+        place: 'สนาม 3',
+        homeTeam: {
+          name: "Loser of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Loser of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:30',
+          end: '17:00'
+        }
+      },
+      {
+        sportTitle: 'Table Tennis (MX) Final',
+        location: 'gym',
+        place: 'สนาม 4',
+        homeTeam: {
+          name: "Winner of 5",
+          logo: TeamLogos.TBD
+        },
+        awayTeam: {
+          name: "Winner of 6",
+          logo: TeamLogos.TBD
+        },
+        preiod: {
+          start: '16:30',
+          end: '17:00'
+        }
+      }
     ]
   }
 ]

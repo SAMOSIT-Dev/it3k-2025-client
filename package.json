@@ -16,7 +16,9 @@
     "brackets-viewer": "^1.6.2",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.4.10",
     "fs": "^0.0.1-security",
+    "howler": "^2.2.4",
     "lodash": "^4.17.21",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -36,6 +38,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@iconify/react": "^5.2.0",
+    "@types/howler": "^2.2.12",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

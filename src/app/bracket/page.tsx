@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ import kmutnbLogo from '../../../public/images/KMUTNB_logo.png';
 import kmutnbprLogo from '../../../public/images/KMUTNB_PR_logo.png';
 import gooseLogo from '../../../public/images/pop_goose/default_goose.png';
 import { useAuth } from '../login/hooks/useAuth';
+import BackButton from '@/shared/components/BackButton'
 
 // Interfaces
 interface Match {
@@ -28,9 +29,9 @@ interface Match {
 type TeamKey = 'team1' | 'team2';
 
 interface ApiResponse {
-  success: boolean;
-  message: string;
-  data: SportMatch[];
+  success: boolean
+  message: string
+  data: SportMatch[]
 }
 
 interface SportMatch {
@@ -51,15 +52,16 @@ interface SportMatch {
 }
 
 interface BracketProps {
-  sport?: string;
+  sport?: string
 }
 
 // Constants
 const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK', 'BLANK', 'Null'] as const;
 const SPORT_NAMES: Record<string, string> = {
-  badminton: 'แบดมินตัน',
-  pingpong: 'ปิงปอง',
-};
+  badminton: 'Badminton',
+  pingpong: 'Table Tennis'
+}
+
 const BUTTON_TYPES: Record<string, readonly string[]> = {
   badminton: ['mix', 'single_male', 'single_female', 'pair_male', 'pair_female'],
   pingpong: ['mix', 'single_male', 'single_female', 'pair_male', 'pair_female'],
@@ -124,7 +126,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const { accessToken, admin, isLoading: authLoading, refreshAccessToken } = useAuth();
   const router = useRouter();
   const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<string>('mix')
   const [matchesData, setMatchesData] = useState<ApiResponse | null>(null);
 
   const isAdmin = !!admin && admin.role === 'super_admin';
@@ -147,6 +149,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      keepPreviousData: true,
       fallbackData: { success: false, message: 'No data available', data: [] },
       onSuccess: (fetchedData) => setMatchesData(fetchedData),
       onError: async (err) => {
@@ -161,7 +164,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
         }
       },
     }
-  );
+  )
 
   const computedMatches = useMemo(() => {
     const matches = matchesData || data;
@@ -349,15 +352,17 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   };
 
   const startEditing = (matchId: number, teamKey: TeamKey): void => {
-    if (!isAdmin) return;
-    setEditingTeam({ matchId, teamKey });
-  };
+    if (!isAdmin) return
+    setEditingTeam({ matchId, teamKey })
+  }
 
   const renderTeamSelector = (match: Match, teamKey: TeamKey): JSX.Element => {
     const teamName = match[teamKey];
     if (isAdmin && editingTeam?.matchId === match.id && editingTeam?.teamKey === teamKey) {
       return (
-        <div className="absolute bg-white text-black p-2 rounded shadow-lg" style={{ zIndex: 1000, left: '50px', top: '0' }}>
+        <div
+          className="absolute bg-white text-black p-2 rounded shadow-lg"
+          style={{ zIndex: 1000, left: '50px', top: '0' }}>
           {TEAM_OPTIONS.map((team) => (
             <button
               key={team}
@@ -367,11 +372,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
               {team}
             </button>
           ))}
-          <button className="block w-full text-left px-2 py-1 text-red-500 hover:bg-gray-200" onClick={() => setEditingTeam(null)}>
+          <button
+            className="block w-full text-left px-2 py-1 text-red-500 hover:bg-gray-200"
+            onClick={() => setEditingTeam(null)}>
             Cancel
           </button>
         </div>
-      );
+      )
     }
     return (
       <span
@@ -381,12 +388,12 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       >
         {teamName || 'TBD'} {isAdmin && '(Edit)'}
       </span>
-    );
-  };
+    )
+  }
 
   const handleFilterClick = (type: string): void => {
-    setSelectedType((prev) => (prev === type ? null : type));
-  };
+    setSelectedType(type)
+  }
 
   useEffect(() => {
     console.log('Current Token:', accessToken);
@@ -401,54 +408,65 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     return <div className="text-white text-center p-4 mt-[100px]">Error loading data: {error.message}</div>;
 
   return (
-    <div className="brackets-wrapper-container">
-      <div className="sport-section mb-8 flex flex-col">
-        <h1 className="text-white text-3xl sm:text-4xl mb-6 mt-24 font-extrabold">
-          <Link href="/">
-            <button className="btn-back">◀</button>
-          </Link>
-          {SPORT_NAMES[sport]}
-        </h1>
-        <div className="flex gap-2 w-full max-w-4xl">
-          {BUTTON_TYPES[sport]?.map((type) => (
-            <button
-              key={type}
-              className={`btn-bracket flex-1 min-w-[10px] max-w-[20vw] text-[6px] sm:text-[8px] md:text-xs ${
-                selectedType === type ? 'bg-red-700' : 'bg-transparent border border-red-600'
-              }`}
-              onClick={() => handleFilterClick(type)}
-            >
-              {type === 'mix'
-                ? 'คู่ผสม'
-                : type === 'single_male'
-                ? 'ชายเดี่ยว'
-                : type === 'single_female'
-                ? 'หญิงเดี่ยว'
-                : type === 'pair_male'
-                ? 'ชายคู่'
-                : 'หญิงคู่'}
-            </button>
-          ))}
+    <div className="brackets-wrapper-container pt-[100px] flex flex-col bg-black-300 text-white w-full min-h-screen items-center space-y-2 sm:space-y-4 lg:space-y-8">
+      <div className="sport-section w-[90%]">
+        <div className="flex flex-row items-center mt-2 -ml-1 md:-ml-2 lg:-ml-4 md:mb-4">
+          <BackButton />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+            {SPORT_NAMES[sport]}
+          </h1>
+        </div>
+        <div
+          className="font-Prompt flex overflow-x-scroll h-[65px] justify-center items-center"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}>
+          <div className="relative w-full whitespace-nowrap scrollbar-hide md:flex md:justify-center md:space-x-2">
+            <div className="w-full flex space-x-2 px-2 md:px-0">
+              {BUTTON_TYPES[sport]?.map((type) => (
+                <button
+                  key={type}
+                  className={`rounded-lg px-4 py-2 transition-all duration-300 text-xs sm:text-sm md:text-base ${
+                    selectedType == type
+                      ? 'bg-red-500 text-white shadow-[0_0_5px_4px_rgba(255,0,0,0.4)]'
+                      : 'border border-red-500 text-white hover:shadow-[0_0_5px_4px_rgba(255,0,0,0.4)] hover:border-red-500'
+                  }`}
+                  onClick={() => handleFilterClick(type)}>
+                  {type === 'mix'
+                    ? 'Mixed Doubles'
+                    : type === 'single_male'
+                      ? "Men's Singles"
+                      : type === 'single_female'
+                        ? "Women's Singles"
+                        : type === 'pair_male'
+                          ? "Men's Doubles"
+                          : "Women's Doubles"}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="flex justify-center w-full">
-        <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+      <div className="flex justify-center w-full pb-24">
+        <TransformWrapper initialScale={0.7} minScale={0.3} maxScale={5}>
           <TransformComponent
             wrapperStyle={{
               border: '2px solid #ff0000',
               background: '#000',
-              padding: '10px',
+              // padding: '2px',
               overflow: 'hidden',
               cursor: 'grab',
               boxShadow: '0 4px 8px rgba(255, 0, 0, 0.5)',
               width: '80%',
               maxWidth: '1200px',
+              height: '60vh'
             }}
-            contentStyle={{ transform: 'scale(1)' }}
-          >
+            contentStyle={{ transform: 'scale(1)' }}>
             <div className="p-8 bg-black min-h-screen bracket-container">
-              <div className="relative flex gap-32 ml-48 font-bold">
+              <div className="relative flex gap-32 ml-0 md:ml-48 font-bold">
                 <div className="flex flex-col gap-24">
                   {computedMatches.round1.map((match, index) => (
                     <div key={match.id} className="relative match-wrapper">
@@ -465,7 +483,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(match, 'team1')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
@@ -473,7 +493,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             >
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score1}</span>
+                            <span className="text-white mx-2">
+                              {match.score1}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
                               onClick={() => handleScoreChange(match.id, 'score1', 1)}
@@ -493,7 +515,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(match, 'team2')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
@@ -501,7 +525,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             >
                               -
                             </button>
-                            <span className="text-white mx-2">{match.score2}</span>
+                            <span className="text-white mx-2">
+                              {match.score2}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
                               onClick={() => handleScoreChange(match.id, 'score2', 1)}
@@ -511,9 +537,12 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                           </div>
                         </div>
                       </div>
-                      <div className={`connector-wrapper ${index % 2 === 0 ? 'connector-top' : 'connector-bottom'}`}>
+                      <div
+                        className={`connector-wrapper ${index % 2 === 0 ? 'connector-top' : 'connector-bottom'}`}>
                         <div className="connector-horizontal" />
-                        {index % 2 === 0 && <div className="connector-vertical" />}
+                        {index % 2 === 0 && (
+                          <div className="connector-vertical" />
+                        )}
                       </div>
                     </div>
                   ))}
@@ -607,7 +636,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                           />
                           {renderTeamSelector(computedMatches.final, 'team1')}
                         </div>
-                        <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                        <div
+                          className={isAdmin ? 'hidden' : 'score-separator'}
+                        />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
@@ -615,7 +646,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                           >
                             -
                           </button>
-                          <span className="text-white mx-2">{computedMatches.final.score1}</span>
+                          <span className="text-white mx-2">
+                            {computedMatches.final.score1}
+                          </span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
                             onClick={() => handleScoreChange(computedMatches.final.id, 'score1', 1)}
@@ -635,7 +668,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                           />
                           {renderTeamSelector(computedMatches.final, 'team2')}
                         </div>
-                        <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                        <div
+                          className={isAdmin ? 'hidden' : 'score-separator'}
+                        />
                         <div className="flex items-center">
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
@@ -643,7 +678,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                           >
                             -
                           </button>
-                          <span className="text-white mx-2">{computedMatches.final.score2}</span>
+                          <span className="text-white mx-2">
+                            {computedMatches.final.score2}
+                          </span>
                           <button
                             className={isAdmin ? 'score-button' : 'hidden'}
                             onClick={() => handleScoreChange(computedMatches.final.id, 'score2', 1)}
@@ -658,7 +695,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                   <div className="w-60 rounded mt-6" id="third">
                     <h2 className="text-white text-center text-xl">Third Place</h2>
                     {computedMatches.third && (
-                      <div className="w-60 bg-black border border-red-600 rounded mt-6" id="third">
+                      <div
+                        className="w-60 bg-black border border-red-600 rounded mt-6"
+                        id="third">
                         <div className="flex justify-between items-center p-3 border-b border-red-600">
                           <div className="flex items-center gap-3 relative">
                             <Image
@@ -670,7 +709,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(computedMatches.third, 'team1')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
@@ -678,7 +719,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             >
                               -
                             </button>
-                            <span className="text-white mx-2">{computedMatches.third.score1}</span>
+                            <span className="text-white mx-2">
+                              {computedMatches.third.score1}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
                               onClick={() => handleScoreChange(computedMatches.third.id, 'score1', 1)}
@@ -698,7 +741,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             />
                             {renderTeamSelector(computedMatches.third, 'team2')}
                           </div>
-                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div
+                            className={isAdmin ? 'hidden' : 'score-separator'}
+                          />
                           <div className="flex items-center">
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
@@ -706,7 +751,9 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                             >
                               -
                             </button>
-                            <span className="text-white mx-2">{computedMatches.third.score2}</span>
+                            <span className="text-white mx-2">
+                              {computedMatches.third.score2}
+                            </span>
                             <button
                               className={isAdmin ? 'score-button' : 'hidden'}
                               onClick={() => handleScoreChange(computedMatches.third.id, 'score2', 1)}
@@ -725,7 +772,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
         </TransformWrapper>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Bracket;
+export default Bracket

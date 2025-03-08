@@ -4,31 +4,38 @@ import TableComponent from '@/shared/components/TableComponent'
 import TeamCell from '@/shared/components/TeamCell'
 import { Team, TeamMapping } from '@/shared/utils/team'
 
-interface ScoreboardEntry {
-  id: number
+interface DashboardEntry {
+  rank: number
   university: string
-  winLose: string
-  point: string
+  wins: number
+  draws: number
+  losses: number
+  totalPointsScored: number
+  totalPointsConceded: number
   pointDiff: number
 }
 
 interface FootballTableProps {
-  liveData: ScoreboardEntry[]
+  liveData: DashboardEntry[]
 }
 
 const FootballTable: React.FC<FootballTableProps> = ({ liveData }) => {
-  const header = ['อันดับ', 'TEAM', 'WIN_LOSE', 'POINT', 'POINT DIFF']
+  const header = ['RANK', 'TEAM', 'WIN_DRAW_LOSE', 'GOAL', 'GOAL DIFF']
 
-  const tableData = liveData.map((team, index) => [
-    index + 1,
-    <TeamCell
-      key={team.id}
-      team={TeamMapping[team.university] || Team.KMUTNB}
-    />,
-    team.winLose,
-    team.point,
-    team.pointDiff
-  ])
+  const tableData = liveData.map((entry) => {
+    const team= TeamMapping[entry.university] || Team.TBD; 
+
+    return [
+      entry.rank,
+      <TeamCell
+        key={`team-${team.toLowerCase()}`}
+        team={team}
+      />,
+      `${entry.wins}-${entry.draws}-${entry.losses}`,
+      `${entry.totalPointsScored}-${entry.totalPointsConceded}`,
+      entry.pointDiff
+    ];
+  });
 
   const getColumnStyle = (colIndex: number) => {
     if (colIndex === 0) return 'font-bold'

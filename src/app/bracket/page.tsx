@@ -351,7 +351,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     if (isAdmin && editingTeam?.matchId === match.id && editingTeam?.teamKey === teamKey) {
       return (
         <div
-          className="absolute bg-white text-black p-2 rounded shadow-lg"
+          className="absolute bg-white text-black-300 p-2 rounded shadow-lg"
           style={{ zIndex: 1000, left: '50px', top: '0' }}>
           {TEAM_OPTIONS.map((team) => (
             <button

@@ -5,7 +5,8 @@ import axios from 'axios'
 import {
   getFootballSocket,
   initFootballSocket
-} from './hooks/useFootballAdminSocket'
+} from './utils/initFootballSocket'
+import { useRouter } from 'next/navigation'
 // import { useAuth } from '@/app/login/hooks/useAuth'
 
 interface Team {
@@ -64,16 +65,14 @@ const AdminFootballScores = () => {
     locationId: 2
   })
 
+  const router = useRouter()
+
   useEffect(() => {
     const token = localStorage.getItem('accessToken')
     if (token) {
       setAccessToken(token)
       setHeaders({ Authorization: `Bearer ${token}` })
     }
-
-    const socket = initFootballSocket()
-
-    socket.on('connect', () => {})
 
     const fetchTeams = async () => {
       await axios
@@ -94,10 +93,6 @@ const AdminFootballScores = () => {
     }
     fetchTeams()
     fetchMatches()
-
-    return () => {
-      socket.disconnect()
-    }
   }, [accessToken])
 
   const handleScoreChange = (
@@ -139,19 +134,34 @@ const AdminFootballScores = () => {
     const updatedScore = scores[matchId]
     if (!updatedScore) return
 
-    const socket = getFootballSocket()
-    if (socket) {
-      socket.emit('updateMatchScore', {
-        score_A: updatedScore.team_A,
-        score_B: updatedScore.team_B
-      })
-      socket.disconnect()
+    if (updatedScore.team_A === undefined) {
+      updatedScore.team_A = 0
+    } else if (updatedScore.team_B === undefined) {
+      updatedScore.team_B = 0
     }
+
+    // const socket = getFootballSocket()
+    // if (socket) {
+    //   console.log('update')
+    //   console.log(typeof updatedScore.team_A)
+    //   console.log(typeof updatedScore.team_B)
+    //   console.log(matchId)
+    //   if (socket.connected) {
+    //     socket.emit('updateMatchScore', {
+    //       id: matchId,
+    //       score_A: updatedScore.team_A,
+    //       score_B: updatedScore.team_B
+    //     })
+    //   } else {
+    //     console.error('Socket is not connected, cannot emit event')
+    //   }
+    // }
 
     axios
       .put(
         `https://it3k.sit.kmutt.ac.th/api/admin/football/score/${matchId}`,
         {
+          id: matchId,
           score_A: updatedScore.team_A,
           score_B: updatedScore.team_B
         },
@@ -170,6 +180,7 @@ const AdminFootballScores = () => {
           )
         )
         alert(`Update score on match id ${matchId} successful`)
+        router.refresh()
       })
       .catch((error) => console.error('Error updating score:', error))
   }
@@ -187,9 +198,9 @@ const AdminFootballScores = () => {
         },
         { headers: headers }
       )
-      .then((response) => {
+      .then(() => {
         alert(`Create new match successful`)
-        console.log('New match created:', response.data)
+        router.refresh()
       })
       .catch((error) => {
         console.error('Error creating match:', error)
@@ -200,12 +211,26 @@ const AdminFootballScores = () => {
     const updatedMatch = updates[matchId] || {}
 
     updatedMatch.locationId = 2
+
+    // const socket = getFootballSocket()
+    // if (socket) {
+    //   console.log('update status')
+    //   console.log(matchId)
+    //   if (socket.connected) {
+    //     socket.emit('updateMatchStatus', {
+    //       id: matchId,
+    //       status: updatedMatch.status
+    //     })
+    //   } else {
+    //     console.error('Socket is not connected, cannot emit event')
+    //   }
+    // }
+
     axios
       .put(
-        `https://it3k.sit.kmutt.ac.th/api/admin/football/${matchId}`,
+        `https://it3k.sit.kmutt.ac.th/api/admin/football/status/${matchId}`,
         {
-          ...updatedMatch
-          // team_A_id: matches.filter((match) => match.id === matchId)
+          status: updatedMatch.status
         },
         { headers: headers }
       )
@@ -216,7 +241,7 @@ const AdminFootballScores = () => {
           )
         )
         alert(`Update match id ${matchId} successful`)
-        console.log(updateMatch)
+        router.refresh()
       })
       .catch((error) => console.error('Error updating match:', error))
   }
@@ -228,7 +253,7 @@ const AdminFootballScores = () => {
       })
       .then(() => {
         alert(`Delete match id ${matchId} successful`)
-        console.log('Delete successful')
+        router.refresh()
       })
       .catch((error) => console.error('Error deleting match:', error))
   }
@@ -377,7 +402,7 @@ const AdminFootballScores = () => {
           </button>
 
           <div className="mt-4 flex flex-col gap-2">
-            <div className="flex justify-start gap-4">
+            {/* <div className="flex justify-start gap-4">
               <input
                 type="number"
                 placeholder="Team A id"
@@ -398,7 +423,7 @@ const AdminFootballScores = () => {
                   handleUpdateChange(match.id, 'team_B_id', e.target.value)
                 }
               />
-            </div>
+            </div> */}
 
             <select
               className="border p-2"
@@ -410,7 +435,7 @@ const AdminFootballScores = () => {
               <option value="break">Break</option>
               <option value="finished">Finished</option>
             </select>
-            <input
+            {/* <input
               type="datetime-local"
               placeholder="Start Time"
               className="border p-2"
@@ -425,7 +450,7 @@ const AdminFootballScores = () => {
               onChange={(e) =>
                 handleUpdateChange(match.id, 'timeEnd', e.target.value)
               }
-            />
+            /> */}
             <button
               className="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
               onClick={() => updateMatch(match.id)}>

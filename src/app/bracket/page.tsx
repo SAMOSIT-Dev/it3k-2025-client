@@ -129,19 +129,10 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
   const isAdmin = !!admin && admin.role === 'super_admin';
 
-  useEffect(() => {
-    if (!authLoading && !accessToken) {
-      console.log('No access token, redirecting to login');
-      router.push('/login');
-    }
-  }, [accessToken, authLoading, router]);
 
   const { data, error, isLoading, mutate } = useSWR<ApiResponse>(
-    sport && accessToken
-      ? [
-          `https://it3k.sit.kmutt.ac.th/api/${sport}${selectedType ? `/${selectedType}` : ''}`,
-          accessToken,
-        ]
+    sport
+      ? [`https://it3k.sit.kmutt.ac.th/api/${sport}${selectedType ? `/${selectedType}` : ''}`, accessToken || null]
       : null,
     ([url, token]) => fetcher(url, token),
     {
@@ -150,13 +141,13 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       fallbackData: { success: false, message: 'No data available', data: [] },
       onSuccess: (fetchedData) => setMatchesData(fetchedData),
       onError: async (err) => {
-        if (axios.isAxiosError(err) && err.response?.status === 401) {
+        if (axios.isAxiosError(err) && err.response?.status === 401 && accessToken) {
           try {
             await refreshAccessToken();
             mutate();
           } catch (refreshError) {
             console.error('Failed to refresh token:', refreshError);
-            router.push('/login');
+            // ไม่ redirect ถ้าไม่มี token
           }
         }
       },
@@ -247,9 +238,8 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
   const apiCall = async (url: string, method: string, body?: any): Promise<void> => {
     if (!isAdmin || !accessToken) {
-      console.log('Not authorized or no token');
-      router.push('/login');
-      return;
+      console.log('Not authorized or no token for update');
+      return; // ไม่ redirect แต่หยุดการทำงานถ้าไม่มี token หรือไม่ใช่ admin
     }
 
     const headers: Record<string, string> = {
@@ -284,7 +274,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
           return retryResponse;
         } catch (refreshError) {
           console.error('Failed to refresh token:', refreshError);
-          router.push('/login');
+          // ไม่ redirect
         }
       }
       throw error;
@@ -520,77 +510,77 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
                 </div>
 
                 <div className="flex flex-col gap-48 mt-24">
-  {computedMatches.round2.map((match, index) => (
-    <div
-      key={match.id}
-      className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}
-    >
-      <h2 className="text-white text-center text-xl mb-8">Semi Final</h2>
-      <div className="w-72 bg-black border border-red-600 rounded-lg"> {/* เปลี่ยนจาก w-60 เป็น w-72 */}
-        <div className="flex justify-between items-center p-3 border-b border-red-600">
-          <div className="flex items-center gap-3 relative min-w-0 flex-1">
-            <Image
-              width={32}
-              height={32}
-              src={getTeamLogo(match.team1)}
-              alt={match.team1 || 'TBD'}
-              className="w-8 h-8 flex-shrink-0"
-            />
-            {renderTeamSelector(match, 'team1')}
-          </div>
-          <div className={isAdmin ? 'hidden' : 'score-separator'} />
-          <div className="flex items-center gap-2 min-w-[100px] justify-end">
-            <button
-              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
-              onClick={() => handleScoreChange(match.id, 'score1', -1)}
-            >
-              -
-            </button>
-            <span className="text-white mx-2 min-w-[20px] text-center">{match.score1}</span>
-            <button
-              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
-              onClick={() => handleScoreChange(match.id, 'score1', 1)}
-            >
-              +
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center p-3">
-          <div className="flex items-center gap-3 relative min-w-0 flex-1">
-            <Image
-              width={32}
-              height={32}
-              src={getTeamLogo(match.team2)}
-              alt={match.team2 || 'TBD'}
-              className="w-8 h-8 flex-shrink-0"
-            />
-            {renderTeamSelector(match, 'team2')}
-          </div>
-          <div className={isAdmin ? 'hidden' : 'score-separator'} />
-          <div className="flex items-center gap-2 min-w-[100px] justify-end">
-            <button
-              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
-              onClick={() => handleScoreChange(match.id, 'score2', -1)}
-            >
-              -
-            </button>
-            <span className="text-white mx-2 min-w-[20px] text-center">{match.score2}</span>
-            <button
-              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
-              onClick={() => handleScoreChange(match.id, 'score2', 1)}
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className={`connector-wrapper ${index === 0 ? 'connector-top' : 'connector-bottom'}`}>
-        <div className="connector-horizontal" />
-        {index === 0 && <div className="connector-vertical1" />}
-      </div>
-    </div>
-  ))}
-</div>
+                  {computedMatches.round2.map((match, index) => (
+                    <div
+                      key={match.id}
+                      className={`relative match-wrapper ${index === 1 ? 'semifinal-bottom' : ''}`}
+                    >
+                      <h2 className="text-white text-center text-xl mb-8">Semi Final</h2>
+                      <div className="w-72 bg-black border border-red-600 rounded-lg">
+                        <div className="flex justify-between items-center p-3 border-b border-red-600">
+                          <div className="flex items-center gap-3 relative min-w-0 flex-1">
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team1)}
+                              alt={match.team1 || 'TBD'}
+                              className="w-8 h-8 flex-shrink-0"
+                            />
+                            {renderTeamSelector(match, 'team1')}
+                          </div>
+                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div className="flex items-center gap-2 min-w-[100px] justify-end">
+                            <button
+                              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
+                              onClick={() => handleScoreChange(match.id, 'score1', -1)}
+                            >
+                              -
+                            </button>
+                            <span className="text-white mx-2 min-w-[20px] text-center">{match.score1}</span>
+                            <button
+                              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
+                              onClick={() => handleScoreChange(match.id, 'score1', 1)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center p-3">
+                          <div className="flex items-center gap-3 relative min-w-0 flex-1">
+                            <Image
+                              width={32}
+                              height={32}
+                              src={getTeamLogo(match.team2)}
+                              alt={match.team2 || 'TBD'}
+                              className="w-8 h-8 flex-shrink-0"
+                            />
+                            {renderTeamSelector(match, 'team2')}
+                          </div>
+                          <div className={isAdmin ? 'hidden' : 'score-separator'} />
+                          <div className="flex items-center gap-2 min-w-[100px] justify-end">
+                            <button
+                              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
+                              onClick={() => handleScoreChange(match.id, 'score2', -1)}
+                            >
+                              -
+                            </button>
+                            <span className="text-white mx-2 min-w-[20px] text-center">{match.score2}</span>
+                            <button
+                              className={isAdmin ? 'score-button w-6 h-6' : 'hidden'}
+                              onClick={() => handleScoreChange(match.id, 'score2', 1)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={`connector-wrapper ${index === 0 ? 'connector-top' : 'connector-bottom'}`}>
+                        <div className="connector-horizontal" />
+                        {index === 0 && <div className="connector-vertical1" />}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
                 <div className="flex flex-col justify-center">
                   <h2 className="text-white text-center text-xl mb-4">Final</h2>

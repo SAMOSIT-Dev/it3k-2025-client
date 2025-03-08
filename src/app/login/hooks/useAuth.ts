@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { loginFilter } from '../utils/loginFilter';
 
 const API_URL = 'https://it3k.sit.kmutt.ac.th';
 
@@ -48,6 +49,9 @@ export const useAuth = () => {
 
   const login = async (username: string, password: string) => {
     try {
+
+      if (!loginFilter(username, password)) return
+      
       const res = await axios.post(`${API_URL}/api/admin/auth/login/`, { username, password });
 
       const newAccessToken = res.data.accessToken;

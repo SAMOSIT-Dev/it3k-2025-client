@@ -11,9 +11,9 @@ const Page = () => {
   const header = ['RANK', 'TEAM', 'WIN_LOSE']
   const tableData = [
     [1, <TeamCell key="team-kmutt" team={Team.KMUTT} />, '3-1'],
-    [1, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-2'],
+    [2, <TeamCell key="team-kmitl" team={Team.KMITL} />, '2-2'],
     [3, <TeamCell key="team-kmutnb" team={Team.KMUTNB} />, '2-2'],
-    [3, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />, '1-3']
+    [4, <TeamCell key="team-kmutnbpr" team={Team.KMUTNB_PR} />, '1-3']
   ]
   const matcheData = [
     {

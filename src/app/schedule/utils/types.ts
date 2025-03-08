@@ -43,9 +43,9 @@ export enum Sport {
 }
 
 export enum Place {
-  chord = 'chord',
+  court = 'court',
   stadium = 'stadium',
   table = 'table'
 }
 
-export type PlaceType = Place.chord | Place.stadium | Place.table
+export type PlaceType = Place.court | Place.stadium | Place.table

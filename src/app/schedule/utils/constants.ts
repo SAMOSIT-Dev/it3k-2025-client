@@ -21,7 +21,7 @@ export const universityLogoList = [
 ]
 
 export const SportPlaceMapping: Record<Sport, PlaceType> = {
-  [Sport.badminton]: Place.chord,
+  [Sport.badminton]: Place.court,
   [Sport.athletics]: Place.stadium,
   [Sport.basketball]: Place.stadium,
   [Sport.pingpong]: Place.table,

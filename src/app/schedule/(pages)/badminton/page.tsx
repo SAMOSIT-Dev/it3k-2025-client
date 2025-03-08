@@ -53,7 +53,7 @@ export default function BadmintonSchedulePage() {
                       key={i}
                       type={item.teamA && item.teamB ? 'match' : 'info'}
                       scheduleData={item}
-                      placeType={Place.chord}
+                      placeType={Place.court}
                     />
                   </VerticalFadeIn>
                 ))}

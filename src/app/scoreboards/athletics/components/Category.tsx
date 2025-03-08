@@ -1,13 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import styles from '@/app/styles/scoreboards/athletics/category.module.css'
-import swiperStyles from '@/app/styles/swiper/swiper.module.css'
 import {
   AthleticsCategory,
   CATEGORY_LABELS
@@ -19,22 +15,6 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ selected, onSelect }) => {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      if (window.innerWidth < 768) {
-        setIsMobile(true)
-      } else {
-        setIsMobile(false)
-      }
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
   const categories = Object.values(AthleticsCategory)
 
   const handleSelect = (category: AthleticsCategory) => {
@@ -42,49 +22,33 @@ const Category: React.FC<Props> = ({ selected, onSelect }) => {
   }
 
   return (
-    <div className="font-Prompt">
-      {isMobile ? (
-        <Swiper
-          modules={[Navigation]}
-          slidesPerView={2}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }}
-          className={swiperStyles.swiper}>
+    <div
+      className="font-Prompt flex overflow-x-scroll h-[65px] justify-center items-center mb-3"
+      style={{
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }}>
+      <div className="relative w-full whitespace-nowrap mb-4 scrollbar-hide md:flex md:justify-center md:space-x-2">
+        <div className="w-full flex space-x-2 px-2 md:px-0">
           {categories.map((category) => {
             const isActive = selected === category
+
             return (
-              <SwiperSlide key={category} className={styles['swiper-slide']}>
-                <button
-                  className={`rounded-lg ${styles['category-button']} ${
-                    isActive ? 'bg-red-500 !important' : ''
-                  }`}
-                  onClick={() => handleSelect(category)}>
-                  {CATEGORY_LABELS[category]}
-                </button>
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
-      ) : (
-        <ul className={styles.container}>
-          {categories.map((category) => {
-            const isActive = selected === category
-            return (
-              <li
+              <button
                 key={category}
-                className={`md:rounded-xl xl:rounded-lg ${styles['category-button']} ${
-                  isActive ? styles.active : ''
-                }`}>
-                <button onClick={() => handleSelect(category)}>
-                  {CATEGORY_LABELS[category]}
-                </button>
-              </li>
+                className={`rounded-lg px-4 py-2 transition-all duration-300 text-xs sm:text-sm md:text-base ${
+                  isActive
+                    ? 'bg-red-500 text-white shadow-[0_0_5px_4px_rgba(255,0,0,0.4)]'
+                    : 'border border-red-500 text-white hover:shadow-[0_0_5px_4px_rgba(255,0,0,0.4)] hover:border-red-500'
+                }`}
+                onClick={() => handleSelect(category)}>
+                {CATEGORY_LABELS[category]}
+              </button>
             )
           })}
-        </ul>
-      )}
+        </div>
+      </div>
     </div>
   )
 }

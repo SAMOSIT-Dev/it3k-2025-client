@@ -20,10 +20,10 @@ export enum AthleticsCategory {
 }
 
 export const CATEGORY_LABELS: Record<AthleticsCategory, string> = {
-  [AthleticsCategory.FEMALE_100M]: '100m men',
-  [AthleticsCategory.MALE_100M]: '100m women',
-  [AthleticsCategory.FEMALE_400M]: '4x100m men',
-  [AthleticsCategory.MALE_400M]: '4x100m women'
+  [AthleticsCategory.FEMALE_100M]: '100m women',
+  [AthleticsCategory.MALE_100M]: '100m men',
+  [AthleticsCategory.FEMALE_400M]: '4x100m women',
+  [AthleticsCategory.MALE_400M]: '4x100m men'
 }
 
 export interface IMatchData {

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { BasketballTeam } from '../interfaces/basketball'
-import { TeamLogos } from '@/shared/utils/team';
+import { TeamLogos } from '@/shared/utils/team'
 
 const BasketballTeamScore = ({
   data
@@ -18,7 +18,7 @@ const BasketballTeamScore = ({
           fill
         />
       </div>
-      <div className="relative flex flex-col text-[#E9E9E9] font-semibold text-center w-[32px] sm:w-[75px] lg:w-[120px] mx-2">
+      <div className="relative flex flex-col text-[#E9E9E9] font-semibold text-center w-[32px] sm:w-[75px] lg:w-[120px] mx-1 sm:mx-2">
         <h3 className="text-[9px] sm:text-[15px] lg:text-[24px] z-10">
           {data.team.uniName}
         </h3>

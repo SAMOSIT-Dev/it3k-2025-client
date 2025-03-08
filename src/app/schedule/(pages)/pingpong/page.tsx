@@ -1,10 +1,11 @@
 import PageTitle from '../../components/PageTitle'
 import { pingpongScheduleData } from '../../scheduleData'
 import ScheduleCard from '../../components/ScheduleCard'
+import VerticalFadeIn from '@/shared/components/animations/VerticalFadeIn'
 
 export default function PingpongSchedulePage() {
   return (
-    <div className="mt-[100px] w-screen px-8 md:px-24 lg:px-0 h-auto overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
+    <div className="pt-[100px] w-screen px-8 md:px-24 lg:px-0 h-auto overflow-x-hidden min-w-0 overflow-scroll bg-black-300">
       <header className="">
         <div className="w-auto lg:w-[1038.35px] mx-auto">
           <PageTitle title="Table Tennis" />
@@ -18,7 +19,9 @@ export default function PingpongSchedulePage() {
             </span>
             <div className="font-Prompt flex flex-col justify-center m-auto space-y-5 md:space-y-6 lg:space-y-[42px]">
               {type.scheduleData.map((data, i) => (
-                <ScheduleCard key={i} type="match" scheduleData={data} />
+                <VerticalFadeIn key={i} visibleThreshold={0.9}>
+                  <ScheduleCard key={i} type="match" scheduleData={data} />
+                </VerticalFadeIn>
               ))}
             </div>
           </div>

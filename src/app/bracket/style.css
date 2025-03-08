@@ -65,7 +65,7 @@
 
 .connector-vertical {
   width: 2px;
-  height: 253px;
+  height: 269px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
@@ -83,20 +83,22 @@
   transform: translateY(-50%);
 }
 .btn-bracket {
-  @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
+  @apply px-6 py-[6px] text-white border border-red-600 rounded;
   transition: all 0.3s ease;
   border-radius: 5px;
   scale: 1;
   font-weight: 600;
   margin-top: 10px;
-  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
-  min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
+  white-space: nowrap; 
+  min-width: 0; 
   max-width: none; 
  
 }
-.btn-bracket:hover {
-  background-color: red;
-  box-shadow: 0 0 11px rgba(255, 120, 120, 0.953); 
+.btn-bracket:hover,
+.btn-bracket-hover {
+    background-color: #E90000;
+    box-shadow: 0 0 10px #E90000, 0 0 7px #E90000;
+    outline: none; 
 }
 
 .match-wrapper {
@@ -114,7 +116,7 @@
 }
 .connector-vertical1 {
   width: 2px;
-  height: 470px;
+  height: 510px;
   background-color: rgb(98, 98, 98);
   position: absolute;
   left: 32px;
@@ -171,15 +173,6 @@
   
 }
 
-.btn-bracket {
-  @apply px-8 py-2 text-white border border-red-600 rounded mx-1;
-  transition: all 0.3s ease;
-  border-radius: 5px;
-  scale: 1;
-  font-weight: 600;
-  margin-top: 10px;
-  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
-}
 
 .sport-section {
   display: flex;
@@ -199,17 +192,6 @@
   margin-right: 2rem
 }
 
-.btn-bracket {
-  @apply px-10 py-2 text-white border border-red-600 rounded mx-2;
-  transition: all 0.3s ease;
-  border-radius: 5px;
-  scale: 1;
-  font-weight: 600;
-  margin-top: 10px;
-  white-space: nowrap; /* ป้องกันข้อความหักบรรทัด */
-  min-width: 0; /* ลบ min-width เดิมเพื่อให้ยืดหยุ่น */
-  max-width: none; /* ลบ max-width เพื่อให้ยืดหยุ่น */
-}
 
 /* Media Query สำหรับมือถือ (768px ลงมา) */
 @media (max-width: 768px) {
@@ -217,19 +199,9 @@
     gap: 1px;
   }
 
-  .btn-bracket {
-    padding: 0.5rem 0.8rem; /* รักษาขนาดปุ่มให้เล็กลงตามเดิม */
-    font-size: 10px;
-    margin-left: 0.5rem; /* ลด margin ด้านซ้าย */
-    margin-right: 0.5rem; /* ลด margin ด้านขวา */
-  }
 }
 /* Media Query สำหรับหน้าจอเล็กมาก (480px ลงมา) */
 @media (max-width: 480px) {
-  .btn-bracket {
-    padding: 0.4rem 0.8rem; /* ลด padding มากขึ้น */
-    font-size: 8px; /* ลดขนาดตัวอักษรเพิ่ม */
-  }
   .slider-content {
     gap: 1px;
   }

@@ -11,7 +11,7 @@ import Scorebar from './components/Scorebar'
 import usePopCatClicker from './hooks/usePopCatClicker'
 import { Howl } from 'howler'
 
-const PoppedGoose = ({isPopped} : {isPopped: boolean}) => {
+const PoppedGoose = ({ isPopped }: { isPopped: boolean }) => {
   return (
     <Image
       src={'/images/pop_goose/pop_goose.png'}
@@ -25,7 +25,7 @@ const PoppedGoose = ({isPopped} : {isPopped: boolean}) => {
   )
 }
 
-const DefaultGoose = ({isPopped} : {isPopped: boolean}) => {
+const DefaultGoose = ({ isPopped }: { isPopped: boolean }) => {
   return (
     <Image
       src={'/images/pop_goose/default_goose.png'}
@@ -46,27 +46,27 @@ const PopGoosePage = () => {
   const [isPopped, setIsPopped] = useState(false)
   const [totalClick, setTotalClick] = useState<number>(0)
   // const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([])
-const audioRef = useRef<Howl>(null)
+  const audioRef = useRef<Howl>(null)
 
-useEffect(() => {
-  audioRef.current = new Howl({
-    src: '/audio/popSound.mp3',
-    preload: true
-  })
-}, []) // Initialize once when the component mounts
+  useEffect(() => {
+    audioRef.current = new Howl({
+      src: '/audio/popSound.mp3',
+      preload: true
+    })
+  }, []) // Initialize once when the component mounts
 
-const playAudio = () => {
-  audioRef.current?.play()
-}
-  
+  const playAudio = () => {
+    audioRef.current?.play()
+  }
+
   // const lastClickTime = useRef(0)
   // const clickBuffer = useRef(0)
   // const emitTimeout = useRef<NodeJS.Timeout | null>(null)
   // const clickTimestamps = useRef<number[]>([])
   // const [socketState, setSocketState] = useState<Socket>(null)
-  
+
   const { leaderboardData, registerClick } = usePopCatClicker(university)
-  
+
   // useEffect(() => {
   //   const socket = initSocket()
 
@@ -101,48 +101,46 @@ const playAudio = () => {
   // }, [university, socketState])
 
   // const handlePress = () => {
-    // const now = Date.now()
-    // const timeSinceLastClick = now - lastClickTime.current
+  // const now = Date.now()
+  // const timeSinceLastClick = now - lastClickTime.current
 
-    // if (timeSinceLastClick < 10) {
-    //   console.log('Limit 1')
-    //   setIsModal(true)
-    //   console.error('Error 403: Big Brain Not Found.')
-    //   return
-    // }
-    // clickTimestamps.current = clickTimestamps.current.filter(
-    //   (timestamp) => now - timestamp < 1000
-    // )
-
-    // if (clickTimestamps.current.length >= 40) {
-    //   setIsModal(true)
-    //   console.log('Limit 2')
-    //   console.error('Error 403: Big Brain Not Found.')
-    //   return
-    // }
-
-    // clickTimestamps.current.push(now)
-    // lastClickTime.current = now
-
-    // setClickCount((prev) => prev + 1)
-    // setIsPopped(true)
-
-    // if (typeof window !== 'undefined') {
-    //   if (!audioRef.current) {
-    //     audioRef.current = new Audio(popSound)
-    //   }
-    //   audioRef.current.currentTime = 0
-    //   audioRef.current.play()
-    // }
-
-    // clickBuffer.current += 1
-
-    // emitTimeout.current = setTimeout(emitClicksToServer, 500)
-    
-    
-    
+  // if (timeSinceLastClick < 10) {
+  //   console.log('Limit 1')
+  //   setIsModal(true)
+  //   console.error('Error 403: Big Brain Not Found.')
+  //   return
   // }
-  
+  // clickTimestamps.current = clickTimestamps.current.filter(
+  //   (timestamp) => now - timestamp < 1000
+  // )
+
+  // if (clickTimestamps.current.length >= 40) {
+  //   setIsModal(true)
+  //   console.log('Limit 2')
+  //   console.error('Error 403: Big Brain Not Found.')
+  //   return
+  // }
+
+  // clickTimestamps.current.push(now)
+  // lastClickTime.current = now
+
+  // setClickCount((prev) => prev + 1)
+  // setIsPopped(true)
+
+  // if (typeof window !== 'undefined') {
+  //   if (!audioRef.current) {
+  //     audioRef.current = new Audio(popSound)
+  //   }
+  //   audioRef.current.currentTime = 0
+  //   audioRef.current.play()
+  // }
+
+  // clickBuffer.current += 1
+
+  // emitTimeout.current = setTimeout(emitClicksToServer, 500)
+
+  // }
+
   const handlePressFinn = () => {
     registerClick()
     setTotalClick((prev) => prev + 1)
@@ -159,7 +157,7 @@ const playAudio = () => {
 
   return (
     <section
-      className={`bg-[#9FC5E8] relative mt-[100px] bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
+      className={`bg-[#9FC5E8] relative pt-[100px] bg-gameBgSm sm:bg-gameBgMd xl:bg-gameBg bg-cover bg-center bg-no-repeat flex items-center justify-center min-h-screen py-4 select-none  ${styles['no-select']}`}>
       {isModal && <UniversitySelectModal onSubmit={handleUniSelect} />}
 
       <Link href={'/'}>
@@ -188,7 +186,7 @@ const playAudio = () => {
               setIsPopped(true)
             }}
             onPointerUp={handleRelease}>
-            <div className='relative w-fit z-20'>
+            <div className="relative w-fit z-20">
               <PoppedGoose isPopped={isPopped} />
               <DefaultGoose isPopped={isPopped} />
               <Image

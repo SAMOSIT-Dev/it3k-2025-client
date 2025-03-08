@@ -59,7 +59,7 @@ const usePopCatClicker = (university: string) => {
           tempTotalClick.current = 0 // Reset session click count
         }
       }, 1000), // Trigger after 1 second of inactivity
-    [university]
+    [university, serverRequestCriteria]
   )
   const registerClick = () => {
     startCPSTimer()

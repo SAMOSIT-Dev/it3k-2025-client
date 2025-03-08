@@ -15,7 +15,7 @@ interface SportSliderProps {
 
 const SportSlider = ({ title, sportLists }: SportSliderProps) => {
   return (
-    <div className="px-8 md:px-36 py-4 sm:py-8 relative">
+    <div className="px-0 sm:px-8 md:px-36 py-4 sm:py-8 relative">
       <div className='flex justify-center'>
         <div className='relative w-fit flex flex-col items-center'>
           <div className="font-bold font-Prompt text-2xl md:text-5xl flex justify-center text-white z-20">
@@ -46,7 +46,7 @@ const SportSlider = ({ title, sportLists }: SportSliderProps) => {
                 height={200}
                 width={200}
               />
-              <p className="text-white text-[14px] sm:text-xl md:text-2xl font-bold font-Prompt ">
+              <p className="text-white text-[14px] sm:text-xl md:text-2xl font-bold font-Prompt text-center">
                 {sport.name}
               </p>
             </Link>

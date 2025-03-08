@@ -133,8 +133,8 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
     const transformedMatches: Match[] = data.data.map((item: SportMatch) => ({
       matchId: item.matchId,
-      team1: UniIdToName[item.team_A_number] || `TBD`,
-      team2: UniIdToName[item.team_B_number] || `TBD`,
+      team1: UniIdToName[item.team_A_id] || `TBD`,
+      team2: UniIdToName[item.team_B_id] || `TBD`,
       score1:
         item.result_A ??
         (sport === 'pingpong'

@@ -1,4 +1,5 @@
 import { Team, TeamLogos } from '@/shared/utils/team'
+import { Place, PlaceType, Sport } from './types'
 
 export const universityLogoList = [
   {
@@ -18,3 +19,12 @@ export const universityLogoList = [
     alt: Team.KMUTNB_PR
   }
 ]
+
+export const SportPlaceMapping: Record<Sport, PlaceType> = {
+  [Sport.badminton]: Place.chord,
+  [Sport.athletics]: Place.stadium,
+  [Sport.basketball]: Place.stadium,
+  [Sport.pingpong]: Place.table,
+  [Sport.football]: Place.stadium,
+  [Sport.tradition]: Place.stadium
+}

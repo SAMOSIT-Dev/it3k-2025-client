@@ -1,3 +1,4 @@
+import axios from 'axios'
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -13,3 +14,5 @@ export function timeFormat(str: string): string {
   const [hh, mm] = str.split(':')
   return `${hh}:${mm}`
 }
+
+export const fetcher = (url: string) => axios.get(url).then((res) => res.data)

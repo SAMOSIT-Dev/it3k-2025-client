@@ -16,6 +16,7 @@
     "brackets-viewer": "^1.6.2",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.4.10",
     "fs": "^0.0.1-security",
     "howler": "^2.2.4",
     "lodash": "^4.17.21",

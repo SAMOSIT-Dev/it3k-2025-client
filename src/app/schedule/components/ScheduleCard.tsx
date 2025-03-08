@@ -117,7 +117,7 @@ function MatchCard({ data }: CardProps['match']) {
                 <Image
                   objectFit="cover"
                   fill
-                  className="size-full bg-white object-cover rounded-full relative"
+                  className="size-full object-cover rounded-full relative"
                   src={data.homeTeam.logo}
                   alt={data.homeTeam.name}
                 />
@@ -135,7 +135,7 @@ function MatchCard({ data }: CardProps['match']) {
                 <Image
                   objectFit="cover"
                   fill
-                  className="size-full bg-white object-cover rounded-full relative"
+                  className="size-full object-cover rounded-full relative"
                   src={data.awayTeam.logo}
                   alt={data.awayTeam.name}
                 />

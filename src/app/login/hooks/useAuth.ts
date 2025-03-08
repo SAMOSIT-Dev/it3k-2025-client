@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const API_URL = "https://it3k-in.sit.kmutt.ac.th";
@@ -8,6 +8,7 @@ const API_URL = "https://it3k-in.sit.kmutt.ac.th";
 export const useAuth = () => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
     const [admin, setAdmin] = useState<{ id: number; username: string; role: string } | null>(null);
+
 
     const login = async (username: string, password: string) => {
         try {

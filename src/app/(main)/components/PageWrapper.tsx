@@ -6,12 +6,11 @@ interface Props {
   children: React.ReactNode
 }
 
-const PageWrapper = ({children}: Props) => {
-
+const PageWrapper = ({ children }: Props) => {
   const pathname = usePathname()
-  
+
   return (
-    <div className={`${pathname !== '/' ? 'mt-[100px]' : ''}`}>{children}</div>
+    <div className={`${pathname !== '/' ? 'pt-[100px]' : ''}`}>{children}</div>
   )
 }
 

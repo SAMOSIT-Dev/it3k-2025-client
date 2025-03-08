@@ -7,6 +7,7 @@ import SportSlider from './(main)/components/SportSlider'
 import { scheduleSports, scoreboardSports } from './(main)/data/sportData'
 import FloatingPopGoose from './(main)/components/FloatingPopGoose';
 import MainBackground from './(main)/components/MainBackground';
+import VerticalFadeIn from '@/shared/components/animations/VerticalFadeIn';
 
 export default function Home() {
   
@@ -17,20 +18,30 @@ export default function Home() {
 
       {/* Podium Section By Ice */}
       <div className='sm:mt-20'>
-        <PodiumSection />
+        <VerticalFadeIn>
+          <PodiumSection />
+        </VerticalFadeIn>
       </div>
 
       {/* Sport Scoreboard Slider By Gun*/}
-      <SportSlider title="Scoreboard" sportLists={scoreboardSports} />
+      <VerticalFadeIn>
+        <SportSlider title="Scoreboard" sportLists={scoreboardSports} />
+      </VerticalFadeIn>
 
       {/* Podium Scoreboard By Ice */}
-      <PodiumScoreBoard />
+      <VerticalFadeIn>
+        <PodiumScoreBoard />
+      </VerticalFadeIn>
 
       {/* Live Schedule By C */}
-      <LiveSchedule/>
+      <VerticalFadeIn>
+        <LiveSchedule/>
+      </VerticalFadeIn>
       {/* Full detail sport schedule slider By Gun*/}
       <div className='my-10'>
-        <SportSlider title="Sport Schedule" sportLists={scheduleSports} />
+        <VerticalFadeIn>
+          <SportSlider title="Sport Schedule" sportLists={scheduleSports} />
+        </VerticalFadeIn>
       </div>
 
       {/* Sponsers */}

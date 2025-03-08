@@ -19,7 +19,7 @@ const BasketBall = () => {
 
   return (
     <div
-      className="pt-[100px] flex flex-col w-full min-h-[calc(100vh-100px)] flex-1  items-center pb-12  bg-black-300 font-Prompt bg-cover bg-bottom"
+      className="pt-[100px] flex flex-col w-full min-h-screen flex-1  items-center pb-12  bg-black-300 font-Prompt bg-cover bg-bottom"
       style={{
         backgroundImage: "url('/images/backgrounds/basketballBackground.png')"
       }}>

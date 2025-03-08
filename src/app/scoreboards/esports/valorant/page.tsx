@@ -84,7 +84,7 @@ const Page = () => {
   }
 
   return (
-    <div className="pt-[100px] flex flex-col text-white w-full min-h-[calc(100dvh-102px)] items-center space-y-2 sm:space-y-4 lg:space-y-8">
+    <div className="pt-[100px] flex flex-col text-white w-full min-h-screen items-center space-y-2 sm:space-y-4 lg:space-y-8">
       <div className="w-[90%]">
         <div className="flex flex-row items-center mt-8 mb-4 -ml-1 md:-ml-2 lg:-ml-4 md:mb-4">
           <BackButton />

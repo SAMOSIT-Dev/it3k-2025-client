@@ -6,6 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "IT3K",
   description: "A informative website for IT3K@SIT",
+  icons: '/images/logoNav.svg'
 };
 
 export default function RootLayout({

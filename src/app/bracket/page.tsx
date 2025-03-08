@@ -5,9 +5,6 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import useSWR from 'swr'
 import Image from 'next/image'
 import './style.css'
-import kmitlLogo from '../../../public/images/KMITL_logo.png'
-import kmuttLogo from '../../../public/images/KMUTT_logo.png'
-import kmutnbLogo from '../../../public/images/KMUTNB_logo.png'
 import gooseLogo from '../../../public/images/pop_goose/default_goose.png'
 import BackButton from '@/shared/components/BackButton'
 
@@ -105,12 +102,13 @@ const BUTTON_TYPES: Record<string, readonly string[]> = {
 }
 
 const TEAM_LOGOS: Record<string, string> = {
-  KMITL: kmitlLogo.src,
-  KMUTNB: kmutnbLogo.src,
-  KMUTT: kmuttLogo.src,
-  KMUTNB_PR: kmutnbLogo.src,
-  Null: gooseLogo.src,
-  BLANK: gooseLogo.src
+  KMITL: '/images/KMITL_logo.png',
+  KMUTT: '/images/KMUTT_logo.png',
+  KMUTNB: '/images/KMUTNB_logo.png',
+  KMUTNB_PR: '/images/KMUTNB_PR_logo.png',
+  'KMUTNB PR': '/images/KMUTNB_PR_logo.png',
+  Null: '/images/pop_goose/default_goose.png',
+  BLANK: '/images/pop_goose/default_goose.png'
 }
 
 const fetcher = async (url: string): Promise<ApiResponse> => {
@@ -315,7 +313,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       ...computedMatches.round2,
       computedMatches.final,
       computedMatches.third
-    ].find((m) => m.matchId === matchId)
+    ].find((m) => m?.matchId === matchId)
     if (!match) return
 
     const updatedMatch = { ...match, [team]: Math.max(0, match[team] + delta) }
@@ -336,7 +334,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       ...computedMatches.round2,
       computedMatches.final,
       computedMatches.third
-    ].find((m) => m.matchId === matchId)
+    ].find((m) => m?.matchId === matchId)
     if (!match) return
 
     const updatedMatch = { ...match, [teamKey]: newName }

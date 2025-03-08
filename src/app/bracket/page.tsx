@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState, useMemo, useEffect, useCallback, JSX } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -74,7 +76,7 @@ const TEAM_LOGOS: Record<string, string> = {
   BLANK: gooseLogo.src,
 };
 
-const fetcher = async (url: string, token: string | null | unknown) => {
+const fetcher = async (url: string, token: string | null) => {
   console.log(`Fetching from: ${url}`);
   console.log(`Received Token:`, token);
 
@@ -111,10 +113,9 @@ const fetcher = async (url: string, token: string | null | unknown) => {
 };
 
 // Debounce function
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const debounce = (func: (...args: any[]) => void, wait: number) => {
   let timeout: NodeJS.Timeout;
-  return (...args: unknown[]) => {
+  return (...args: any[]) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
@@ -123,6 +124,7 @@ const debounce = (func: (...args: any[]) => void, wait: number) => {
 const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const [sport] = useState<string>(propSport || 'badminton');
   const { accessToken, admin, isLoading: authLoading, refreshAccessToken } = useAuth();
+  const router = useRouter();
   const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
   const [selectedType, setSelectedType] = useState<string>('mix')
   const [matchesData, setMatchesData] = useState<ApiResponse | null>(null);
@@ -232,12 +234,12 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       final: finalMatch,
       third: thirdMatch,
     };
-  }, [matchesData, data, selectedType]);
+  }, [matchesData, data, sport, selectedType]);
 
   const getTeamLogo = (teamName: string | null): string =>
     teamName && teamName in TEAM_LOGOS ? TEAM_LOGOS[teamName as keyof typeof TEAM_LOGOS] : gooseLogo.src;
 
-  const apiCall = async (url: string, method: string, body?: unknown): Promise<void> => {
+  const apiCall = async (url: string, method: string, body?: any): Promise<void> => {
     if (!isAdmin || !accessToken) {
       console.log('Not authorized or no token for update');
       return; // ไม่ redirect แต่หยุดการทำงานถ้าไม่มี token หรือไม่ใช่ admin
@@ -262,7 +264,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         try {
           await refreshAccessToken();
-          await axios({
+          const retryResponse = await axios({
             url,
             method,
             headers: {
@@ -272,6 +274,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
             data: body,
           });
           if (method !== 'GET') mutate();
+          return retryResponse;
         } catch (refreshError) {
           console.error('Failed to refresh token:', refreshError);
           // ไม่ redirect
@@ -285,49 +288,42 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     matchId: number,
     updates: { team_A_id?: number; team_B_id?: number; score_A?: number; score_B?: number }
   ) => {
-    const body: { team_A_id?: number; team_B_id?: number; score_A?: number; score_B?: number } = {};
+    const body: { team_A_id?: number; team_B_id?: number; score_A?: number; score_B?: number; id?: number} = {};
     if (updates.team_A_id !== undefined) body.team_A_id = updates.team_A_id;
     if (updates.team_B_id !== undefined) body.team_B_id = updates.team_B_id;
     if (updates.score_A !== undefined) body.score_A = updates.score_A;
     if (updates.score_B !== undefined) body.score_B = updates.score_B;
-
+    body.id = matchId
     if (Object.keys(body).length === 0) return;
 
-    await apiCall(`https://it3k.sit.kmutt.ac.th/api/admin/${sport}/score/${matchId}`, 'PUT', body);
+    await apiCall(`https://it3k.sit.kmutt.ac.th/api/admin/${sport}/score`, 'PUT', body);
   };
 
   const handleScoreChange = useCallback(
-    (matchId: number, team: 'score1' | 'score2', delta: number) =>
-      debounce(
-        async () => {
-          if (!isAdmin) return
+    debounce(async (matchId: number, team: 'score1' | 'score2', delta: number) => {
+      if (!isAdmin) return;
 
-          const match = [
-            ...computedMatches.round1,
-            ...computedMatches.round2,
-            computedMatches.final,
-            computedMatches.third
-          ].find((m) => m.id === matchId)
-          if (!match) return
+      const match = [...computedMatches.round1, ...computedMatches.round2, computedMatches.final, computedMatches.third].find(
+        (m) => m.id === matchId
+      );
+      if (!match) return;
 
-          const updatedMatch = {
-            ...match,
-            [team]: Math.max(0, match[team] + delta)
-          }
+      const updatedMatch = {
+        ...match,
+        [team]: Math.max(0, match[team] + delta),
+      };
 
-          try {
-            await updateMatch(matchId, {
-              score_A: team === 'score1' ? updatedMatch.score1 : match.score1,
-              score_B: team === 'score2' ? updatedMatch.score2 : match.score2
-            })
-          } catch (error) {
-            console.error('Error updating score:', error)
-          }
-        },
-        500
-      ),
+      try {
+        await updateMatch(matchId, {
+          score_A: team === 'score1' ? updatedMatch.score1 : match.score1,
+          score_B: team === 'score2' ? updatedMatch.score2 : match.score2,
+        });
+      } catch (error) {
+        console.error('Error updating score:', error);
+      }
+    }, 500),
     [isAdmin, computedMatches]
-  )
+  );
 
   const handleTeamNameChange = async (oldName: string | null, newName: string, matchId: number, teamKey: TeamKey) => {
     if (!isAdmin || oldName === newName || !newName.trim()) return;

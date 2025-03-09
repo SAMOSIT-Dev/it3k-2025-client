@@ -8,13 +8,13 @@ import { AxiosError } from 'axios'
 import mapUniNameToLogo from '@/shared/utils/mapUniNameToLogo'
 
 interface Props {
-  data: IUniversity[]
+  data: IUniversity[] | undefined
   loading: boolean
   error: AxiosError | null
 }
 
 const Table: React.FC<Props> = ({ data, loading, error }) => {
-  const sortedData = [...data].sort((a, b) => a.ranking - b.ranking)
+  const sortedData = data ? [...data].sort((a, b) => a.ranking - b.ranking) : []
 
   return (
     <div className="overflow-x-auto mt-6 md:mt-10">
@@ -32,6 +32,8 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
           </thead>
           <tbody>
             {sortedData.map((item, index) => (
+              
+              item.uniName ? (
               <tr key={item.id}>
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center text-md md:text-xl lg:text-2xl font-bold lg:py-4 py-2 border-2 md:border-4 border-x-[#E80100] border-y-[#E80100]`}>
@@ -40,8 +42,6 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>
                   <div className="flex flex-row items-center justify-center">
-                    {item.uniName ? (
-                      <>
                         <Image
                           src={`${mapUniNameToLogo(item.uniName)}`}
                           alt={item.uniName}
@@ -51,13 +51,9 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
                           className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
                         />
                         {item.uniName}
-                      </>
-                    ) : (
-                      <></>
-                    )}
                   </div>
                 </td>
-              </tr>
+              </tr>) : <></>
             ))}
           </tbody>
         </table>

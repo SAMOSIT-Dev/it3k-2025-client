@@ -1,8 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import React, { useState, useMemo, useEffect, useCallback, JSX } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -56,7 +54,7 @@ interface BracketProps {
 }
 
 // Constants
-const TEAM_OPTIONS = ['KMUTT', 'KMUTNB', 'KMITL', 'KMUTNB BKK', 'BLANK', 'Null'] as const;
+const TEAM_OPTIONS = ['KMUTT', 'KMITL','KMUTNB', 'KMUTNB PR', 'BLANK', 'Null'] as const;
 const SPORT_NAMES: Record<string, string> = {
   badminton: 'Badminton',
   pingpong: 'Table Tennis'
@@ -69,9 +67,8 @@ const BUTTON_TYPES: Record<string, readonly string[]> = {
 const TEAM_LOGOS: Record<string, string> = {
   KMITL: kmitlLogo.src,
   KMUTNB: kmutnbLogo.src,
-  'KMUTNB BKK': kmutnbLogo.src,
   KMUTT: kmuttLogo.src,
-  KMUTNB_PR: kmutnbprLogo.src,
+  "KMUTNB PR": kmutnbprLogo.src,
   Null: gooseLogo.src,
   BLANK: gooseLogo.src,
 };
@@ -124,7 +121,6 @@ const debounce = (func: (...args: any[]) => void, wait: number) => {
 const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
   const [sport] = useState<string>(propSport || 'badminton');
   const { accessToken, admin, isLoading: authLoading, refreshAccessToken } = useAuth();
-  const router = useRouter();
   const [editingTeam, setEditingTeam] = useState<{ matchId: number; teamKey: TeamKey } | null>(null);
   const [selectedType, setSelectedType] = useState<string>('mix')
   const [matchesData, setMatchesData] = useState<ApiResponse | null>(null);

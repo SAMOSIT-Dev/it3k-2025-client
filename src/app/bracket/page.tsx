@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState, useMemo, useEffect, useCallback, JSX } from 'react';
@@ -132,7 +133,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
     sport
       ? [`https://it3k.sit.kmutt.ac.th/api/${sport}${selectedType ? `/${selectedType}` : ''}`, accessToken || null]
       : null,
-    ([url, token]) => fetcher(url, token),
+    ([url, token]) => fetcher(url, token as string),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
@@ -230,7 +231,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       final: finalMatch,
       third: thirdMatch,
     };
-  }, [matchesData, data, sport, selectedType]);
+  }, [matchesData, data, selectedType]);
 
   const getTeamLogo = (teamName: string | null): string =>
     teamName && teamName in TEAM_LOGOS ? TEAM_LOGOS[teamName as keyof typeof TEAM_LOGOS] : gooseLogo.src;
@@ -260,7 +261,7 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         try {
           await refreshAccessToken();
-          const retryResponse = await axios({
+          await axios({
             url,
             method,
             headers: {
@@ -270,7 +271,6 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
             data: body,
           });
           if (method !== 'GET') mutate();
-          return retryResponse;
         } catch (refreshError) {
           console.error('Failed to refresh token:', refreshError);
           // ไม่ redirect

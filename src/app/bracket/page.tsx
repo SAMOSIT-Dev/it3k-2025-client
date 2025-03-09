@@ -194,22 +194,24 @@ const Bracket: React.FC<BracketProps> = ({ sport: propSport }) => {
 
     const round1 = transformedMatches.slice(0, 4); // id: 33-36
     const round2 = transformedMatches.slice(4, 6); // id: 37-38
-    const thirdMatch = transformedMatches.find((m) => m.id === 39) || {
-      id: 39,
-      team1: null,
-      team2: null,
-      score1: 0,
-      score2: 0,
-      type: selectedType || 'mix',
-    };
-    const finalMatch = transformedMatches.find((m) => m.id === 40) || {
-      id: 40,
-      team1: null,
-      team2: null,
-      score1: 0,
-      score2: 0,
-      type: selectedType || 'mix',
-    };
+    const finalMatch = transformedMatches[6]
+    const thirdMatch = transformedMatches[7]
+    // const thirdMatch = transformedMatches.find((m) => m.id === 39) || {
+    //   id: 39,
+    //   team1: null,
+    //   team2: null,
+    //   score1: 0,
+    //   score2: 0,
+    //   type: selectedType || 'mix',
+    // };
+    // const finalMatch = transformedMatches.find((m) => m.id === 40) || {
+    //   id: 40,
+    //   team1: null,
+    //   team2: null,
+    //   score1: 0,
+    //   score2: 0,
+    //   type: selectedType || 'mix',
+    // };
 
     return {
       round1: round1.length ? round1 : [...Array(4)].map((_, i) => ({

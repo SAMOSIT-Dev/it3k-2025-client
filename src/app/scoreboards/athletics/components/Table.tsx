@@ -32,10 +32,11 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
           </thead>
           <tbody>
             {sortedData.map((item, index) => (
+              
               <tr key={item.id}>
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center text-md md:text-xl lg:text-2xl font-bold lg:py-4 py-2 border-2 md:border-4 border-x-[#E80100] border-y-[#E80100]`}>
-                  {item.ranking}
+                  {index + 1}
                 </td>
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>

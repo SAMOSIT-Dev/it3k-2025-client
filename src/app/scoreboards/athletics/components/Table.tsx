@@ -32,7 +32,6 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
           </thead>
           <tbody>
             {sortedData.map((item, index) => (
-              
               <tr key={item.id}>
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center text-md md:text-xl lg:text-2xl font-bold lg:py-4 py-2 border-2 md:border-4 border-x-[#E80100] border-y-[#E80100]`}>
@@ -41,15 +40,21 @@ const Table: React.FC<Props> = ({ data, loading, error }) => {
                 <td
                   className={`${index === 0 && style['glow-cell']} bg-black-300 text-center lg:py-4 py-2 border-2 md:border-4 border-[#E80100]`}>
                   <div className="flex flex-row items-center justify-center">
-                    <Image
-                      src={`${mapUniNameToLogo(item.uniName)}`}
-                      alt={item.uniName}
-                      width={0}
-                      height={0}
-                      sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
-                      className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
-                    />
-                    {item.uniName}
+                    {item.uniName ? (
+                      <>
+                        <Image
+                          src={`${mapUniNameToLogo(item.uniName)}`}
+                          alt={item.uniName}
+                          width={0}
+                          height={0}
+                          sizes="(max-width: 640px) 20px, (max-width: 1024px) 40px, 56px"
+                          className="mr-2 sm:mr-4 w-5 h-5 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full aspect-square"
+                        />
+                        {item.uniName}
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </td>
               </tr>

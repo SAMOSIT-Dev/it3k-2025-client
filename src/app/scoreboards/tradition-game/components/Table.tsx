@@ -15,24 +15,24 @@ const Table: React.FC<TableProps> = ({ categoryId }) => {
   const universityData: Record<number, UniversityDataProps[]> = {
     1: [
       // ชักเย่อ
-      { rank: 0, team: Team.KMUTT },
-      { rank: 0, team: Team.KMITL },
-      { rank: 0, team: Team.KMUTNB },
-      { rank: 0, team: Team.KMUTNB_PR }
+      { rank: 2, team: Team.KMUTT },
+      { rank: 3, team: Team.KMITL },
+      { rank: 4, team: Team.KMUTNB },
+      { rank: 1, team: Team.KMUTNB_PR }
     ],
     2: [
       // กินวิบาก
-      { rank: 0, team: Team.KMUTT },
-      { rank: 0, team: Team.KMITL },
-      { rank: 0, team: Team.KMUTNB },
-      { rank: 0, team: Team.KMUTNB_PR }
+      { rank: 4, team: Team.KMUTT },
+      { rank: 2, team: Team.KMITL },
+      { rank: 3, team: Team.KMUTNB },
+      { rank: 1, team: Team.KMUTNB_PR }
     ],
     3: [
       // วิ่งเปรี้ยว
-      { rank: 0, team: Team.KMUTT },
-      { rank: 0, team: Team.KMITL },
-      { rank: 0, team: Team.KMUTNB },
-      { rank: 0, team: Team.KMUTNB_PR }
+      { rank: 1, team: Team.KMUTT },
+      { rank: 3, team: Team.KMITL },
+      { rank: 4, team: Team.KMUTNB },
+      { rank: 2, team: Team.KMUTNB_PR }
     ]
   }
 

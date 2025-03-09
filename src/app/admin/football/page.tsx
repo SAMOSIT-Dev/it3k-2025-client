@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import {
@@ -8,6 +8,7 @@ import {
   initFootballSocket
 } from './utils/initFootballSocket'
 import { useAuth } from '@/app/login/hooks/useAuth'
+import { Socket } from 'socket.io-client'
 
 interface Team {
   name: string
@@ -37,6 +38,7 @@ interface Match {
 const AdminFootballScores = () => {
   const { accessToken } = useAuth()
   const [headers, setHeaders] = useState({})
+  const socketRef = useRef<Socket>(undefined)
   const [teams, setTeams] = useState<TeamData[]>([])
   const [matches, setMatches] = useState<Match[]>([])
   const [scores, setScores] = useState<
@@ -67,13 +69,25 @@ const AdminFootballScores = () => {
   const router = useRouter()
 
   useEffect(() => {
+    socketRef.current = initFootballSocket()
+
+    socketRef.current.on('connect', () => {
+      console.log('connected')
+    })
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect()
+      }
+    }
+  }, [])
+  
+  useEffect(() => {
     if (accessToken) {
       setHeaders({ Authorization: `Bearer ${accessToken}` })
     }
 
-    const socket = initFootballSocket()
 
-    socket.on('connect', () => {})
 
     const fetchTeams = async () => {
       await axios
@@ -95,9 +109,7 @@ const AdminFootballScores = () => {
     fetchTeams()
     fetchMatches()
 
-    return () => {
-      socket.disconnect()
-    }
+
   }, [accessToken])
 
   const handleScoreChange = (

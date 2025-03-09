@@ -1,27 +1,24 @@
 import { io, Socket } from 'socket.io-client'
 
 let socket: Socket
-const socketServerUrl =
-  process.env.NEXT_PUBLIC_VM_SOCKET_URL || 'http://localhost:8083'
 
 export const initFootballSocket = (): Socket => {
-  socket = io(socketServerUrl, {
-    transports: ['websocket'],
-    withCredentials: true,
-    path: '/api/admin-service/socket'
-  })
-
+  if (!socket && typeof window !== 'undefined') {
+    const socketServerUrl = 'it3k-in.sit.kmutt.ac.th'
+    const socketServerPath = '/api/admin-service/socket/'
+    if (!socketServerUrl) {
+      throw new Error('Socket server URL is not defined')
+    }
+    socket = io(socketServerUrl, {
+      transports: ['websocket'], // Force WebSocket connection
+      withCredentials: true,
+      path: socketServerPath
+    })
+  }
   if (!socket) {
     throw new Error('Socket failed to initialize')
   }
-
   return socket
 }
 
-export const getFootballSocket = (): Socket | null => {
-  if (socket && socket.connected) {
-    return socket
-  }
-  console.warn('Socket is not connected')
-  return null
-}
+export const getFootballSocket = (): Socket | null => socket

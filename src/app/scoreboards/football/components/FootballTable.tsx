@@ -22,11 +22,13 @@ interface FootballTableProps {
 const FootballTable: React.FC<FootballTableProps> = ({ liveData }) => {
   const header = ['RANK', 'TEAM', 'WIN_DRAW_LOSE', 'GOAL', 'GOAL DIFF']
 
-  const tableData = liveData.map((entry) => {
+  const tableData = liveData.filter(data => data.university !== 'KMUTNB').map((entry, index) => {
+    
+
     const team= TeamMapping[entry.university] || Team.TBD; 
 
     return [
-      entry.rank,
+      index + 1,
       <TeamCell
         key={`team-${team.toLowerCase()}`}
         team={team}

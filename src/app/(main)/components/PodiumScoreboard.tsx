@@ -86,7 +86,7 @@ const PodiumScoreBoard: React.FC = () => {
         </div>
 
         {/* Scoreboard List */}
-        <div className="flex flex-col items-center space-y-4 sm:space-y-[26px]">
+        <div className="w-full space-y-4 sm:space-y-[26px]  max-w-[100%] sm:max-w-[100%] md:max-w-[100%] lg:max-w-[100%] xl:max-w-[100%] mx-auto">
           {sortPodiumScoreboard(scoreboardData).map((item, index) => (
             <VerticalFadeIn key={index} >
               <div
@@ -100,11 +100,11 @@ const PodiumScoreBoard: React.FC = () => {
                     alt={`${item.name} Logo`}
                     width={92}
                     height={92}
-                    className="rounded-full w-[35px] sm:w-[100px] xl:w-full"
+                    className="rounded-full w-[25px] sm:w-[100px] xl:w-full"
                     priority
                   />
 
-                  <div className="text-[10px] sm:text-[20px] lg:text-[26px] xl:text-[32px] mr-[45px] whitespace-nowrap flex-shrink-0">
+                  <div className="text-[10px] sm:text-[20px] lg:text-[24px] xl:text-[30px] mr-[45px] whitespace-nowrap flex-shrink-0">
                     {replaceUnderscoreWithSpace(item.name)}
                   </div>
                 </div>
